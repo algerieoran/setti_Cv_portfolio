@@ -18,4 +18,3 @@ Début du travail le 7 septembre 2018, pantin
 # MySql (voir insertion JS jQuery)
 # AJAX
 # PHPO 
-

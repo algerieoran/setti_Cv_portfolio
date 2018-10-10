@@ -1,0 +1,14 @@
+/* les styles de ma page */
+@charset "utf-8";
+
+body {
+    background: grey;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+    text-align: center;
+}
+caption {
+    caption-side: top;
+}
