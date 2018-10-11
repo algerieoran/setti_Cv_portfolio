@@ -1,22 +1,21 @@
-<?php
+ <?php
 require_once '../inc/init.inc.php';
-// require_once '../inc/requet.php';
+
 
 if(!internauteEstConnecte()){ // si le membre n'est pas connecté, il ne doit pas avoir accès à la page profil
     header('location:connexion.php'); // nous l'invitons à se connecter
     exit();
 }
-// require_once '../inc/requet.php';
 
 
 
-extract($_SESSION['t_users']);// Extrait tous les indices de l'array sous forme de variables auxquelles on 
+extract($_SESSION['t_utilisateurs']);// Extrait tous les indices de l'array sous forme de variables auxquelles on 
 
 //suppression de l'esxpérience
 if (isset($_GET['id_experience']))  {
     $resultat = executeRequete("DELETE FROM t_experiences WHERE id_experience = :id_experience", array(':id_experience' => $_GET['id_experience']));
     
-    if ($resultat -> rowCount() == 1) { // si j'ai une ligne dans $resultat, j'ai supprimé un produit
+    if ($resultat -> rowCount() == 1) { // si j'ai une ligne dans $resultat, j'ai supprimé une experience
     $contenu .= '<div class="alert alert-success" role="alert">L\expérience à bien été supprimé</div>';
     } else {
         $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression</div>';
@@ -28,7 +27,7 @@ if (isset($_GET['id_experience']))  {
 if (!empty($_POST)) {
 
     $resultat = executeRequete("UPDATE t_loisirs 
-                                SET id_loisir = :id_loisir, type= :type, date_debut= :date_debut, dep_service= :dep_service, entreprise= :entreprise, date_fin =:date_fin, id_user= :id_user
+                                SET id_loisir = :id_loisir, loisir= :loisir,   id_utilisateur= :id_utilisateur
                                 WHERE id_loisir = :id_loisir",
                                array(':id_loisir' => $_POST['id_loisir'],
                                     ':type' => $_POST['type'],

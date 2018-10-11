@@ -1,8 +1,9 @@
-<?php require 'connexion.php'; 
+<?php
+require_once 'inc/init.inc.php';
 
 // insertion d'une competence
 if(isset($_POST['competence'])){
-    //si on a reçu un nouvelle competencecompetence
+    //si on a reçu un nouvelle competence
     if($_POST['competence']!='' && $_POST['niveau']!='' && $_POST['categorie']!=''){
 
         $competence = addslashes($_POST['competence']);
@@ -56,6 +57,8 @@ if(isset($_GET['order']) && isset($_GET['column'])){	// début de if(isset($_GET
 
 }	//  fin de if(isset($_GET['order']) && isset($_GET['column']))
 
+//-----------------------------------------------------------AFFICHAGE---------------------------------------------------------
+require_once 'inc/haut.inc.php'; 
 
 ?>
 <!DOCTYPE html>
@@ -149,3 +152,7 @@ if(isset($_GET['order']) && isset($_GET['column'])){	// début de if(isset($_GET
         </div><!-- fin div .row -->
     </body>
 </html>
+
+<?php
+
+require_once 'inc/bas.inc.php'; // footer et fermeture des balises

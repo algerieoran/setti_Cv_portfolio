@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <!-- La marque -->
-       <a class="navbar-brand" href="<?php echo RACINE_SITE . 'boutique.php'; ?>">Mon CV Portfolio</a>
+       <a class="navbar-brand" href="<?php echo RACINE_SITE . 'cv.php'; ?>">Mon CV Portfolio</a>
        
         <!-- Le burger -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav1" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="nav1">
         	<ul class="navbar-nav ml-auto">
             	<?php
-                  echo '<li><a class="nav-link" href="'. RACINE_SITE .'mon_cv.php" >Boutique</a></li>';
+                  echo '<li><a class="nav-link" href="'. RACINE_SITE .'cv.php" >Mon PortFolio</a></li>';
 
                   // menu si internaute connecté :
                   if (internauteEstConnecte()) {
@@ -47,9 +47,9 @@
 
                   //menu si internaute est un admin :
                   if (internauteEstConnecteEtAdmin()) {
-                    echo '<li><a class="nav-link" href="'. RACINE_SITE .'admin/gestion_boutique.php" >Gestion de la boutique</a></li>';
+                    echo '<li><a class="nav-link" href="'. RACINE_SITE .'admin/gestion_cv.php" >Gestion de mon cv</a></li>';
                     
-                    echo '<li><a class="nav-link" href="'. RACINE_SITE .'admin/gestion_membre.php" >Gestion des membres</a></li>';
+                    echo '<li><a class="nav-link" href="'. RACINE_SITE .'admin/gestion_utilisateur.php" >Gestion des utilisateurs</a></li>';
 
                   }
 				      ?>

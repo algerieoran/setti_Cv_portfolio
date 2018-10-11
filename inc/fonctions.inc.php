@@ -10,21 +10,21 @@ function debug($param) {
 
 
 //2/--------------------------fonction membres--------------------------------------
-// fonction date
+//fonction date
 
-// function validateDate ($date, $format = 'Y'){// $format = 'd-m-Y' permet de donner une valeur par défaut au paramètre $format si on ne lui pas d'argument lors de l'appel de la fonction
-//     $d = DateTime::createFromFormat($format, $date); // Crée un objet date si la date est valide et qu'elle corrspond au format indiqué dans $format. Dans le cas contraire, retourne false (c'est- à - dir si la date n'est pas valide ou qu'elle ne correspond pas au format indiqué)
+function validateDate ($date, $format = 'Y'){// $format = 'd-m-Y' permet de donner une valeur par défaut au paramètre $format si on ne lui pas d'argument lors de l'appel de la fonction
+    $d = DateTime::createFromFormat($format, $date); // Crée un objet date si la date est valide et qu'elle corrspond au format indiqué dans $format. Dans le cas contraire, retourne false (c'est- à - dir si la date n'est pas valide ou qu'elle ne correspond pas au format indiqué)
 
-//     if ($d && $d->format($format)== $date){ // si $d n'est pas false (voir ci-dessus) et que l'objet dat $d est bien égale à la date $date, c'est qu'il n'y a pas eu d'extrapolation sur la date : exemple de 32/01/2015 qui devient 01/02/2015. Dans ce cas la date est validé . On retourne true.
+    if ($d && $d->format($format)== $date){ // si $d n'est pas false (voir ci-dessus) et que l'objet dat $d est bien égale à la date $date, c'est qu'il n'y a pas eu d'extrapolation sur la date : exemple de 32/01/2015 qui devient 01/02/2015. Dans ce cas la date est validé . On retourne true.
 
-//         return true;
-//     }
-//     else {
+        return true;
+    }
+    else {
 
-//         return false;
-//     }
+        return false;
+    }
     
-//  }
+ }
 
     // Fonction qui indique si l'internaute est connécté :
     function internauteEstConnecte() {
@@ -46,7 +46,7 @@ function internauteEstConnecteEtAdmin() {
         return false;
     }
     // OU :
-    return (internauteEstConnecte() && $_SESSION['t_utilisateurs']['statut'] == 1);
+    //return (internauteEstConnecte() && $_SESSION['t_utilisateurs']['statut'] == 1);
 }
 
 //3/---------------------------------------------------------------------Fonction de Requêtte : ---------------------------------------------------------------------
