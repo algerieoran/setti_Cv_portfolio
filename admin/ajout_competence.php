@@ -2,52 +2,76 @@
 <?php
 require_once '../inc/init.inc.php';
 
-// 1- On vérifie si membre est admin :
+// 1- On vérifie si l'utilisateur est admin :
 if(!internauteEstConnecteEtAdmin()) {
         header('location:../connexion.php');   // si pas admin, on le redirige vers la page de connexion
         exit();
 }
 
-// 4- Traitement de $_POST : enregistrement du produit en BDD 
+//********************TRI PAR ORDER CROISSANT ET DECROISSANT ************************* */
+
+$order = '';
+if(isset($_GET['order']) && isset($_GET['column'])){	// début de if(isset($_GET['order']))
+
+	if($_GET['column'] == 'competence'){
+		$order = ' ORDER BY competence';
+	}
+
+	elseif($_GET['column'] == 'niveau'){
+		$order = ' ORDER BY niveau';
+	}
+
+	
+	elseif($_GET['column'] == 'categorie'){
+		$order = ' ORDER BY categorie';
+    }
+    
+    if($_GET['order'] == 'asc'){
+		$order.= ' ASC';
+	}
+
+	elseif($_GET['order'] == 'desc'){
+		$order.= ' DESC';
+	}
+
+
+}	//  fin de if(isset($_GET['order']) && isset($_GET['column']))
+
+//***************************************************************** */
+
+
+// 4- Traitement de $_POST : enregistrement de la competence en BDD 
 //debug($_POST);
 
 if(!empty($_POST)) {
     // ICI il faudrait mettre les contrôles sur les champs du formulaire.
 
     // ICI le code de la photo à venir
-    $photo_bdd ='';  // par défaut la photo est vide en BDD
+    // $photo_bdd ='';  // par défaut la photo est vide en BDD
 
-    debug($_FILES);
+    // debug($_FILES);
 
-    if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
-        $nom_photo = $_POST['reference'] . '_' . $_FILES['photo']['name'];   // pour créer un nom de fichier unique, on concatène la référence du produit avec le nom du fichier en cour d'upload.
+    // if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
+    //     $nom_photo = $_POST['reference'] . '_' . $_FILES['photo']['name'];   // pour créer un nom de fichier unique, on concatène la référence du produit avec le nom du fichier en cour d'upload.
 
-        $photo_bdd = 'photo/' . $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
+    //     $photo_bdd = 'photo/' . $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
 
-        copy($_FILES['photo']['tmp_name'], '../' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "../photo/nom_photo.jpg"
+    //     copy($_FILES['photo']['tmp_name'], '../' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "../photo/nom_photo.jpg"
 
-    }
+    // }
 
 
-    // Insertion du produit en BDD :
-    executeRequete("REPLACE INTO produit VALUES (:id_produit, :reference, :categorie, :titre, :description, :couleur, :taille, :public, :photo_bdd, :prix, :stock)", 
-      array(':id_produit'   => $_POST['id_produit'],
-            ':reference'    => $_POST['reference'],
-            ':categorie'    => $_POST['categorie'],
-            ':titre'        => $_POST['titre'],
-            ':description'  => $_POST['description'],
-            ':couleur'      => $_POST['couleur'],
-            ':taille'       => $_POST['taille'],
-            ':public'       => $_POST['public'],
-            ':photo_bdd'    => $photo_bdd,  // attention : variable
-            ':prix'         => $_POST['prix'],
-            ':stock'        => $_POST['stock']
-    
-        
+    // Insertion de la competence en BDD :
+    executeRequete("REPLACE INTO t_competences VALUES (:id_competence, :competence, :niveau, :categorie, :id_utilisateur)", 
+      array(':id_competence'   => $_POST['id_competence'],
+            ':competence'    => $_POST['competence'],
+            ':niveau'    => $_POST['niveau'],
+            ':categorie'        => $_POST['categorie'],
+            ':id_utilisateur'  => $_POST['id_utilisateur']
         ));
-//REPLACE INTO se comporte comme un INSERT INTO quand l'id_produit n'existe pas en BDD : c'est le cas lors de la création d'un produit pour lequel nous avons mis un id_produit à 0 par défaut dans le formulaire (voir champ id_produit). REPLACE INTO se comporte comme un UPDATE quand l'id_produit existe en BDD : c'est le cas lors de la modification d'un produit existant.
+//REPLACE INTO se comporte comme un INSERT INTO quand l'id_competence n'existe pas en BDD : c'est le cas lors de la création d'une competence pour laquelle nous avons mis un id_competence à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_competence existe en BDD : c'est le cas lors de la modification d'une experience existante.
 
-$contenu .= '<div class="bg-success">Le produit a bien été enregistré ! </div>';
+$contenu .= '<div class="bg-success">La competence a bien été enregistré ! </div>';
 
 
 
@@ -57,64 +81,52 @@ $contenu .= '<div class="bg-success">Le produit a bien été enregistré ! </div
 //-----------------------------------------AFFICHAGE--------------------------------------------
 require_once '../inc/haut.inc.php';
 ?>
-    <h1 class="mt-4">Gestion boutique</h1>
+    <h1 class="mt-4">Gestion competences</h1>
 
     <ul class="nav nav-tabs">
-        <li><a class="nav-link" href="gestion_boutique.php">Affichage de produit</a></li>
-        <li><a class="nav-link active" href="ajout_produit.php">Ajout d'un produit</a></li>
+        <li><a class="nav-link" href="gestion_cv.php">Affichage de compétence</a></li>
+        <li><a class="nav-link active" href="ajout_competence.php">Ajout d'un compétence</a></li>
+        <li><a class="nav-link" href="modif_competence.php">Modifier une compétence</a></li>
     </ul>
 
 <?php
 echo $contenu;
 ?>
 
-<!--  3- formulaire d'ajout de produit -->
-<h2>Ajout d'un produit</h2>
+<!--  3- formulaire d'ajout de competence -->
+<h2>Ajout d'une competence</h2>
 
-<form action="" method="post" enctype="multipart/form-data">   <!--  "multipart/form-data" spécifie que le formulaire renvoie des données d'un fichier uploadé et du texte : permet d'uploader une photo pour le produit -->
+<form action="ajout_competence.php" method="post">
+    <input type="hidden" id="id_competence" name="id_competence" value="0">
 
-    <input type="hidden" id="id_produit" name="id_produit" value=""><!-- ce champcaché est utile pour la dodification d'un produit afin de l'identifier dans la requête SQL . La valeur 0 par défaut n'existe pas en BDD, et qu'on est en train de le créer -->
-    <label for="reference">Reference</label><br>
-    <input type="text" id="reference" name="reference" value=""><br><br>
+        <div class="form-group">
+            <label for="competence">Compétence :</label>
+            <input type="text" name="competence" class="form-control" placeholder="Nouvelle compétence" required>
+        </div>
+        <div class="form-group">
+            <label for="niveau">Niveau :</label>
+            <input type="text" name="niveau" class="form-control" placeholder="Niveau en chiffre" required>
+        </div>
+        <div class="form-group">
+            <label for="categorie">Catégorie</label>
+            <select name="categorie" class="form-control">
+                <option value="Back">Back</option>
+                <option value="CMS">CMS</option>
+                <option value="Front">Front</option>
+                <option value="Frameworks">Frameworks</option>
+            </select>
+        </div>
 
-    <label for="categorie">Catégorie</label><br>
-    <input type="text" id="categorie" name="categorie" value=""><br><br>
-
-    <label for="titre">Titre</label><br>
-    <input type="text" id="titre" name="titre" value=""><br><br>
-
-    <label for="description">Description</label><br>
-    <textarea type="text" id="description" name="description"></textarea><br><br>
-
-    <label for="couleur">Couleur</label><br>
-    <input type="text" id="couleur" name="couleur" value=""><br><br>
-
-    <label for="taille">Taille</label><br>
-    <select id="taille" name="taille">
-    <option value="S">S</option>
-    <option value="M">M</option>
-    <option value="L">L</option>
-    <option value="XL">XL</option>
-    </select><br><br>
-
-     <label>Public</label><br>
-    <input type="radio" name="public" value="m" checked>Masculin
-    <input type="radio" name="public" value="f">Féminin <br><br>
-
-    <label for="photo">Photo</label>
-    <input type="file" name="photo" id="photo"><br><br> <!-- le type file permet d'uploader un fichier et  de remplir la superglobale $_FILES. Ne pas oublier l'attribut enctype (enctype="multipart/form-data) dans la balise <form> de ce formulaire  -->
-
-    <label for="prix">Prix</label><br>
-
-    <input type="text" name="prix" id="prix" value="0"><br><br>    
-    <label for="stock">Stock</label><br>
-
-    <input type="text" name="stock" id="stock" value="0"><br><br>    
-    <input type="submit" value="valider" class="btn">
-
-
+    <div class="">
+        <button class="btn btn-primary" type="submit">Insérer une expérience</button>
+    </div>
 
 </form>
+
+   
+
+
+
 
 
 

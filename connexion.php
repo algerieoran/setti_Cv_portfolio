@@ -14,17 +14,6 @@ if(isset($_GET['action']) && $_GET['action'] == 'deconnexion') {// si l'internau
     exit();  // pour quitter le script
 }
 
-
-
-
-
-
-
-
-
-
-
-
 //debug($_POST);
 
 // 1- traitement du formulaire :
@@ -60,23 +49,24 @@ if(!empty($_POST)) {  //SI LE FORMULAIRE est sumis
 
 
 
-
 //------------------------------------------------------------------------AFFICHAGE : --------------------------------------------------------------------
 require_once 'inc/haut.inc.php';  // doctype, header, nav
 ?>
-    <h1 class="mt-4">Connexion</h1>
-    <?php echo $contenu; ?>
-    <form action="" method="post">
-
-    <label for="pseudo">Pseudo</label><br>
-    <input type="text" name="pseudo" id="pseudo" value=""><br><br>
-
-    <label for="mdp">Mot de passe</label><br>
-    <input type="password" name="mdp" id="mdp" value=""><br><br>
-
-     <input type="submit" value="se connecter" class="btn">
-
-     </form>
+    <center>
+        <h1 class="mt-4">Connexion</h1>
+        <?php echo $contenu; ?>
+        <form class="form-signin" action="" method="post">
+    
+        <label for="pseudo">Pseudo</label><br>
+        <input type="text" name="pseudo" id="pseudo" value=""><br><br>
+    
+        <label for="mdp">Mot de passe</label><br>
+        <input type="password" name="mdp" id="mdp" value=""><br><br>
+    
+         <input type="submit" value="se connecter" class="btn">
+    
+         </form>
+    </center>
 
 
 

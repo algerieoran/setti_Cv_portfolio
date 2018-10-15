@@ -53,14 +53,15 @@ $contenu .= '<table class="table table-hover" border="1">';
         // affichage des informations de chaque ligne $ligne :
             foreach($ligne as $indice => $valeur){
                 if($indice == 'photo') {
+                    
                     $contenu .= '<td><input type="file" name="' . $valeur . '" id="'. $indice . '"> <img src="../photo/' . $valeur . '" width="90" alt"' . $ligne['loisir'] . '"></td>';
-                    } else {
+                } else {
                
                      $contenu .= '<td><input   type ="text" id ="' . $indice . '" name="' .$indice. '" value="' . $valeur . '"></td>';
               
-            }
+                    }
 
-        }
+            }
             $contenu .= '<td><input type="submit" id="'.$ligne['id_loisir'] .'" value="modification"  onclick="return(confirm(\'Etes-vous certain de vouloir modifier ce loisir ? \' ))" ></td>';  // $ligne['id_loisir'] contien l'id de chaque loisir à chaque tour de boucle while : ainsi le lien est dynamique, l'id passé en GET change selon le loisir sur lequel je clique
             $contenu .= '</tr>';
         $contenu .= '</form>';
