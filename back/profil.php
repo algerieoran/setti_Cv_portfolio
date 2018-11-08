@@ -16,27 +16,25 @@ extract($_SESSION['t_utilisateurs']);   // extrait tous les indices de l'array s
 require_once 'inc/haut.inc.php';
 ?>
     
-<h1 class="mt-5">Profil</h1>
+<div class="container">
+    <h1 class="mt-5">Profil</h1>
 
-<h2>Bonjour <strong><?php echo $prenom; ?></strong></h2>
-
-<?php 
-if(internauteEstConnecteEtAdmin()) echo '<p>Vous êtes un administrateur.</p>';
- ?>
-<hr>
-
-<h3>Voici vos formations de profil</h3>
-
-<p><?php echo $photo; ?></p>
-<p>Votre email : <?php echo $prenom; ?></p>
-<p>Votre email : <?php echo $nom; ?></p>
-<p>Votre email : <?php echo $email; ?></p>
-<p>Votre adresse : <?php echo $adresse; ?></p>
-<p>Votre ville: <?php echo $ville; ?></p>
-<p>Votre code postal : <?php echo $code_postal; ?></p>
-<p>Votre email : <?php echo $pays; ?></p>
-
-
+    <div class="card">
+        <img src="img/<?php echo $photo; ?>" alt="" style="width:100%">
+        <h2>Bonjour <strong><?php echo $prenom; ?></strong></h2>
+        
+        <?php 
+            if (internauteEstConnecteEtAdmin()) echo '<p class="title">Vous êtes un administrateur</p>';
+        ?>
+        <hr>
+        <p>Harvard University</p>
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+            <p><button>Contact</button></p>
+    </div>
+</div>
 
 
 

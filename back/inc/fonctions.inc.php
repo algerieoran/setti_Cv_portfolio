@@ -13,16 +13,16 @@ function debug($param) {
 
     // Fonction qui indique si l'internaute est connécté :
     function internauteEstConnecte() {
-        if(isset($_SESSION['t_utilisateurs'])) {  // si la session "membre" existe, c'est que l'internaute est passé par la page de connexion et nous avons créé cet indice dans $_SESSION
+        if(isset($_SESSION['t_utilisateurs'])) {  // si la session "utilisateur" existe, c'est que l'internaute est passé par la page de connexion et nous avons créé cet indice dans $_SESSION
             return true;
         } else {
             return false;
         }
-        // OU :
+        
        
     }
 
-//3/ Fonctionqui indique si le membre est admin connecté :
+//3/ Fonctionqui indique si l'utilisateur est admin connecté :
 function internauteEstConnecteEtAdmin() {
     if(internauteEstConnecte() && $_SESSION['t_utilisateurs']['statut'] == 1){ // si membre est connecté et que son statut dans la session vaut 1, il est admin connecté
             return true;
@@ -34,7 +34,7 @@ function internauteEstConnecteEtAdmin() {
 }
 
 //3/---------------------------------------------------------------------Fonction de Requêtte : ---------------------------------------------------------------------
-function executeRequete($req, $param = array()) {   // cette fonction attend 2 valeurs : 1 ezquête SQL (obligatoire) et un array qui associe les marqueurs aux valeurs (non obligatoire car on a affecté au paramètre un array() vide par défaut)
+function executeRequete($req, $param = array()) {   // cette fonction attend 2 valeurs : 1 requête SQL (obligatoire) et un array qui associe les marqueurs aux valeurs (non obligatoire car on a affecté au paramètre un array() vide par défaut)
 
     // Echappement des données reçues avec htmlspecialchars :
     if (!empty($param)) {  // si l'array $param n'est pas vide, je peux faire la boucle :
@@ -47,7 +47,7 @@ function executeRequete($req, $param = array()) {   // cette fonction attend 2 v
     global $pdo;   // permet d'avoir accès à la variable $pdo définie dans l'espace global (c'est-à-dire hors de cette fonction) au sein de cette fonction
 
     $result = $pdo->prepare($req); // on prépare la requête envoyée à notre fonction
-    $result->execute($param);   /// on exécute la requête en lui donnant l'arrayprésent dans $param qui associe tous les marqueurs à leur valeur
+    $result->execute($param);   /// on exécute la requête en lui donnant l'array présent dans $param qui associe tous les marqueurs à leur valeur
     return $result;   // on retourne le résultat de la requête de SELECT
 
 
