@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <!-- profil style -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- Mes styles -->
     <link href="css/styleAdmin.css" rel="stylesheet" type="text/css">
@@ -54,7 +54,7 @@
           <ul class="navbar-nav ml-auto">
             <?php
 
-              // menu si internaute connecté :
+              // menu si internaute connecté et admin :
               if (internauteEstConnecteEtAdmin()) {
                 echo '<li><a class="nav-link" href="'. RACINE_SITE .'profil.php">Profil</a></li>';
                 echo '<li><a class="nav-link" href="'. RACINE_SITE .'competences.php">Compétences</a></li>';
