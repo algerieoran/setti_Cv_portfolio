@@ -53,7 +53,7 @@ require_once 'inc/haut.inc.php';
         $nbr_loisirs = $sql -> rowCount();
     ?>
 
-<div class="container">
+<div class="container margin">
     <div class="row m-2 p-1">
         <div class="col-xs-12 col-sm-12 col-md-9 col-xl-9">
             <div class="table-responsive">

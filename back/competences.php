@@ -77,7 +77,7 @@ require_once 'inc/haut.inc.php';
 echo $contenu;
 ?>
 
-<div class="container">
+<div class="container margin">
             <div class="row">  
                 <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
                     <?php 

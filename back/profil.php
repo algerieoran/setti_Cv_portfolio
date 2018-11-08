@@ -16,26 +16,31 @@ extract($_SESSION['t_utilisateurs']);   // extrait tous les indices de l'array s
 require_once 'inc/haut.inc.php';
 ?>
     
-<h1 class="mt-5">Profil</h1>
 
-<h2>Bonjour <strong><?php echo $prenom; ?></strong></h2>
 
-<?php 
-if(internauteEstConnecteEtAdmin()) echo '<p>Vous êtes un administrateur.</p>';
- ?>
-<hr>
 
-<h3>Voici vos formations de profil</h3>
+<div class="container margin" >
+    <h1 class="mt-5">Profil</h1>
+    <?php 
+    if(internauteEstConnecteEtAdmin()) echo '<h1>Vous êtes un administrateur</h1>';
+     ?>
+    <hr>
+    
+    <div class="card" style="background:transparent" width="200">
 
-<p><?php echo $photo; ?></p>
-<p>Votre email : <?php echo $prenom; ?></p>
-<p>Votre email : <?php echo $nom; ?></p>
-<p>Votre email : <?php echo $email; ?></p>
-<p>Votre adresse : <?php echo $adresse; ?></p>
-<p>Votre ville: <?php echo $ville; ?></p>
-<p>Votre code postal : <?php echo $code_postal; ?></p>
-<p>Votre email : <?php echo $pays; ?></p>
-
+      <img src="photo/<?php echo $photo; ?>" alt="Setti" class="rounded-circle" style="width:100%">
+      <h1><?php echo $prenom.'&nbsp;&nbsp;' .$nom; ?></h1>
+      <p><i class="fas fa-map-marker-alt"></i> <?php echo $adresse; ?></p>
+      <p><i class="fas fa-city"></i> <?php echo $ville.'&nbsp;-&nbsp;' .$code_postal; ?></p>
+    
+      <p><i class="fas fa-envelope"></i> <?php echo $email; ?></p>
+      <a href="#"><i class="fa fa-dribbble"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+      <a href="#"><i class="fa fa-linkedin"></i></a>
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      
+    </div>
+</div>
 
 
 

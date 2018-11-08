@@ -3,10 +3,11 @@
 // 2 - Déconnexion de l'internaute :
 
 if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') {  // si l'internaute a cliqué sur "se déconnecter"
-    session_destroy();  // on supprime toute la session du membre. Rappel : cette instruction ne s'exécute qu'en fin de script
+    session_destroy();  // on supprime toute la session du l'utilisateur.
+                        // Rappel : cette instruction ne s'exécute qu'en fin de script
 }
 
-// GET = ? dans les url ;  (?action=....)
+
 
 // 3 -  On vérifie si l'internaute est déjà connecté :
 
@@ -20,8 +21,8 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son pr
 // 1- traitement du formulaire :
     if (!empty($_POST)) {  // si le formulaire est soumis 
         // Validation des champs du formulaire :
-    if (!isset($_POST['email']) || empty($_POST['email'])) $contenu .= '<div class="text-danger">Entrez un email valide.</div>';
-    if (!isset($_POST['mdp']) || empty($_POST['mdp'])) $contenu .= '<div class="text-danger">Veuillez entrer votre mot de passe.</div>';
+    if (!isset($_POST['email']) || empty($_POST['email'])) $contenu .= '<div class="text-danger">Entrez un email valide !</div>';
+    if (!isset($_POST['mdp']) || empty($_POST['mdp'])) $contenu .= '<div class="text-danger">Veuillez entrer votre mot de passe !</div>';
     if (empty($contenu)) {  // s'il n'a pas d'erreur sur le formulaire
 
         // Vérification du pseudo :
@@ -47,94 +48,13 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son pr
 }  // fin du if (!empty($_POST))
 
 //------------------------------ AFFICHAGE -----------------------
-
+  
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Setti Dev' Intégrateur Web</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <?php
-require_once 'inc/init.inc.php';
-
-
-// 2 - Déconnexion de l'internaute :
-if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') {  // si l'internaute a cliqué sur "se déconnecter"
-    session_destroy();  // on supprime toute la session du membre. Rappel : cette instruction ne s'exécute qu'en fin de script
-}
-
-// GET = ? dans les url ;  (?action=....)
-
-// 3 -  On vérifie si l'internaute est déjà connecté :
-if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son profil :
-        header('location:profilAdmin.php');
-        exit();  // pour quitter le script
-    }
-
-// debug($_POST);
-
-// 1- traitement du formulaire :
-    if (!empty($_POST)) {  // si le formulaire est soumis 
+    <!
     
-        // Validation des champs du formulaire :
-
-    if (!isset($_POST['email']) || empty($_POST['email'])) $contenu .= '<div class="text-danger">Entrez un email valide.</div>';
-
-    if (!isset($_POST['password']) || empty($_POST['password'])) $contenu .= '<div class="text-danger">Veuillez entrer votre mot de passe.</div>';
-
-    if (empty($contenu)) {  // s'il n'a pas d'erreur sur le formulaire
-        // Vérification du pseudo :
-            $t_users = executeRequete("SELECT * FROM t_users WHERE email = :email AND password = :password", array(':email' => $_POST['email'], ':password' => $_POST['password']));  // on sélectionne en base les éventuels membres dont le pseudo correspond au pseudo donné par l'internaute lors de l'inscription
-
-    if ($t_users->rowCount() > 0) {  // si le nombre de ligne est supérieur à 0, alors le login et le mot de passe existent ensemble en BDD
-            // on crée une session avec les informations du membre :
-            $informations = $t_users->fetch(PDO::FETCH_ASSOC);  // on fait un fetch pour transformer l'objet $membre en un array associatif qui contient en indices le nom de tous les champs de la requête
-            debug($informations);
-
-            $_SESSION['t_users'] = $informations;  // nous créons une session avec les infos du membre qui proviennent de la BDD
-
-            header('location:profilAdmin.php');
-            exit();  // on redirige l'internaute vers sa page de profil, et on quitte ce script avec la fonction exit()
-
-
-        } else {
-            // sinon c'est qu'il y a une erreur sur les identifiants (ils n'existent pas ou pas pour le même membre)
-            $contenu.= '<div class="text-danger">Identifiants incorrects. Recommencez !</div>';
-        }
-
-    }  // fin du if (empty($contenu))
-
-}  // fin du if (!empty($_POST))
-
-
-
-
-//------------------------------ AFFICHAGE -----------------------
-
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Setti Dev' Intégrateur Web</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
