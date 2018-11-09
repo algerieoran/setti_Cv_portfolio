@@ -1,6 +1,20 @@
 <?php require_once 'inc/init.inc.php';
 
-$ordre = '';
+//pour le tri des colonnes 
+$ordre = ''; // on vide la variable 
+
+if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
+
+    if ($_GET['colonne'] == 'loisirs') {
+        $ordre = ' ORDER BY loisir';
+    }
+
+    if ($_GET['ordre'] == 'asc') {
+        $ordre .= ' ASC';
+    } elseif ($_GET['ordre'] == 'desc') {
+        $ordre .= ' DESC';
+    }
+}
 
 // insertion d'un loisir
 if(isset($_POST['loisir'])) { // si on a reçu une nouvelle formation
@@ -17,17 +31,6 @@ if(isset($_POST['loisir'])) { // si on a reçu une nouvelle formation
     } // ferme le if n'est pas vide
 } // ferme le if isset
 
-if(isset($_GET['ordre']) && isset($_GET['column'])){
-
-    if($_GET['column'] == 'loisirs') {
-        $ordre = ' ORDER BY loisir'; }
-
-    if($_GET['ordre'] == 'asc') {
-        $ordre.= ' ASC'; }
-
-    elseif($_GET['ordre'] == 'desc') { 
-        $ordre.= ' DESC'; }     
-}
 
 // suppression d'un élément de la BDD
 if(isset($_GET['id_loisir'])) { // on récupère ce que je supprime dans l'url par son id

@@ -20,6 +20,7 @@ require_once 'inc/haut.inc.php';
 
 
 <div class="container margin" >
+    
     <h1 class="mt-5">Profil</h1>
     <?php 
     if(internauteEstConnecteEtAdmin()) echo '<h1>Vous êtes un administrateur</h1>';

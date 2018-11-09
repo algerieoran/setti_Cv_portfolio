@@ -42,7 +42,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-5">
 
         <!-- La marque -->
-        <a class="navbar-brand" href="<?php echo RACINE_SITE ?>">Setti CV Portfolio</a>
+        <a class="navbar-brand" href="<?php echo RACINE_SITE ?>"><i class="fas fa-home"></i>  Setti CV Portfolio</a>
 
         <!-- Le burger -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav1" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,18 +56,18 @@
 
               // menu si internaute connecté et admin :
               if (internauteEstConnecteEtAdmin()) {
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'profil.php">Profil</a></li>';
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'competences.php">Compétences</a></li>';
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'formations.php">Formations</a></li>';
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'experiences.php">Expériences</a></li>';
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'loisirs.php">Loisirs</a></li>';
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'reseaux.php">Réseaux</a></li>';
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'gestion_messages.php">Messages</a></li>';
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/profil.php">Profil</a></li>';
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/competences.php">Compétences</a></li>';
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/formations.php">Formations</a></li>';
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/experiences.php">Expériences</a></li>';
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/loisirs.php">Loisirs</a></li>';
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/reseaux.php">Réseaux</a></li>';
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/gestion_messages.php">Messages</a></li>';
               } 
 
               // // menu si internaute connecté :
               if (internauteEstConnecte()) {
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'connexion.php?action=deconnexion">Se déconnecter</a></li>';             
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/connexion.php?action=deconnexion">Se déconnecter</a></li>';             
               }   
 
             ?>

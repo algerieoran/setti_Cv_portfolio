@@ -4,32 +4,25 @@ require_once 'inc/init.inc.php';
 
 //********************TRI PAR ORDER CROISSANT ET DECROISSANT ************************* */
 
-$ordre = '';
-if(isset($_GET['order']) && isset($_GET['column'])){	// début de if(isset($_GET['order']))
+//pour le tri des colonnes 
+$ordre = ''; // on vide la variable 
 
-	if($_GET['column'] == 'competences'){
-		$order = ' ORDER BY competence';
-	}
+if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
 
-	elseif($_GET['column'] == 'niveau'){
-		$order = ' ORDER BY niveau';
-	}
-
-	
-	elseif($_GET['column'] == 'categorie'){
-		$order = ' ORDER BY categorie';
+    if ($_GET['colonne'] == 'competences') {
+        $ordre = ' ORDER BY competence';
+    } elseif ($_GET['colonne'] == 'niveau') {
+        $order = ' ORDER BY niveau';
+    } elseif ($_GET['colonne'] == 'categorie') {
+        $order = ' ORDER BY categorie';
     }
-    
-    if($_GET['order'] == 'asc'){
-		$order.= ' ASC';
-	}
 
-	elseif($_GET['order'] == 'desc'){
-		$order.= ' DESC';
-	}
-
-
-}	//  fin de if(isset($_GET['order']) && isset($_GET['column']))
+    if ($_GET['ordre'] == 'asc') {
+        $ordre .= ' ASC';
+    } elseif ($_GET['ordre'] == 'desc') {
+        $ordre .= ' DESC';
+    }
+}
 
 //***************************************************************** */
 

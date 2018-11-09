@@ -1,6 +1,20 @@
 <?php require_once 'inc/init.inc.php';
 
-$ordre = '';
+//pour le tri des colonnes 
+$ordre = ''; // on vide la variable 
+
+if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
+
+    if ($_GET['colonne'] == 'reseaux') {
+        $ordre = ' ORDER BY nom_reseau';
+    }
+
+    if ($_GET['ordre'] == 'asc') {
+        $ordre .= ' ASC';
+    } elseif ($_GET['ordre'] == 'desc') {
+        $ordre .= ' DESC';
+    }
+}
 
 // insertion d'une formation
 

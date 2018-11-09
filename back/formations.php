@@ -1,19 +1,40 @@
 <?php require_once 'inc/init.inc.php';
 
-$ordre = '';
+//pour le tri des colonnes 
+$ordre = ''; // on vide la variable 
+
+if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
+
+  if ($_GET['colonne'] == 'titre_form') {
+    $ordre = ' ORDER BY titre_form';
+  } elseif ($_GET['colonne'] == 'stitre_form') {
+    $order = ' ORDER BY stitre_form';
+  } elseif ($_GET['colonne'] == 'dates_form') {
+    $order = ' ORDER BY dates_form';
+  } elseif ($_GET['colonne'] == 'description_form') {
+    $order = ' ORDER BY descrition_form';
+  }
+
+  if ($_GET['ordre'] == 'asc') {
+    $ordre .= ' ASC';
+  } elseif ($_GET['ordre'] == 'desc') {
+    $ordre .= ' DESC';
+  }
+}
 
 // insertion d'une formation
 
 if(isset($_POST['dates_form'])) { // si on a reçu une nouvelle formation
 
-    if($_POST['dates_form']!='' && $_POST['titre_form']!='' && $_POST['stitre_form']!='' && $_POST['description_form']!='') {
+    if($_POST['dates_form']!='' && $_POST['titre_form']!='' && $_POST['stitre_form']!='' && $_POST['description_form']!='' && $_POST['icon']!='') {
 
+        $icon = addslashes($_POST['icon']);
         $dates_form = addslashes($_POST['dates_form']);
         $titre_form = addslashes($_POST['titre_form']);
         $stitre_form = addslashes($_POST['stitre_form']);
         $description_form = addslashes($_POST['description_form']);
 
-        $pdo -> exec("INSERT INTO t_formations VALUES (NULL, '$dates_form', '$titre_form', '$stitre_form', '$description_form', '1')");
+        $pdo -> exec("INSERT INTO t_formations VALUES (NULL,'$icon', '$dates_form', '$titre_form', '$stitre_form', '$description_form', '1')");
 
         header("location:formations.php");
             exit();
@@ -21,26 +42,7 @@ if(isset($_POST['dates_form'])) { // si on a reçu une nouvelle formation
     } // ferme le if n'est pas vide
 } // ferme le if isset
 
-if(isset($_GET['ordre']) && isset($_GET['column'])){
 
-    if($_GET['column'] == 'dates_forms') {
-        $ordre = ' ORDER BY dates_form'; }
-
-    elseif($_GET['column'] == 'titre_form') { 
-        $ordre = ' ORDER BY titre_form'; }
-
-    elseif($_GET['column'] == 'stitre_form') {
-        $ordre = ' ORDER BY stitre_form'; }
-
-    elseif($_GET['column'] == 'description_form') {
-        $ordre = ' ORDER BY description_form'; }
-
-    if($_GET['ordre'] == 'asc') {
-        $ordre.= ' ASC'; }
-
-    elseif($_GET['ordre'] == 'desc') { 
-        $ordre.= ' DESC'; }     
-}
 
 // suppression d'un élément de la BDD
 if(isset($_GET['id_formation'])) { // on récupère ce que je supprime dans l'url par son id

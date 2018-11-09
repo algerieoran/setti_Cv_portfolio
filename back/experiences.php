@@ -1,6 +1,27 @@
 <?php require_once 'inc/init.inc.php';
 
-$ordre = '';
+//pour le tri des colonnes 
+$ordre = ''; // on vide la variable 
+
+if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
+
+    if ($_GET['colonne'] == 'titre_exp') {
+        $ordre = ' ORDER BY titre_exp';
+    } elseif ($_GET['colonne'] == 'stitre_exp') {
+        $order = ' ORDER BY stitre_exp';
+    } elseif ($_GET['colonne'] == 'dates_exp') {
+        $order = ' ORDER BY dates_exp';
+    } elseif ($_GET['colonne'] == 'description_exp') {
+        $order = ' ORDER BY descrition_exp';
+    }
+
+    if ($_GET['ordre'] == 'asc') {
+        $ordre .= ' ASC';
+    } elseif ($_GET['ordre'] == 'desc') {
+        $ordre .= ' DESC';
+    }
+}
+
 
 // insertion d'une formation
 
@@ -15,32 +36,14 @@ if(isset($_POST['dates_exp'])) { // si on a reçu une nouvelle formation
 
         $pdo -> exec("INSERT INTO t_experiences VALUES (NULL, '$dates_exp', '$titre_exp', '$stitre_exp', '$description_exp', '1')");
 
+        $contenu .= '<div class="bg-success">La formation a bien été enregistré ! </div>';
+
         header("location:experiences.php");
             exit();
 
     } // ferme le if n'est pas vide
 } // ferme le if isset
 
-if(isset($_GET['ordre']) && isset($_GET['column'])){
-
-    if($_GET['column'] == 'dates_exps') {
-        $ordre = ' ORDER BY dates_exp'; }
-
-    elseif($_GET['column'] == 'titre_exp') { 
-        $ordre = ' ORDER BY titre_exp'; }
-
-    elseif($_GET['column'] == 'stitre_exp') {
-        $ordre = ' ORDER BY stitre_exp'; }
-
-    elseif($_GET['column'] == 'description_exp') {
-        $ordre = ' ORDER BY description_exp'; }
-
-    if($_GET['ordre'] == 'asc') {
-        $ordre.= ' ASC'; }
-
-    elseif($_GET['ordre'] == 'desc') { 
-        $ordre.= ' DESC'; }     
-}
 
 // suppression d'un élément de la BDD
 if(isset($_GET['id_experience'])) { // on récupère ce que je supprime dans l'url par son id

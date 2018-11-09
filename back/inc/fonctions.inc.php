@@ -30,7 +30,7 @@ function internauteEstConnecteEtAdmin() {
         return false;
     }
     // OU :
-    return (internauteEstConnecte() && $_SESSION['t_utilisateurs']['statut'] == 1);
+    // return (internauteEstConnecte() && $_SESSION['t_utilisateurs']['statut'] == 1);
 }
 
 //3/---------------------------------------------------------------------Fonction de Requêtte : ---------------------------------------------------------------------
