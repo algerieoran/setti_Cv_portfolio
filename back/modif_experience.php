@@ -14,13 +14,14 @@ extract($_SESSION['t_utilisateurs']);
 if (!empty($_POST)) {
 
     $result = executeRequete(
-        " UPDATE t_experiences SET titre_exp = :titre_exp, stitre_exp = :stitre_exp, dates_exp = :dates_exp, description_exp = :description_exp, id_utilisateur = :id_utilisateur WHERE id_experience = :id_experience",
+        " UPDATE t_experiences SET titre_exp = :titre_exp, stitre_exp = :stitre_exp, dates_exp = :dates_exp, description_exp = :description_exp, id_utilisateur = $id_utilisateur WHERE id_experience = :id_experience",
         array(
+            ':id_experience' => $_POST['id_experience'],
             ':titre_exp' => $_POST['titre_exp'],
             ':stitre_exp' => $_POST['stitre_exp'],
             ':dates_exp' => $_POST['dates_exp'],
-            ':description_exp' => $_POST['description_exp'],
-            ':id_utilisateur' => $_POST['id_utilisateur']
+            ':description_exp' => $_POST['description_exp']
+           
         )
     );
 
@@ -55,6 +56,7 @@ while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC)) {
 
     }
     $contenu .= '<input type ="submit" id="' . $ligne_exp['id_experience'] . '" value="Modifier" class="form-control btn-success">';
+    $contenu .= '<strong><a href="experiences.php">Experiences</a></div class="primary"></strong>';
     $contenu .= '<form>';
 }
 //--------------------------AFFICHAGE------------
@@ -75,7 +77,6 @@ require_once 'inc/haut.inc.php';
                 <?php echo $contenu; ?>
             </div>
         </div>
-    
     
     </div>
     

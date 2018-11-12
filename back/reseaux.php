@@ -1,156 +1,156 @@
-<?php require_once 'inc/init.inc.php';
+<?php
 
-//pour le tri des colonnes 
-$ordre = ''; // on vide la variable 
 
-if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
 
-    if ($_GET['colonne'] == 'reseaux') {
-        $ordre = ' ORDER BY nom_reseau';
+require_once 'inc/init.inc.php';
+
+// 1- On vérifie si l'utilisateur est admin :
+
+    if(!internauteEstConnecteEtAdmin()){
+        header('location:connexion.php'); // si pas admin, on le redirige vers la page de connexion
+        exit();
     }
 
-    if ($_GET['ordre'] == 'asc') {
-        $ordre .= ' ASC';
-    } elseif ($_GET['ordre'] == 'desc') {
-        $ordre .= ' DESC';
+    extract($_SESSION['t_utilisateurs']);
+
+
+ // Supprimer une langue
+ if (isset($_GET['id_reseau'])) {
+    $resultat = executeRequete("DELETE FROM t_reseaux WHERE id_reseau = :id_reseau", array(':id_reseau' => $_GET['id_reseau']));
+    
+    if ($resultat -> rowCount() == 1) { // si j'ai une ligne dans $resultat, j'ai supprimé un produit
+    $contenu .= '<div class="alert alert-success" role="alert">Le reseau à bien été supprimé</div>';
+    } else {
+        $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression</div>';
     }
 }
 
-// insertion d'une formation
-
-if(isset($_POST['url'])) { // si on a reçu une nouvelle formation
-
-    if($_POST['url']!='') {
-
-        $url = addslashes($_POST['url']);
-
-        $pdo -> exec("INSERT INTO t_reseaux VALUES (NULL, '$url', '1')");
-
-        $contenu .= '<div class="alert alert-success" role="alert">La langue a bien été enregitré !</div>';
-
-        header("location:reseaux.php");
-            exit();
-
-    } // ferme le if n'est pas vide
-} // ferme le if isset
 
 
 
-// suppression d'un élément de la BDD
-if(isset($_GET['id_reseau'])) { // on récupère ce que je supprime dans l'url par son id
-    $efface = $_GET['id_reseau']; //je passe l'id dans une variable $efface
+    // Update de reseau pour chaque utilisateur
+if (!empty($_POST)){ // Si le formulaire est soumis
+    // debug($_POST);
 
-    $sql = "DELETE FROM t_reseaux WHERE id_reseau = '$efface' "; // delete de la BDD
-    $pdo -> query($sql); // on peut le faire avec exec également
+    // Validation des champs du formulaire
+ 
+// echo ($_POST['url'] );
+    if ($_POST['icon'] == 'Facebook'){
+        $url .=  '<a href="' . $_POST['url'] . '" target="_blank"><i class="fab fa-facebook fa-2x fa-fw"></i></a>';
+    }
 
-        if ($sql -> rowCount() == 1) { // si j'ai une ligne dans $sql, j'ai supprimé un reseau
-        $contenu .= '<div class="alert alert-success" role="alert">Le reseau à bien été supprimé</div>';
-        } else {
-            $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression</div>';
-        }
+    if ($_POST['icon']  == 'Instagram'){
+        $url .=  '<a href="' . $_POST['url'] . '" target="_blank"><i class="fab fa-instagram fa-2x fa-fw"></i></a>';
+    }
 
-    header("location:reseaux.php");
-} // ferme le if isset pour la suppression
+    if ($_POST['icon']  == 'Twitter'){
+        $url .=  '<a href="' . $_POST['url'] . '" target="_blank"><i class="fab fa-twitter-square fa-2x fa-fw"></i></a>';
+    }
+    if ($_POST['icon'] == 'Linkedin'){
+        $url .=  '<a href="' . $_POST['url'] . '" target="_blank"><i class="fab fa-linkedin fa-2x fa-fw"></i></a>';
+    }
+    // echo($url);
 
+    if (!isset($_POST['url']) || strlen($_POST['url']) < 4 || strlen($_POST['url']) > 255  ) $contenu .= '<div class="alert alert-danger" role="alert">Le nom doit contenir entre 50 et 255 caractères.</div>';
 
-// Update de reseau pour chaque utilisateur
-    if (!empty($_POST)){ // Si le formulaire est soumis
-        // debug($_POST);
-    
-        // Validation des champs du formulaire
-     
-        // echo ($_POST['url_reseau'] );
-        if ($_POST['icon'] == 'Facebook'){
-            $url .=  '<a href="' . $_POST['url_reseau'] . '" target="_blank"><i class="fab fa-facebook fa-2x fa-fw"></i></a>';
-        }
-    
-        if ($_POST['icon']  == 'Instagram'){
-            $url .=  '<a href="' . $_POST['url_reseau'] . '" target="_blank"><i class="fab fa-instagram fa-2x fa-fw"></i></a>';
-        }
-    
-        if ($_POST['icon']  == 'Twitter'){
-            $url .=  '<a href="' . $_POST['url_reseau'] . '" target="_blank"><i class="fab fa-twitter-square fa-2x fa-fw"></i></a>';
-        }
-        if ($_POST['icon'] == 'Linkedin'){
-            $url .=  '<a href="' . $_POST['url_reseau'] . '" target="_blank"><i class="fab fa-linkedin fa-2x fa-fw"></i></a>';
-        }
-        // echo($url);
-    
-        if (!isset($_POST['url_reseau']) || strlen($_POST['url_reseau']) < 4 || strlen($_POST['url_reseau']) > 255  ) $contenu .= '<div class="alert alert-danger" role="alert">Le nom doit contenir entre 50 et 255 caractères.</div>';
-         //-------------------------------
+ 
+
+    //-------------------------------
   
-        
+    // Insertion de nouvelles reseau en BDD :
+    $pdo -> exec("INSERT INTO t_reseaux VALUES (NULL, '$url', '$id_utilisateur')");
 
     
      
 
-        
-    
-    }/* fin if (!empty($_POST)) */
+$contenu .= '<div class="alert alert-success" role="alert">Le reseau a bien été enregitré !</div>';
+
+}/* fin if (!empty($_POST)) */
     
 
-//----------------------------- AFFICHAGE -------------------------
+ // Affichage les reseaux pour chaque utilisateur
+
+ $resultat = $pdo -> query("SELECT id_reseau, url, ut.prenom, ut.nom
+                            FROM t_reseaux r, t_utilisateurs ut 
+                            WHERE r.id_utilisateur = $id_utilisateur  AND ut.id_utilisateur = $id_utilisateur");
+
+$contenu .='<table class="table" border = "1">';
+    $contenu .= '<thead class="thead-dark">';
+        $contenu .='<tr>';
+       
+        $contenu .= '<th>URL du reseau</th>' ;
+            $contenu .= '<th>Prénom</th>' ;
+            $contenu .= '<th>Nom</th>' ;
+           
+            $contenu .='<th colspan="2">Actions</th>';
+        $contenu .='</tr>';
+$contenu .= '</thead>';
+while ($ligne = $resultat->fetch(PDO::FETCH_ASSOC)){
+$contenu .= '<tr>';
+    foreach ($ligne as $indice => $valeur) {
+    // Affichage de chaque ligne à chaque tour de boucle sauf "mdp"
+        if($indice != 'id_reseau'){
+            $contenu .= '<td>'. $valeur . '</td>'; 
+        }
+    }
+$contenu .='<td><a href="?id_reseau='. $ligne['id_reseau'] .'"  onclick="return(confirm(\'Etes-vous certain de vouloir supprimer ce reseau ? \' ))" ><i class="far fa-trash-alt"></i></a></td>';
+        $contenu .='</tr>';
+}
+$contenu .= '</table>'; 
+
+    //------------------------AFFICHAGE---------------------------
 
 require_once 'inc/haut.inc.php';
 
+
+
 ?>
-
-   
-
-<div class="container margin" style="min-width: 180vh; min-height: 180vh">
-    <div class="row">  
-        <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
-    <?php
-        //requête pour compter et chercher plusieurs enregistrements, on ne peut compter que si on a un prepare
-
-        $sql = $pdo -> prepare("SELECT * FROM t_reseaux".$ordre);
-        $sql -> execute();
-        $nbr_reseaux = $sql -> rowCount();
-    ?>
-    <div class="row m-5 p-1">
-        <div class="col-xs-12 col-sm-12 col-md-9 col-xl-9">
-            <div class="table-responsive">
-                <table class="table table-bordered border border-danger table-hover table-primary table-striped table-sm">
-
-                    <thead>
-                        <tr>
-                            <th>URL</th>
-                            <th>Modifier </th>
-                            <th>Supprimer </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while($line_reseau=$sql ->fetch())
-                        {
-                        ?> 
-                            <tr id="<?php echo $line_reseau['id_reseau']; ?>">
-                                <td><?php echo $line_reseau['url']; ?></td>
-                                <td><a href="modif_reseau.php?id_reseau=<?php echo $line_reseau['id_reseau']; ?>"><i class="fas fa-edit"></i></a></td> 
-                                <td><a href="reseaux.php?id_reseau=<?php echo $line_reseau['id_reseau']; ?>"><i class="fas fa-window-close"></i></a></td>
-                            </tr>
-                        <?php 
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-
-          
-        </div> <!-- fin col 1 -->
-
+<div class="container mt-5" style="min-width: 180vh">
+    <div class="jumbotron mt-5">
+            <h1 class="text-center mt-4 mb-4">Gestion de votre CV</h1>
+            <?php    echo '<h4 class="text-center mt-4 mb-4">' . $prenom . ' - ' . $nom .  '</h4>';  ?>
+            <h2 class="text-center lead"> Vous êtes un  admin.</h2>
             
-        <div class="container">
+        </div>
+
+        
+
+
+        <div class="row mb-4">
+            <div class="col-lg-12 text-center">
+                <h2>Suppression et ajout du reseau</h2>
+            </div>
+        </div>
+
+        
+
+        <div class="row mb-4">
+            <div class="col-lg-12 text-center">
+                <?php  echo $contenu;?>
+            </div>
+        </div>
+</div>
+
+<div class="container">
             <div class="row ">
                     <div class="col-lg-4 text-center m-5">
-                        <h2 class="text-primary font-weight-bold text-center">La liste des reseaux : <?php echo $nbr_reseaux; ?></h2>
+                        <h2>Ajout d'un reseau </h2>
                     </div>
                     <div class="col-lg-4 ">
                         <form method ="post" action=""> 
                             <input type="hidden" id="id_reseau" name="id_reseau" value="0"><!-- Ce champ caché est utile pour la modification d'un produit afin de l'identifier dans la requête SQL. La valeur 0 par défaut signifie que le produit n'existe pas en BDD, et qu'on est en train de le créer -->
+                            <!-- <div class="form-group"> -->
+                    <!-- <label for="id_utilisateur">Choix de l'utilisateur :</label>
+                    <select type="text" name="id_utilisateur" id="id_utilisateur" value ="">
+                           
+                    </select>
+                    </div> -->
+
+                    <!-- <input type="text" id="id_utilisateur" name ="id_utilisateur" value="">  -->
                         
                             <div class="form-group">
                                 <label for="url">Url de réseau</label>
-                                <input type="text" class="form-control" name="url" id="url" placeholder="Votre Url">
+                                <input type="text" class="form-control" name="url" id="url" placeholder="Url reseau">
                             </div>
                             <div class="form-group">
                                 <label for="icon">Choix de l'icon</label>                                
@@ -163,7 +163,7 @@ require_once 'inc/haut.inc.php';
                             </div>
                             
                             <div class="form-group">
-                                <input type="submit" class="form-control btn-primary"  value="Enregistrer">
+                                <input type="submit" class="form-control btn-success"  value="valider">
                             </div>
                         </form>
                     </div> 
@@ -171,6 +171,7 @@ require_once 'inc/haut.inc.php';
             </div>
     </div>
 
-<?php require_once 'inc/bas.inc.php';
 
+<?php
 
+require_once 'inc/bas.inc.php';

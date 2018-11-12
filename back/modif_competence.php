@@ -13,12 +13,13 @@ extract($_SESSION['t_utilisateurs']);
 //-----------------mise à jour d'une experience ---------------
 if (!empty($_POST)) {
 
-    $result = executeRequete(" UPDATE t_competences SET competence = :competence, niveau = :niveau, categorie = :categorie, id_utilisateur = :id_utilisateur
+    $result = executeRequete(" UPDATE t_competences SET competence = :competence, niveau = :niveau, categorie = :categorie, id_utilisateur = $id_utilisateur
                                 WHERE id_competence = :id_competence",
-                                array(':competence' => $_POST['competence'],    
+                                array(':id_competence' => $_POST['id_competence'],    
+                                        ':competence' => $_POST['competence'],    
                                         ':niveau' => $_POST['niveau'],
-                                        ':categorie' => $_POST['categorie'],
-                                        ':id_utilisateur' => $_POST['id_utilisateur']
+                                        ':categorie' => $_POST['categorie']
+                                        
                                         ));
 
     if ($result -> rowCount() == 1) { // si j'ai une ligne dans $result, j'ai modifié une competence
@@ -61,7 +62,7 @@ while($ligne_comp = $resultat->fetch(PDO::FETCH_ASSOC)) {
     <div class="container mt-4" style="min-width: 180vh">
         <div class="jumbotron mt-4" style="background-color:#f1f1f1;opacity:0.5; color:grey;">
                 <h1 class="text-center mt-4 mb-4">Gestion de votre  CV</h1>
-                <?php    echo '<h4 class="text-center mt-4 mb-4">' . $prenom . ' - ' . $nom .  '</h4>';  ?>
+                <?php echo '<h4 class="text-center mt-4 mb-4">' . $prenom . ' - ' . $nom .  '</h4>';  ?>
                 <h2 class="text-center"> Vous êtes un administrateur !</h2>
         </div>
     

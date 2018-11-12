@@ -50,14 +50,12 @@ if (!empty($_POST)) {
 
     // Insertion de la competence en BDD :
     executeRequete(
-        " REPLACE INTO t_experiences VALUES (:id_experience, :titre_exp, :stitre_exp, :dates_exp, :description_exp, :id_utilisateur)",
+        " REPLACE INTO t_experiences VALUES (NULL, :titre_exp, :stitre_exp, :dates_exp, :description_exp, $id_utilisateur)",
         array(
-            ':id_experience' => $_POST['id_experience'],
             ':titre_exp' => $_POST['titre_exp'],
             ':stitre_exp' => $_POST['stitre_exp'],
             ':dates_exp' => $_POST['dates_exp'],
-            ':description_exp' => $_POST['description_exp'],
-            ':id_utilisateur' => $_POST['id_utilisateur']
+            ':description_exp' => $_POST['description_exp']
         )
     );
     //REPLACE INTO se comporte comme un INSERT INTO quand l'id_experience n'existe pas en BDD : c'est le cas lors de la création d'une experience pour laquelle nous avons mis un id_experience à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_experience existe en BDD : c'est le cas lors de la modification d'une experience existante.
@@ -84,10 +82,8 @@ if (isset($_GET['id_experience'])) {// on récupère ce que je supprime dans l'u
 
 //-----------------------------------------AFFICHAGE--------------------------------------------
 require_once 'inc/haut.inc.php';
-?>
 
-<?php
-echo $contenu;
+//echo $contenu;
 ?>
 
 <div class="container margin">
@@ -95,7 +91,7 @@ echo $contenu;
         <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
-            $sql = $pdo->prepare(" SELECT * FROM t_experiences " . $ordre);
+            $sql = $pdo->prepare(" SELECT * FROM t_experiences $ordre ");
             $sql->execute();
             $nbr_experiences = $sql->rowCount();
             ?>
@@ -107,7 +103,7 @@ echo $contenu;
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Titre de l'experience  <a href="competences.php?colonne=competences&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="competences.php?colonne=competences&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
+                            <th>Titre de l'experience  <a href="experiences.php?colonne=titre_exp&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="experiences.php?colonne=titre_exp&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                             <th>Sous titre</th>
                             <th>Date d'experience</th>
                             <th>Description</th>

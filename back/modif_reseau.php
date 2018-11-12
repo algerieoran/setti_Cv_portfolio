@@ -14,8 +14,9 @@ extract($_SESSION['t_utilisateurs']);
 if (!empty($_POST)) {
 
     $result = executeRequete(
-        " UPDATE t_reseaux SET url = :url, id_utilisateur = :id_utilisateur WHERE id_loisir = :id_loisir",
+        " UPDATE t_reseaux SET url = :url, id_utilisateur = :id_utilisateur WHERE id_reseau = :id_reseau",
         array(
+            ':id_reseau' => $_POST['id_reseau'],
             ':url' => $_POST['url'],
             ':id_utilisateur' => $_POST['id_utilisateur']
         )

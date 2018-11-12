@@ -18,6 +18,7 @@ if (!empty($_POST)) {
                                 SET titre_real = :titre_real, stitre_real = :stitre_real, dates_real = :dates_real, description_real = :description_real, id_utilisateur = :id_utilisateur
                                 WHERE id_realisation = :id_realisation",
         array(
+            ':id_realisation' => $_POST['id_realisation'],
             ':titre_real' => $_POST['titre_real'],
             ':stitre_real' => $_POST['stitre_real'],
             ':dates_real' => $_POST['dates_real'],

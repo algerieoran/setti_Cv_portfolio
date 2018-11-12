@@ -2,12 +2,12 @@
 require_once 'inc/init.inc.php';
 
 //pour le tri des colonnes par ordre croissant et decroissant
-$ordre = ''; // on declare la variable 
+$ordre = ''; // on declare la variable  
 
 if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
 
-    if ($_GET['colonne'] == 'loisirs') {
-        $ordre = ' ORDER BY loisir';
+    if ($_GET['colonne'] == 'urls') {
+        $ordre = ' ORDER BY url';
     }
 
     if ($_GET['ordre'] == 'asc') {
@@ -43,30 +43,30 @@ if (!empty($_POST)) {
 
     // Insertion de la competence en BDD :
     executeRequete(
-        " REPLACE INTO t_loisirs VALUES (:id_loisir, :loisir, :id_utilisateur)",
+        " REPLACE INTO t_reseaux VALUES (:id_reseau, :url, :id_utilisateur)",
         array(
-            ':id_loisir' => $_POST['id_loisir'],
-            ':loisir' => $_POST['loisir'],
+            ':id_reseau' => $_POST['id_reseau'],
+            ':url' => $_POST['url'],
             ':id_utilisateur' => $_POST['id_utilisateur']
         )
     );
     //REPLACE INTO se comporte comme un INSERT INTO quand l'id_experience n'existe pas en BDD : c'est le cas lors de la création d'une experience pour laquelle nous avons mis un id_experience à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_experience existe en BDD : c'est le cas lors de la modification d'une experience existante.
 
-    $contenu .= '<div class="bg-success">Le loisir a bien été enregistrée ! </div>';
+    $contenu .= '<div class="bg-success">Le reseau a bien été enregistrée ! </div>';
 
 }// fin du if (!empty($_POST))
 
 
 
 //suppression d'un élément de la BDD
-if (isset($_GET['id_loisir'])) {// on récupère ce que je supprime dans l'url par son id
-    $efface = $_GET['id_loisir'];// je passe l'id dans une variable $efface
+if (isset($_GET['id_reseau'])) {// on récupère ce que je supprime dans l'url par son id
+    $efface = $_GET['id_reseau'];// je passe l'id dans une variable $efface
 
-    $resultat = $pdo->query(" DELETE FROM t_loisirs WHERE id_loisir = '$efface' ");
+    $resultat = $pdo->query(" DELETE FROM t_reseaux WHERE id_reseau = '$efface' ");
 
-    header("location: ../back/loisirs.php");
+    header("location: ../back/reseaux.php");
 
-    $contenu .= '<div class="alert alert-success" role="alert">Le loisir à bien été supprimé</div>';
+    $contenu .= '<div class="alert alert-success" role="alert">Le reseau à bien été supprimé</div>';
 } else {
     $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression</div>';
 
@@ -85,31 +85,31 @@ require_once 'inc/haut.inc.php';
         <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
-            $sql = $pdo->prepare(" SELECT * FROM t_loisirs " . $ordre);
+            $sql = $pdo->prepare(" SELECT * FROM t_reseaux " . $ordre);
             $sql->execute();
-            $nbr_loisirs = $sql->rowCount();
+            $nbr_reseaux = $sql->rowCount();
             ?>
 
             <div class="table-responsive">
                 <div class="card-header">
-                    La liste des compétences : <?php echo $nbr_loisirs; ?>
+                    La liste des reseaux : <?php echo $nbr_reseaux; ?>
                 </div>
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Loisir  <a href="loisirs.php?colonne=loisirs&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="loisirs.php?colonne=loisirs&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
+                            <th>Reseau  <a href="reseaux.php?colonne=urls&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="reseaux.php?colonne=urls&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody class="thead-light">
-                    <?php while ($ligne_loisir = $sql->fetch()) {
+                    <?php while ($ligne_reseaux = $sql->fetch()) {
 
                         echo '<tr>';
-                        echo '<td>' . $ligne_loisir['loisir'] . '</td>';
-                        echo '<td> <a href="modif_loisir.php?id_loisir=' . $ligne_loisir['id_loisir'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier ce loisir ?\'))"><i class="fas fa-edit"></i></a></td>';
+                        echo '<td>' . $ligne_reseaux['url'] . '</td>';
+                        echo '<td> <a href="modif_reseau.php?id_reseau=' . $ligne_reseaux['id_reseau'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier ce reseau ?\'))"><i class="fas fa-edit"></i></a></td>';
 
-                        echo '<td> <a href="?id_loisir=' . $ligne_loisir['id_loisir'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer ce loisir ?\'))" ><i class="far fa-trash-alt"></i></a></td>';
+                        echo '<td> <a href="?id_experience=' . $ligne_reseaux['id_reseau'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer ce reseau ?\'))" ><i class="far fa-trash-alt"></i></a></td>';
                         echo '</tr>';
                     }
                     ?>
@@ -121,17 +121,17 @@ require_once 'inc/haut.inc.php';
         <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="card text-white bg-secondary mb-3">
                 <div class="card-header">
-                    Insertion d'un nouveau loisir :
+                    Insertion d'un nouveau reseau :
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
                         <div class="form-group">
-                            <label for="loisir">Loisir</label>
-                            <input type="text" name="loisir" class="form-control" placeholder="nouveau loisir" required>
+                            <label for="url">reseau</label>
+                            <input type="text" name="url" class="form-control" placeholder="nouveau reseau" required>
                         </div>
                         
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Insérer un loisir</button>
+                            <button class="btn btn-primary" type="submit">Insérer un reseau</button>
                         </div>
                     </form>
                 </div><!-- fin div .card-body -->

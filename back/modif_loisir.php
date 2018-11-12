@@ -16,6 +16,7 @@ if (!empty($_POST)) {
     $result = executeRequete(
         " UPDATE t_loisirs SET loisir = :loisir, id_utilisateur = :id_utilisateur WHERE id_loisir = :id_loisir",
         array(
+            ':id_loisir' => $_POST['id_loisir'],
             ':loisir' => $_POST['loisir'],
             ':id_utilisateur' => $_POST['id_utilisateur']
         )

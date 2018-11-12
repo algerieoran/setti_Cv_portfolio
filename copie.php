@@ -20,8 +20,6 @@
 
     <!-- Custom styles for this template -->
     <link href="back/css/grayscale.min.css" rel="stylesheet">
-    <!-- style maison -->
-    <link rel="stylesheet" href="back/css/style.css">
 
   </head>
 
@@ -54,9 +52,8 @@
     <!-- Header -->
     <header class="masthead">
       <div class="container d-flex h-100 align-items-center">
-      <div class="bg-image"></div>
-        <div class="mx-auto text-center bg-text">
-          <h1 class="mx-auto my-0 text-uppercase glow">Setti BELKACEM</h1>
+        <div class="mx-auto text-center">
+          <h1 class="mx-auto my-0 text-uppercase">Setti BELKACEM</h1>
           <h2 class="text-white-50 mx-auto mt-2 mb-5">Développeur Intégrateur Web Junior, à la recherche d'un stage.</h2>
           <a href="#about" class="btn btn-primary js-scroll-trigger">Adoptez-moi !</a>
         </div>
@@ -70,38 +67,65 @@
           <div class="col-lg-8 mx-auto">
             <h2 class="text-white mb-4">A propos de moi </h2>
             <p class="text-white-50">Je me présente, Setti BELKACEM,sérueuse et impliquée, Développeur Web Intégrateur Junior, en formation avec WebForce3. Je suis spécialisé en développement Front-end (intégration : HTML5, CSS3, Jquery) et Back-end (dévéloppement : php7). Je suis à la recherche d'un stage de 2 mois.
+              <!-- <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p> -->
           </div>
         </div>
-        <img src="back/img/profil.jpg" class="img-fluid rounded-circle mb-5" width="250" heigth="250" alt="profil">
+        <img src="back/img/profil.jpg" class="img-fluid" width="250" heigth="250  " alt="profil">
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="skills" class="bg-light">
+    <section id="skills" class="projects-section bg-light">
       <div class="container">
 
         <!-- Featured Project Row -->
-        <div class="timeline">
-          <div id="parcours1" class="container left">
-            <div class="content">
-              <h2>2017</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus consectetur deserunt quia harum quod at dolore, ea quam atque doloribus excepturi dolorem eveniet vitae veritatis, possimus et voluptatum! Id, harum.
-              Possimus nam sunt soluta facere, neque tempora, non aspernatur repellendus quibusdam iure nesciunt vero maiores, error quod recusandae velit exercitationem qui.</p>
+        <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="col-xl-8 col-lg-7">
+            <img class="img-fluid mb-3 mb-lg-0" src="back/img/home-bg.jpg" alt="">
+          </div>
+          <div class="col-xl-4 col-lg-5">
+            <div class="featured-text text-center text-lg-left">
+              <h4>Shoreline</h4>
+              <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
             </div>
           </div>
-          <div id="parcours1" class="container right">
-            <div class="content">
-              <h2>2016</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magni iusto, totam animi consectetur repellendus dolorum reiciendis beatae maxime sed veritatis exercitationem consequuntur soluta ullam fugit dolor harum? Architecto, consequatur.
-              Nulla assumenda odio quis sequi itaque cum. Ipsum reprehenderit itaque dolores esse quia eum quam. Explicabo culpa, nemo assumenda labore reiciendis inventore.</p>
-            </div>
-          </div>
-          
+        </div>
+
         <!-- Project One Row -->
-       
+        <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="back/img/demo-image-01.jpg" alt="">
+          </div>
+          <div class="col-lg-6">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-left">
+                  <h4 class="text-white">Misty</h4>
+                  <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                  <hr class="d-none d-lg-block mb-0 ml-0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- Project Two Row -->
-        
+        <div class="row justify-content-center no-gutters">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="back/img/demo-image-02.jpg" alt="">
+          </div>
+          <div class="col-lg-6 order-lg-first">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-right">
+                  <h4 class="text-white">Mountains</h4>
+                  <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                  <hr class="d-none d-lg-block mb-0 mr-0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </section>

@@ -15,6 +15,7 @@ if (!empty($_POST)) {
     $result = executeRequete(
         " UPDATE t_formations SET icon = :icon, titre_form = :titre_form, stitre_form = :stitre_form, dates_form = :dates_form, description_form = :description_form, id_utilisateur = :id_utilisateur WHERE id_formation = :id_formation",
                                 array(
+                                    ':id_formation' => $_POST['id_formation'],
                                     ':icon' => $_POST['icon'],
                                     ':titre_form' => $_POST['titre_form'],
                                     ':stitre_form' => $_POST['stitre_form'],

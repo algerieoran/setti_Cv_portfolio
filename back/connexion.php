@@ -11,8 +11,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') {  // si l'inter
 
 // 3 -  On vérifie si l'internaute est déjà connecté :
 
-if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son profil :
-        header('location:profil.php');
+if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son index :
+        header('location:index.php');
         exit();  // pour quitter le script
     }
 
@@ -37,8 +37,8 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son pr
             debug($informations);
 
             $_SESSION['t_utilisateurs'] = $informations;  // nous créons une session avec les infos du membre qui proviennent de la BDD​
-            header('location:profil.php');
-            exit();  // on redirige l'internaute vers sa page de profil, et on quitte ce script avec la fonction exit()
+            header('location:index.php');
+            exit();  // on redirige l'internaute vers sa page de index, et on quitte ce script avec la fonction exit()
 
         } else {
             // sinon c'est qu'il y a une erreur sur les identifiants (ils n'existent pas ou pas pour le même membre)

@@ -56,7 +56,7 @@
 
               // menu si internaute connecté et admin :
               if (internauteEstConnecteEtAdmin()) {
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/profil.php">Profil</a></li>';
+                echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/index.php">Accueil</a></li>';
                 echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/competences.php">Compétences</a></li>';
                 echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/formations.php">Formations</a></li>';
                 echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/experiences.php">Expériences</a></li>';
