@@ -14,44 +14,47 @@ extract($_SESSION['t_utilisateurs']);
 if (!empty($_POST)) {
 
     $result = executeRequete(
-        " UPDATE t_loisirs SET loisir = :loisir, id_utilisateur = :id_utilisateur WHERE id_loisir = :id_loisir",
+        " UPDATE t_experiences SET titre_exp = :titre_exp, stitre_exp = :stitre_exp, dates_exp = :dates_exp, description_exp = :description_exp, id_utilisateur = :id_utilisateur WHERE id_experience = :id_experience",
         array(
-            ':loisir' => $_POST['loisir'],
+            ':titre_exp' => $_POST['titre_exp'],
+            ':stitre_exp' => $_POST['stitre_exp'],
+            ':dates_exp' => $_POST['dates_exp'],
+            ':description_exp' => $_POST['description_exp'],
             ':id_utilisateur' => $_POST['id_utilisateur']
         )
     );
 
-    if ($result->rowCount() == 1) { // si j'ai une ligne dans $result, j'ai modifié un loisir
-        $contenu .= '<div class="alert alert-success" role="alert">le loisir à bien été modifier</div>';
+    if ($result->rowCount() == 1) { // si j'ai une ligne dans $result, j'ai modifié une experience
+        $contenu .= '<div class="alert alert-success" role="alert">l\'experience à bien été modifier</div>';
     } else {
         $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la modification</div>';
     }
 }
 
 //-----------------------
-$id_loisir = $_GET['id_loisir'];
+$id_experience = $_GET['id_experience'];
 
-$result = $pdo->query(" SELECT * FROM t_loisirs WHERE id_loisir = '$id_loisir' ");
+$resultat = $pdo->query(" SELECT * FROM t_experiences WHERE id_experience = '$id_experience' ");
 
-while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
+while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC)) {
     $contenu .= '<form method="post" action="">';
         // debug($ligne);
 
-    foreach ($ligne as $indice => $valeur) {
+    foreach ($ligne_exp as $indice => $valeur) {
         $contenu .= '<div class="form-group">';
 
-        if ($indice == 'id_loisir' || $indice == 'id_utilisateur') {
+        if ($indice == 'id_experience' || $indice == 'id_utilisateur') {
             $contenu .= '<input type="hidden" name="' . $indice . '" id="' . $indice . '" value="' . $valeur . '">';
 
         } else {
-            $contenu .= '<label for="' . $indice . '">&nbsp;&nbsp;' . $indice . '</label>';
+            $contenu .= '<label for="' . $indice . '">&nbsp;' . $indice . '</label>';
             $contenu .= '<input class="form-control"  id="' . $indice . '" value="' . $valeur . '" name="' . $indice . '">';
         }
 
         $contenu .= '</div>';
 
     }
-    $contenu .= '<input type ="submit" id="' . $ligne['id_loisir'] . '" value="Modifier" class="form-control btn-success">';
+    $contenu .= '<input type ="submit" id="' . $ligne_exp['id_experience'] . '" value="Modifier" class="form-control btn-success">';
     $contenu .= '<form>';
 }
 //--------------------------AFFICHAGE------------
@@ -66,12 +69,13 @@ require_once 'inc/haut.inc.php';
         </div>
     
         <div class="row d-flex justify-content-center">
-            <h2 class="text-center m-5">La mise à jour d'un loisir</h2>
-            <div class="col-lg-8 m-3">
+            <h2 class="text-center m-5">La mise à jour d'une experience</h2>
+            <div class="col-lg-6 m-3">
             
                 <?php echo $contenu; ?>
             </div>
         </div>
+    
     
     </div>
     

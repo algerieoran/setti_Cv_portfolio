@@ -1,7 +1,8 @@
-<?php require_once 'inc/init.inc.php';
+<?php
+require_once 'inc/init.inc.php';
 
-//pour le tri des colonnes 
-$ordre = ''; // on vide la variable 
+//pour le tri des colonnes par ordre croissant et decroissant
+$ordre = ''; // on declare la variable 
 
 if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
 
@@ -22,123 +23,152 @@ if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
     }
 }
 
+extract($_SESSION['t_utilisateurs']);
 
-// insertion d'une formation
-
-if(isset($_POST['dates_exp'])) { // si on a reçu une nouvelle formation
-
-    if($_POST['dates_exp']!='' && $_POST['titre_exp']!='' && $_POST['stitre_exp']!='' && $_POST['description_exp']!='') {
-
-        $dates_exp = addslashes($_POST['dates_exp']);
-        $titre_exp = addslashes($_POST['titre_exp']);
-        $stitre_exp = addslashes($_POST['stitre_exp']);
-        $description_exp = addslashes($_POST['description_exp']);
-
-        $pdo -> exec("INSERT INTO t_experiences VALUES (NULL, '$dates_exp', '$titre_exp', '$stitre_exp', '$description_exp', '1')");
-
-        $contenu .= '<div class="bg-success">La formation a bien été enregistré ! </div>';
-
-        header("location:experiences.php");
-            exit();
-
-    } // ferme le if n'est pas vide
-} // ferme le if isset
+/**************************************************************** */
 
 
-// suppression d'un élément de la BDD
-if(isset($_GET['id_experience'])) { // on récupère ce que je supprime dans l'url par son id
-    $efface = $_GET['id_experience']; //je passe l'id dans une variable $efface
+// 4- Traitement de $_POST : enregistrement de la competence en BDD 
+//debug($_POST);
 
-    $sql = "DELETE FROM t_experiences WHERE id_experience = '$efface' "; // delete de la BDD
-    $pdo -> query($sql); // on peut le faire avec exec également
+if (!empty($_POST)) {
+    // ICI il faudrait mettre les contrôles sur les champs du formulaire.
 
-    header("location:experiences.php");
-} // ferme le if isset pour la suppression
+    // ICI le code de la photo à venir
+    // $photo_bdd ='';  // par défaut la photo est vide en BDD
 
-//----------------------------- AFFICHAGE -------------------------
+    // debug($_FILES);
 
+    // if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
+    //     $nom_photo = $_POST['reference'] . '_' . $_FILES['photo']['name'];   // pour créer un nom de fichier unique, on concatène la référence du produit avec le nom du fichier en cour d'upload.
+
+    //     $photo_bdd = 'photo/' . $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
+
+    //     copy($_FILES['photo']['tmp_name'], '../' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "../photo/nom_photo.jpg"
+
+    // }
+
+    // Insertion de la competence en BDD :
+    executeRequete(
+        " REPLACE INTO t_experiences VALUES (:id_experience, :titre_exp, :stitre_exp, :dates_exp, :description_exp, :id_utilisateur)",
+        array(
+            ':id_experience' => $_POST['id_experience'],
+            ':titre_exp' => $_POST['titre_exp'],
+            ':stitre_exp' => $_POST['stitre_exp'],
+            ':dates_exp' => $_POST['dates_exp'],
+            ':description_exp' => $_POST['description_exp'],
+            ':id_utilisateur' => $_POST['id_utilisateur']
+        )
+    );
+    //REPLACE INTO se comporte comme un INSERT INTO quand l'id_experience n'existe pas en BDD : c'est le cas lors de la création d'une experience pour laquelle nous avons mis un id_experience à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_experience existe en BDD : c'est le cas lors de la modification d'une experience existante.
+
+    $contenu .= '<div class="bg-success">L\'experience a bien été enregistrée ! </div>';
+
+}// fin du if (!empty($_POST))
+
+//suppression d'un élément de la BDD
+if (isset($_GET['id_experience'])) {// on récupère ce que je supprime dans l'url par son id
+    $efface = $_GET['id_experience'];// je passe l'id dans une variable $efface
+
+    $resultat = $pdo->query(" DELETE FROM t_experiences WHERE id_experience = '$efface' ");
+
+    header("location: ../back/experiences.php");
+
+    $contenu .= '<div class="alert alert-success" role="alert">L\'expaerience à bien été supprimé</div>';
+} else {
+    $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression</div>';
+
+}//ferme le if isset pour la suppression
+
+
+
+//-----------------------------------------AFFICHAGE--------------------------------------------
 require_once 'inc/haut.inc.php';
-
 ?>
 
-    <?php
-        //requête pour compter et chercher plusieurs enregistrements, on ne peut compter que si on a un prepare
-
-        $sql = $pdo -> prepare("SELECT * FROM t_experiences".$ordre);
-        $sql -> execute();
-        $nbr_experiences = $sql -> rowCount();
-    ?>
+<?php
+echo $contenu;
+?>
 
 <div class="container margin">
-    <div class="row m-2 p-1">
-        <div class="col-xs-12 col-sm-12 col-md-9 col-xl-9">
-            <div class="table-responsive">
-                <table class="table table-bordered border border-danger table-hover table-primary table-striped table-sm">
+    <div class="row">  
+        <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
+            <?php 
+                //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
+            $sql = $pdo->prepare(" SELECT * FROM t_experiences " . $ordre);
+            $sql->execute();
+            $nbr_experiences = $sql->rowCount();
+            ?>
 
-                    <thead>
+            <div class="table-responsive">
+                <div class="card-header">
+                    La liste des compétences : <?php echo $nbr_experiences; ?>
+                </div>
+                <table class="table table-striped table-sm">
+                    <thead class="thead-dark">
                         <tr>
-                            <th style="width:18%;">Dates<a href="experiences.php?column=dates_exps&ordre=asc"> <i class="fas fa-sort-up"></i></a> |
-                            <a href="formations.php?column=dates_exps&ordre=desc"> <i class="fas fa-sort-down"></i></a></th>
-                            <th style="width:27%;">Titre exp</th>
-                            <th style="width:25%;">Sous-titres</th>
-                            <th style="width:25%;">Description</th>
-                            <th>Modifier </th>
-                            <th>Supprimer </th>
+                            <th>Titre de l'experience  <a href="competences.php?colonne=competences&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="competences.php?colonne=competences&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
+                            <th>Sous titre</th>
+                            <th>Date d'experience</th>
+                            <th>Description</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php while($line_experience=$sql ->fetch())
-                        {
-                        ?> 
-                            <tr id="<?php echo $line_experience['id_experience']; ?>">
-                                <td><?php echo $line_experience['dates_exp']; ?></td>
-                                <td><?php echo $line_experience['titre_exp']; ?></td>
-                                <td><?php echo $line_experience['stitre_exp']; ?></td>
-                                <td><?php echo $line_experience['description_exp']; ?></td>
-                                <td><a href="modif_experience.php?id_experience=<?php echo $line_experience['id_experience']; ?>"><i class="fas fa-edit"></i></a></td> 
-                                <td><a href="experiences.php?id_experience=<?php echo $line_experience['id_experience']; ?>"><i class="fas fa-window-close"></i></a></td>
-                            </tr>
-                        <?php 
-                        }
-                        ?>
+                    <tbody class="thead-light">
+                    <?php while ($ligne_experience = $sql->fetch()) {
+
+                        echo '<tr>';
+                        echo '<td>' . $ligne_experience['titre_exp'] . '</td>';
+                        echo '<td>' . $ligne_experience['stitre_exp'] . '</td>';
+                        echo '<td>' . $ligne_experience['dates_exp'] . '</td>';
+                        echo '<td>' . $ligne_experience['description_exp'] . '</td>';
+                        echo '<td> <a href="modif_experience.php?id_experience=' . $ligne_experience['id_experience'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier cette experience ?\'))"><i class="fas fa-edit"></i></a></td>';
+
+                        echo '<td> <a href="?id_experience=' . $ligne_experience['id_experience'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer cette experience ?\'))" ><i class="far fa-trash-alt"></i></a></td>';
+                        echo '</tr>';
+                    }
+                    ?>
                     </tbody>
                 </table>
-            </div>
+            </div><!-- fin resposive -->
+        </div><!-- fin .col-lg-8 -->
 
-            <p class="text-primary font-weight-bold text-center">La liste des expériences : <?php echo $nbr_experiences; ?></p>
-        </div> <!-- fin col 1 -->
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">
+                    Insertion d'une nouvelle experience :
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label for="titre_exp">Titre d'experience</label>
+                            <input type="text" name="titre_exp" class="form-control" placeholder="nouvelle experience" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stitre_exp">Sous titre</label>
+                            <input type="text" name="stitre_exp" class="form-control" placeholder="Le sous titre de l'experience" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dates_exp">Date d'experience</label>
+                            <input type="text" name="dates_exp" class="form-control" placeholder="La date de l'experience" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description_exp">Description d'experience</label>
+                            <textarea name="description_exp" id="description_exp" class="form-control" cols="30" rows="10">Description d'experience</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Insérer une experience</button>
+                        </div>
+                    </form>
+                </div><!-- fin div .card-body -->
+            </div><!-- fin div .card -->
+        </div><!-- fin div .col-sm-12 col-md-4 col-lg-4 -->
+        
+    </div><!-- fin .row -->
             
-         <div class="col-xs-12 col-sm-12 col-md-3 col-xl-3">   
-        <div class="card-header border border-dark text-center">AJOUTER</div>
+</div><!-- fin .container-->
 
-            <form action="experiences.php" method="post" class="text-dark border border-dark p-2">
-                    
-                <div class="form-group">
-                <label for="dates_exp">Dates</label>
-                    <input class="form-control" type="text" name="dates_exp" id="dates_exp" placeholder="" required>
-                </div>
-                    
-                <div class="form-group">
-                    <label for="titre_exp">Titre</label>
-                    <input class="form-control" type="text" name="titre_exp" id="titre_exp" placeholder="" required>
-                </div>
-                    
-                <div class="form-group">
-                    <label for="stitre_exp">Sous-titres</label>
-                    <input class="form-control" type="text" name="stitre_exp" id="stitre_exp" placeholder="">
-                </div>
-                    
-                <div class="form-group">
-                    <label for="description_exp">Description</label>
-                    <input class="form-control" type="text" name="description_exp" id="description_exp" placeholder="">
-                </div>
-                    
-                <button type="submit" class="btn btn-primary">Ajouter</button>  
-            </form> 
-        </div> <!-- fin col 2 -->
-    </div> <!-- fin row -->
-</div> <!-- fin container -->
-    
-<?php require_once 'inc/bas.inc.php';
-
-
+<?php
+require_once 'inc/bas.inc.php';

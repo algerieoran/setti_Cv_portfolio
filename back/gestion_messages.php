@@ -1,14 +1,14 @@
 <?php
-
-
 require_once 'inc/init.inc.php';
+
+// 1- On vérifie si l'utilisateur est admin :
 if(internauteEstConnecteEtAdmin()){
     // ----------------------mise à jour des messages-------------------------------
 
     if (isset($_GET['id_message'])) {
-        $resultat = executeRequete("DELETE FROM t_messages WHERE id_message = :id_message", array(':id_message' => $_GET['id_message']));
+        $result = executeRequete("DELETE FROM t_messages WHERE id_message = :id_message", array(':id_message' => $_GET['id_message']));
         
-        if ($resultat -> rowCount() == 1) { // si j'ai une ligne dans $resultat, j'ai supprimé une message
+        if ($result -> rowCount() == 1) { // si j'ai une ligne dans $resultat, j'ai supprimé une message
         $contenu .= '<div class="alert alert-success" role="alert">La message à bien été supprimé</div>';
         } else {
             $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression</div>';

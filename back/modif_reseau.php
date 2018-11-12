@@ -14,24 +14,24 @@ extract($_SESSION['t_utilisateurs']);
 if (!empty($_POST)) {
 
     $result = executeRequete(
-        " UPDATE t_loisirs SET loisir = :loisir, id_utilisateur = :id_utilisateur WHERE id_loisir = :id_loisir",
+        " UPDATE t_reseaux SET url = :url, id_utilisateur = :id_utilisateur WHERE id_loisir = :id_loisir",
         array(
-            ':loisir' => $_POST['loisir'],
+            ':url' => $_POST['url'],
             ':id_utilisateur' => $_POST['id_utilisateur']
         )
     );
 
-    if ($result->rowCount() == 1) { // si j'ai une ligne dans $result, j'ai modifié un loisir
-        $contenu .= '<div class="alert alert-success" role="alert">le loisir à bien été modifier</div>';
+    if ($result->rowCount() == 1) { // si j'ai une ligne dans $result, j'ai modifié un reseau
+        $contenu .= '<div class="alert alert-success" role="alert">le reseau à bien été modifier</div>';
     } else {
         $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la modification</div>';
     }
 }
 
 //-----------------------
-$id_loisir = $_GET['id_loisir'];
+$id_reseau = $_GET['id_reseau'];
 
-$result = $pdo->query(" SELECT * FROM t_loisirs WHERE id_loisir = '$id_loisir' ");
+$result = $pdo->query(" SELECT * FROM t_reseaux WHERE id_reseau = '$id_reseau' ");
 
 while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
     $contenu .= '<form method="post" action="">';
@@ -40,7 +40,7 @@ while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
     foreach ($ligne as $indice => $valeur) {
         $contenu .= '<div class="form-group">';
 
-        if ($indice == 'id_loisir' || $indice == 'id_utilisateur') {
+        if ($indice == 'id_reseau' || $indice == 'id_utilisateur') {
             $contenu .= '<input type="hidden" name="' . $indice . '" id="' . $indice . '" value="' . $valeur . '">';
 
         } else {
@@ -51,7 +51,7 @@ while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
         $contenu .= '</div>';
 
     }
-    $contenu .= '<input type ="submit" id="' . $ligne['id_loisir'] . '" value="Modifier" class="form-control btn-success">';
+    $contenu .= '<input type ="submit" id="' . $ligne['id_reseau'] . '" value="Modifier" class="form-control btn-success">';
     $contenu .= '<form>';
 }
 //--------------------------AFFICHAGE------------
@@ -72,6 +72,7 @@ require_once 'inc/haut.inc.php';
                 <?php echo $contenu; ?>
             </div>
         </div>
+    
     
     </div>
     

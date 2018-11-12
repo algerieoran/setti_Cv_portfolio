@@ -23,7 +23,6 @@ define('RACINE_SITE', '/setti_portfolio/');  // cette constante servira à crée
 
 // Variables d'affichage :
 $contenu ='';
-
 // $contenu_gauche = '';
 // $contenu_droite = '';
 

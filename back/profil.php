@@ -29,7 +29,7 @@ require_once 'inc/haut.inc.php';
     
     <div class="card" style="background:transparent" width="200">
 
-      <img src="photo/<?php echo $photo; ?>" alt="Setti" class="rounded-circle" style="width:100%">
+      <img src="img/<?php echo $photo; ?>" alt="Setti" class="rounded-circle" style="width:100%">
       <h1><?php echo $prenom.'&nbsp;&nbsp;' .$nom; ?></h1>
       <p><i class="fas fa-map-marker-alt"></i> <?php echo $adresse; ?></p>
       <p><i class="fas fa-city"></i> <?php echo $ville.'&nbsp;-&nbsp;' .$code_postal; ?></p>
