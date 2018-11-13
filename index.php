@@ -15,30 +15,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Setti Belkacem">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-
     <title>Site CVportfolio Setti Belkacem</title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS---------------->
     <link href="back/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
+    <!-- fonts du template -->
     <link href="back/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- CDN BOOTSTRAP -->
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
+    <!-- styles du template -->
     <link href="back/css/grayscale.min.css" rel="stylesheet">
+    <!-- ----------------------------------------------- -->
+
     <!-- style maison -->
     <link rel="stylesheet" href="back/css/style.css">
 
+    <!-- CDN section skills -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ fin CDn section skills ---------->
+    <!------ fin CDN footer ---------->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
   </head>
 
-  <body id="page-top" class="bg-secondary">
+  <body id="page-top">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -81,7 +85,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
-            <h2 class="text-white mb-4">A propos de moi </h2>
+            <h2 class="text-white mb-4">Developpeur web integrateur par passion ! </h2>
             <p class="text-white-50">Je me présente, Setti BELKACEM. Développeur Web Intégrateur Junior. <br>
               Actuellement, en formation de 10 mois labellisée Grande École du Numérique Techniques de développement web et mobile avec WebForce3. 
             Sociable, impliquée, à l'écoute des contraintes professionnelles et aux besoins du client, je suis à la recherche d'un stage non rémunéré d'une durée de 2 mois (Janv -Fév.).
@@ -90,211 +94,162 @@
         <img src="back/img/profil.jpg" class="img-fluid rounded-circle mb-5" width="250" heigth="250" alt="profil">
       </div>
     </section>
-    <!-- Project Two Row -->
-    
+    <!-- fin About Section -->
+
+    <!-- Section #skills-->
     <section id="skills" class="projects-section bg-light">
-    <div class="container">
-            <h4>Timeline Style : Demo-12</h4>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main-timeline12">
-                        <div class="col-md-2 col-sm-4 timeline">
-                            <span class="timeline-icon">
-                                <i class="fa fa-key"></i>
-                            </span>
-                            <div class="border"></div>
-                            <div class="timeline-content">
-                                <h4 class="title">Williamson</h4>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-4 timeline">
-                            <div class="timeline-content">
-                                <h4 class="title">Kristiana</h4>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="border"></div>
-                                <span class="timeline-icon">
-                                    <i class="fa fa-key"></i>
-                                </span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 timeline">
-                            <span class="timeline-icon">
-                                <i class="fa fa-key"></i>
-                            </span>
-                            <div class="border"></div>
-                            <div class="timeline-content">
-                                <h4 class="title">Steve thomas</h4>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-4 timeline">
-                            <div class="timeline-content">
-                                <h4 class="title">Miranda joy</h4>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="border"></div>
-                            <span class="timeline-icon">
-                                <i class="fa fa-key"></i>
-                            </span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 timeline">
-                            <span class="timeline-icon">
-                                <i class="fa fa-key"></i>
-                            </span>
-                            <div class="border"></div>
-                            <div class="timeline-content">
-                                <h4 class="title">Williamson</h4>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-4 timeline">
-                            <div class="timeline-content">
-                                <h4 class="title">Kristiana</h4>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="border"></div>
-                            <span class="timeline-icon">
-                                <i class="fa fa-key"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-    <!-- Projects Section -->
-    <div class="container bg-white">
-          <h2 class="text-black mb-4">Parcours </h2>
-            <h4>FORMATIONS </h4>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main-timeline">
-                        <a href="#" class="timeline">
-                            <div class="timeline-icon"><i class="fa fa-globe"></i></div>
-                            <div class="timeline-content">
-                            
-                                <h3 class="title">FORMATION INTÉGRATEUR DÉVELOPPEUR WEB</h3>
-                                <strong> Webforce 3 et LePoleS - depuis mai 2018 </strong>
-                                <p class="description">
-                                Formation de 10 mois labellisée Grande École du Numérique Techniques de développement web et mobile
-                                </p>
-                            </div>
-                        </a>
-                        <a href="#" class="timeline">
-                            <div class="timeline-icon"><i class="fa fa-rocket"></i></div>
-                            <div class="timeline-content">
-                                <h3 class="title">PARCOURS NUMÉRIQUE</h3>
-                                <strong>Association Colombbus - Mars 2018</strong>
-                                <p class="description">
-                                Initiation au développement, à la programmation et à la maintenance informatique
+        <h1 class="text-center">Competences</h1>
+	    <div class="container">
+	        <div class="row">
+            <?php
+             while ($ligne_competence = $sql->fetch()) 
+             { 
+                 if ($ligne_competence['id_competence'] == 1) 
+                {
+            ?>
+                <!--team-1-->
+            <?php   
+	            echo '<div class="col-lg-4">';
+	                echo '<div class="our-team-main">';
+                        
+	                    echo '<div class="team-front">';
+                          echo '<img src="http://placehold.it/110x110/336699/fff?text=' . $ligne_competence['competence'] . ' " class="img-fluid" style="width:250;height:250"/>';
+	                        echo '<h3>' . $ligne_competence['competence'] . '</h3>';
+	                        echo '<p>' . $ligne_competence['niveau'] . '</p>';
+	                    echo '</div>';
+	
+	                    echo '<div class="team-back">';
+	                        echo '<span>
+	                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
+	                            natoque penatibus et magnis dis parturient montes,
+	                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
+	                            natoque.
+	                        echo </span>';
+	                    echo '</div><!-- fin div .team-back -->';
+	
+	                echo '</div><!-- fin div .our-team-main -->';
+                echo '</div><!-- fin div .col-lg-4 -->';
+                } else {
+            ?>
+                <!--fin team-1-->
 
-                                </p>
-                            </div>
-                        </a>
-                        <a href="#" class="timeline">
-                            <div class="timeline-icon"><i class="fa fa-briefcase"></i></div>
-                            <div class="timeline-content">
-                                <h3 class="title"> PASSAGE DU PASSEPORT NUMÉRIQUE MULTIMÉDIA</h3>
-                                <strong>Association emmauS - Avril 2017 </strong>
-                                <p class="description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
-                                </p>
-                            </div>
-                        </a>
-                        <a href="#" class="timeline">
-                            <div class="timeline-icon"><i class="fa fa-mobile"></i></div>
-                            <div class="timeline-content">
-                                <h3 class="title">LICENCE D'ENSEIGNEMENT EN ANGLAIS </h3>
-                                <strong></strong>
-                                <p class="description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <!--team-2-->
+            <?php 
+	            echo '<div class="col-lg-4">';
+	                echo '<div class="our-team-main">';
+	
+	                    echo '<div class="team-front">';
+                            echo '<img src="http://placehold.it/110x110/9c27b0/fff?text=' . $ligne_competence['competence'] . ' " class="img-fluid" style="width:250;height:250"/>';
+                            echo '<h3>' . $ligne_competence['competence'] . '</h3>';
+                            echo '<p>' . $ligne_competence['niveau'] . '</p>';
+	                    echo '</div><!-- fin div .team-front -->';
+	
+	                    echo '<div class="team-back">';
+                            echo '<span>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
+                                natoque penatibus et magnis dis parturient montes,
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
+                                natoque.
+                                </span>';
+	                    echo '</div><!-- fin div .team-back -->';
+	
+	                echo '</div><!-- fin div .our-team-main -->';
+                echo '</div><!-- fin div .col-lg-4 -->';
+                }
 
-          
-        <!-- Project One Row -->
-       
-        <!-- Projects Section -->
+              }
+            ?>
+	            <!--fin team-2-->
+	        </div><!-- fin div .row -->
+	    </div><!-- fin div .container -->
     
-            <div class="container">
-            <h4>EXPÉRIENCES PROFESSIONNELLES</h4>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main-timeline3">
-                        <div class="timeline">
-                            <a href="#" class="timeline-content">
-                                <span class="year">2018</span>
-                                <h3 class="title">Web Designer</h3>
-                                <p class="description">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada tellus lorem, et condimentum neque commodo quis.
-                                </p>
-                            </a>
-                        </div>
-                        <div class="timeline">
-                            <a href="#" class="timeline-content">
-                                <span class="year">2017</span>
-                                <h3 class="title">Web Developer</h3>
-                                <p class="description">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada tellus lorem, et condimentum neque commodo quis.
-                                </p>
-                            </a>
-                        </div>
-                        <div class="timeline">
-                            <a href="#" class="timeline-content">
-                                <span class="year">2016</span>
-                                <h3 class="title">Web Designer</h3>
-                                <p class="description">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada tellus lorem, et condimentum neque commodo quis.
-                                </p>
-                            </a>
-                        </div>
-                        <div class="timeline">
-                            <a href="#" class="timeline-content">
-                                <span class="year">2015</span>
-                                <h3 class="title">Web Developer</h3>
-                                <p class="description">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada tellus lorem, et condimentum neque commodo quis.
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Project Two Row -->
-        
-
-      </div>
     </section>
+    <!-- fin section #skills --> <!-- Project Two Row -->
 
     <!-- Signup Section -->
     <section id="signup" class="signup-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-10 col-lg-8 mx-auto text-center">
+      <div class="row" id="contatti">
+<div class="container mt-5" >
 
-            <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-            <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-
-            <form class="form-inline d-flex">
-              <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
-              <button type="submit" class="btn btn-primary mx-auto">Subscribe</button>
-            </form>
-
+    <div class="row" style="height:550px;">
+      <div class="col-md-6 maps" >
+         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11880.492291371422!2d12.4922309!3d41.8902102!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28f1c82e908503c4!2sColosseo!5e0!3m2!1sit!2sit!4v1524815927977" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-uppercase mt-3 font-weight-bold text-white">CONTATTACI</h2>
+        <form action="">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <input type="text" class="form-control mt-2" placeholder="Nome/Società" required>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <input type="text" class="form-control mt-2" placeholder="Oggetto" required>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <input type="email" class="form-control mt-2" placeholder="Email" required>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <input type="number" class="form-control mt-2" placeholder="Telefono" required>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Inserisci testo" rows="3" required></textarea>
+              </div>
+            </div>
+            <div class="col-12">
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                <label class="form-check-label" for="invalidCheck2">
+                  Accetta le condizioni
+                </label>
+              </div>
+            </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-light" type="submit">Invia</button>
+            </div>
           </div>
+        </form>
+        <div class="text-white">
+        <h2 class="text-uppercase mt-4 font-weight-bold">dove siamo</h2>
+
+        <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+39) 123456</a><br>
+        <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+39) 123456</a><br>
+        <i class="fa fa-envelope mt-3"></i> <a href="">info@test.it</a><br>
+        <i class="fas fa-globe mt-3"></i> Piazza del Colosseo, 1, 00184 Roma<br>
+        <i class="fas fa-globe mt-3"></i> Piazza del Colosseo, 1, 00184 Roma<br>
+        <div class="my-4">
+        <a href=""><i class="fab fa-facebook fa-3x pr-4"></i></a>
+        <a href=""><i class="fab fa-linkedin fa-3x"></i></a>
+        </div>
         </div>
       </div>
-    </section>
 
+    </div>
+</div>
+</div>
+
+<div class="row text-center bg-success text-white" id="author">
+  <div class="col-12 mt-4 h3 ">
+  <a href="#">by P. Fattoruso</a>
+</div>
+<div class="col-12 my-2">
+<a href="https://www.linkedin.com/in/paolofattoruso/" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
+</div>
+</div>
+
+    </section>
     <!-- Contact Section -->
-    <section class="contact-section bg-black">
+    <section class="contact-section">
       <div class="container">
 
         <div class="row">
@@ -349,13 +304,55 @@
 
       </div>
     </section>
-
+    <!-- fin Contact Section -->
+    
+    
     <!-- Footer -->
-    <footer class="bg-black small text-center text-white-50">
-      <div class="container">
-        Copyright &copy; Your Website 2018
-      </div>
-    </footer>
+    <footer class="section footer-classic context-dark bg-image" style="background: #2d3246;">
+        <div class="container">
+          <div class="row row-30">
+            <div class="col-md-4 col-xl-5">
+              <div class="pr-xl-4"><a class="brand" href="index.html"><img class="brand-logo-light" src="images/agency/logo-inverse-140x37.png" alt="" width="140" height="37" srcset="images/agency/logo-retina-inverse-280x74.png 2x"></a>
+                <p>We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.</p>
+                <!-- Rights-->
+                <p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Waves</span><span>. </span><span>All Rights Reserved.</span></p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h5>Contacts</h5>
+              <dl class="contact-list">
+                <dt>Address:</dt>
+                <dd>798 South Park Avenue, Jaipur, Raj</dd>
+              </dl>
+              <dl class="contact-list">
+                <dt>email:</dt>
+                <dd><a href="mailto:#">dkstudioin@gmail.com</a></dd>
+              </dl>
+              <dl class="contact-list">
+                <dt>phones:</dt>
+                <dd><a href="tel:#">+91 7568543012</a> <span>or</span> <a href="tel:#">+91 9571195353</a>
+                </dd>
+              </dl>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <h5>Links</h5>
+              <ul class="nav-list">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacts</a></li>
+                <li><a href="#">Pricing</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row no-gutters social-container">
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-facebook"></span><span>Facebook</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-instagram"></span><span>instagram</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-twitter"></span><span>twitter</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-youtube-play"></span><span>google</span></a></div>
+        </div>
+      </footer>
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -368,9 +365,7 @@
     <script src="js/grayscale.min.js"></script>
 
 
-        <!-- timeline script -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+         
   </body>
 
 </html>

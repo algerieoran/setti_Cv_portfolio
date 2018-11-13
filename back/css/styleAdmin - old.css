@@ -17,7 +17,8 @@ body {
 }
 
 /* -----------------------page connexion -------------------------*/
-
+/* ---------------------------------------------------------- */ 
+/* ------------connexion2---------- */
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 .login-block{
     background: #DE6262;  /* fallback for old browsers */
@@ -43,7 +44,7 @@ padding : 50px 0;
 .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
 .banner-text p{color:#fff;}
 
-/* ------------fin connexion---------- */
+/* ------------fin connexion2---------- */
 
 
 /* -----------------------style page Profil ----------------------------*/
