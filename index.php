@@ -1,3 +1,11 @@
+<?php require_once 'back/inc/init.inc.php';
+  //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
+  $sql = $pdo->prepare(" SELECT * FROM t_competences WHERE id_utilisateur = 1 ");
+  $sql->execute();
+
+
+            
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,7 +14,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Setti Belkacem">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
 
     <title>Site CVportfolio Setti Belkacem</title>
 
@@ -25,7 +38,7 @@
 
   </head>
 
-  <body id="page-top">
+  <body id="page-top" class="bg-secondary">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -41,7 +54,7 @@
               <a class="nav-link js-scroll-trigger" href="#about">Apropos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#skills">Competences</a>
+              <a class="nav-link js-scroll-trigger" href="#skills">Parcours</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#signup">Contact</a>
@@ -57,7 +70,7 @@
       <div class="bg-image"></div>
         <div class="mx-auto text-center bg-text">
           <h1 class="mx-auto my-0 text-uppercase glow">Setti BELKACEM</h1>
-          <h2 class="text-white-50 mx-auto mt-2 mb-5">Développeur Intégrateur Web Junior, à la recherche d'un stage.</h2>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">Développeur Web Intégrateur Junior, à la recherche d'un stage.</h2>
           <a href="#about" class="btn btn-primary js-scroll-trigger">Adoptez-moi !</a>
         </div>
       </div>
@@ -69,37 +82,192 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2 class="text-white mb-4">A propos de moi </h2>
-            <p class="text-white-50">Je me présente, Setti BELKACEM,sérueuse et impliquée, Développeur Web Intégrateur Junior, en formation avec WebForce3. Je suis spécialisé en développement Front-end (intégration : HTML5, CSS3, Jquery) et Back-end (dévéloppement : php7). Je suis à la recherche d'un stage de 2 mois.
+            <p class="text-white-50">Je me présente, Setti BELKACEM. Développeur Web Intégrateur Junior. <br>
+              Actuellement, en formation de 10 mois labellisée Grande École du Numérique Techniques de développement web et mobile avec WebForce3. 
+            Sociable, impliquée, à l'écoute des contraintes professionnelles et aux besoins du client, je suis à la recherche d'un stage non rémunéré d'une durée de 2 mois (Janv -Fév.).
           </div>
         </div>
         <img src="back/img/profil.jpg" class="img-fluid rounded-circle mb-5" width="250" heigth="250" alt="profil">
       </div>
     </section>
-
+    <!-- Project Two Row -->
+    
+    <section id="skills" class="projects-section bg-light">
+    <div class="container">
+            <h4>Timeline Style : Demo-12</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-timeline12">
+                        <div class="col-md-2 col-sm-4 timeline">
+                            <span class="timeline-icon">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <div class="border"></div>
+                            <div class="timeline-content">
+                                <h4 class="title">Williamson</h4>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 timeline">
+                            <div class="timeline-content">
+                                <h4 class="title">Kristiana</h4>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
+                            </div>
+                            <div class="border"></div>
+                                <span class="timeline-icon">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                        </div>
+                        <div class="col-md-2 col-sm-4 timeline">
+                            <span class="timeline-icon">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <div class="border"></div>
+                            <div class="timeline-content">
+                                <h4 class="title">Steve thomas</h4>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 timeline">
+                            <div class="timeline-content">
+                                <h4 class="title">Miranda joy</h4>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
+                            </div>
+                            <div class="border"></div>
+                            <span class="timeline-icon">
+                                <i class="fa fa-key"></i>
+                            </span>
+                        </div>
+                        <div class="col-md-2 col-sm-4 timeline">
+                            <span class="timeline-icon">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <div class="border"></div>
+                            <div class="timeline-content">
+                                <h4 class="title">Williamson</h4>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 timeline">
+                            <div class="timeline-content">
+                                <h4 class="title">Kristiana</h4>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur.</p>
+                            </div>
+                            <div class="border"></div>
+                            <span class="timeline-icon">
+                                <i class="fa fa-key"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
     <!-- Projects Section -->
-    <section id="skills" class="bg-light">
-      <div class="container">
+    <div class="container bg-white">
+          <h2 class="text-black mb-4">Parcours </h2>
+            <h4>FORMATIONS </h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-timeline">
+                        <a href="#" class="timeline">
+                            <div class="timeline-icon"><i class="fa fa-globe"></i></div>
+                            <div class="timeline-content">
+                            
+                                <h3 class="title">FORMATION INTÉGRATEUR DÉVELOPPEUR WEB</h3>
+                                <strong> Webforce 3 et LePoleS - depuis mai 2018 </strong>
+                                <p class="description">
+                                Formation de 10 mois labellisée Grande École du Numérique Techniques de développement web et mobile
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#" class="timeline">
+                            <div class="timeline-icon"><i class="fa fa-rocket"></i></div>
+                            <div class="timeline-content">
+                                <h3 class="title">PARCOURS NUMÉRIQUE</h3>
+                                <strong>Association Colombbus - Mars 2018</strong>
+                                <p class="description">
+                                Initiation au développement, à la programmation et à la maintenance informatique
 
-        <!-- Featured Project Row -->
-        <div class="timeline">
-          <div id="parcours1" class="container left">
-            <div class="content">
-              <h2>2017</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus consectetur deserunt quia harum quod at dolore, ea quam atque doloribus excepturi dolorem eveniet vitae veritatis, possimus et voluptatum! Id, harum.
-              Possimus nam sunt soluta facere, neque tempora, non aspernatur repellendus quibusdam iure nesciunt vero maiores, error quod recusandae velit exercitationem qui.</p>
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#" class="timeline">
+                            <div class="timeline-icon"><i class="fa fa-briefcase"></i></div>
+                            <div class="timeline-content">
+                                <h3 class="title"> PASSAGE DU PASSEPORT NUMÉRIQUE MULTIMÉDIA</h3>
+                                <strong>Association emmauS - Avril 2017 </strong>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#" class="timeline">
+                            <div class="timeline-icon"><i class="fa fa-mobile"></i></div>
+                            <div class="timeline-content">
+                                <h3 class="title">LICENCE D'ENSEIGNEMENT EN ANGLAIS </h3>
+                                <strong></strong>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div id="parcours1" class="container right">
-            <div class="content">
-              <h2>2016</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius magni iusto, totam animi consectetur repellendus dolorum reiciendis beatae maxime sed veritatis exercitationem consequuntur soluta ullam fugit dolor harum? Architecto, consequatur.
-              Nulla assumenda odio quis sequi itaque cum. Ipsum reprehenderit itaque dolores esse quia eum quam. Explicabo culpa, nemo assumenda labore reiciendis inventore.</p>
-            </div>
-          </div>
+        </div>
+
           
         <!-- Project One Row -->
        
-
+        <!-- Projects Section -->
+    
+            <div class="container">
+            <h4>EXPÉRIENCES PROFESSIONNELLES</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-timeline3">
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="year">2018</span>
+                                <h3 class="title">Web Designer</h3>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada tellus lorem, et condimentum neque commodo quis.
+                                </p>
+                            </a>
+                        </div>
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="year">2017</span>
+                                <h3 class="title">Web Developer</h3>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada tellus lorem, et condimentum neque commodo quis.
+                                </p>
+                            </a>
+                        </div>
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="year">2016</span>
+                                <h3 class="title">Web Designer</h3>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada tellus lorem, et condimentum neque commodo quis.
+                                </p>
+                            </a>
+                        </div>
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="year">2015</span>
+                                <h3 class="title">Web Developer</h3>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada tellus lorem, et condimentum neque commodo quis.
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Project Two Row -->
         
 
@@ -199,6 +367,10 @@
     <!-- Custom scripts for this template -->
     <script src="js/grayscale.min.js"></script>
 
+
+        <!-- timeline script -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
   </body>
 
 </html>

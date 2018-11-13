@@ -116,60 +116,47 @@ require_once 'inc/haut.inc.php';
         
 
 
-        <div class="row mb-4">
+        <div class="row mb-3">
             <div class="col-lg-12 text-center">
-                <h2>Suppression et ajout du reseau</h2>
+                <h2>Mise à jour d'un reseau</h2>
             </div>
         </div>
 
         
 
-        <div class="row mb-4">
-            <div class="col-lg-12 text-center">
+        <div class="row mb-4 bg-secondary">
+            <div class="col-lg-6 text-center">
                 <?php  echo $contenu;?>
             </div>
+            
+            <div class="col-lg-4">
+                
+                <form method ="post" action=""> 
+                    <input type="hidden" id="id_reseau" name="id_reseau" value="0"><!-- Ce champ caché est utile pour la modification d'un produit afin de l'identifier dans la requête SQL. La valeur 0 par défaut signifie que le produit n'existe pas en BDD, et qu'on est en train de le créer -->
+                    
+                    <div class="form-group">
+                        <label for="url">Url de réseau</label>
+                        <input type="text" class="form-control" name="url" id="url" placeholder="Url reseau">
+                    </div>
+                    <div class="form-group">
+                        <label for="icon">Choix de l'icon</label>                                
+                        <select name="icon" id="" class="form-control">
+                            <option value="Facebook">Facebook</option>
+                            <option value="Twitter">Twitter</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Linkedin">Linkedin</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="submit" class="form-control btn-success"  value="valider">
+                    </div>
+                </form>
+            </div> 
         </div>
 </div>
 
-<div class="container">
-            <div class="row ">
-                    <div class="col-lg-4 text-center m-5">
-                        <h2>Ajout d'un reseau </h2>
-                    </div>
-                    <div class="col-lg-4 ">
-                        <form method ="post" action=""> 
-                            <input type="hidden" id="id_reseau" name="id_reseau" value="0"><!-- Ce champ caché est utile pour la modification d'un produit afin de l'identifier dans la requête SQL. La valeur 0 par défaut signifie que le produit n'existe pas en BDD, et qu'on est en train de le créer -->
-                            <!-- <div class="form-group"> -->
-                    <!-- <label for="id_utilisateur">Choix de l'utilisateur :</label>
-                    <select type="text" name="id_utilisateur" id="id_utilisateur" value ="">
-                           
-                    </select>
-                    </div> -->
 
-                    <!-- <input type="text" id="id_utilisateur" name ="id_utilisateur" value="">  -->
-                        
-                            <div class="form-group">
-                                <label for="url">Url de réseau</label>
-                                <input type="text" class="form-control" name="url" id="url" placeholder="Url reseau">
-                            </div>
-                            <div class="form-group">
-                                <label for="icon">Choix de l'icon</label>                                
-                                <select name="icon" id="" class="form-control">
-                                    <option value="Facebook">Facebook</option>
-                                    <option value="Twitter">Twitter</option>
-                                    <option value="Instagram">Instagram</option>
-                                    <option value="Linkedin">Linkedin</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="submit" class="form-control btn-success"  value="valider">
-                            </div>
-                        </form>
-                    </div> 
-              
-            </div>
-    </div>
 
 
 <?php

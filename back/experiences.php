@@ -98,7 +98,7 @@ require_once 'inc/haut.inc.php';
 
             <div class="table-responsive">
                 <div class="card-header">
-                    La liste des compétences : <?php echo $nbr_experiences; ?>
+                    La liste des experiences  : <?php echo $nbr_experiences; ?>
                 </div>
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">

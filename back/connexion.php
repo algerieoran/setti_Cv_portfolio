@@ -56,38 +56,84 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> -->
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
         <!-- My CSS style -->
         <link rel="stylesheet" href="css/styleAdmin.css">
     </head>
 
-    <body>
-        <!-- La marque -->
-        <a class="navbar-brand" href="<?php echo RACINE_SITE . 'index.php' ?>"><i class="fas fa-home"></i></a>
+    <body class="secondary">
+         <!-- La marque -->
+         <a class="navbar-brand" href="<?php echo RACINE_SITE . 'index.php' ?>"><i class="fas fa-home"></i></a>
+        <section class="login-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 login-sec">
+                        <h2 class="text-center">Connexion</h2>
+                        <form class="login-form" method="post" action="connexion.php">
+                            <div class="form-group">
+                                <label for="email" class="text-uppercase"><i class="fa fa-envelope icon"></i></label>
+                                <input type="text" class="form-control" placeholder="Votre Email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mdp" class="text-uppercase"><i class="fa fa-key icon"></i></label>
+                                <input type="password" class="form-control" placeholder="Mot de passe"  name="mdp" required>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input">
+                                <small>Remember Me</small>
+                                </label>
+                                <button type="submit" class="btn btn-login float-right">Connexion</button>
+                            </div>
+        
+                        </form>
+                        <div class="copy-text">Created with <i class="fa fa-heart"></i> by <a href="http://settibelkacem.com">settibelkacem.com</a></div>
+                    </div>
+                    <div class="col-md-8 banner-sec">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <div class="banner-text">
+                                            <h2>Bonjour Setti !</h2>
+                                            <p><i class="fas fa-briefcase"></i>Bien venue dans votre Admin !</p>
+                                        </div>	
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <div class="banner-text">
+                                            
+                                        </div>	
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg" alt="First slide">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <div class="banner-text">
+                                            
+                                        </div>
+                                    </div><!-- fin div .row -->	
+                                </div><!-- fin div .row -->
+                            </div><!-- fin div .carousel-inner-->
+                        </div><!-- fin div #carouselExampleIndicators -->	   
+                
+                    </div><!-- fin div .banner-sec -->
+                </div><!-- fin div .row -->
+            </div><!-- fin div .container -->
+        </section>
 
-        <form class="login-content" method="post" action="connexion.php">
-            <div class="imgcontainer">
-                <img src="img/login.png" alt="login" class="avatar">
-            </div>
-
-            <div class="container margin margine">
-                <div class="col-50">
-                    <label for="email"><i class="fa fa-envelope icon"></i></label>
-                    <input type="text" class="input-field" placeholder="Votre Email" style="background-color:transparent;color:#fff" name="email" required>
-                </div>
-
-                <div class="col-50">
-                    <label for="mdp"><i class="fa fa-key icon"></i></label>
-                    <input type="password" class="input-field" placeholder="Mot de passe"  name="mdp"style="background-color:transparent;color:#fff" required>
-                </div>
-            </div>
-
-            <div class="row">
-                <button type="submit" class="btn" style="background-color:#f1f1f1;opacity:0.5">Connexion</button>
-            </div>
-
-           
-        </form>
 
         
     <?php include 'inc/bas.inc.php'; ?>
