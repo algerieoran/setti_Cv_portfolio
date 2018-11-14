@@ -34,8 +34,13 @@
     <!-- CDN section skills -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ fin CDn section skills ---------->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ fin CDN section skills ---------->
+    <!------ CDN section parcour ---------->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ fin https:CDn section parcour ---------->
     <!------ fin CDN footer ---------->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -85,7 +90,12 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
-            <h2 class="text-white mb-4">Developpeur web integrateur par passion ! </h2>
+            <div class="box">
+              <div class="heart">
+                <span class="text"><h4>Developpeur web integrateur  </h4> par passion !</span>
+              </div>
+            </div>
+            <!-- <h2 class="text-white mb-4"></h2> -->
             <p class="text-white-50">Je me présente, Setti BELKACEM. Développeur Web Intégrateur Junior. <br>
               Actuellement, en formation de 10 mois labellisée Grande École du Numérique Techniques de développement web et mobile avec WebForce3. 
             Sociable, impliquée, à l'écoute des contraintes professionnelles et aux besoins du client, je suis à la recherche d'un stage non rémunéré d'une durée de 2 mois (Janv -Fév.).
@@ -115,7 +125,12 @@
 	                    echo '<div class="team-front">';
                           echo '<img src="http://placehold.it/110x110/336699/fff?text=' . $ligne_competence['competence'] . ' " class="img-fluid" style="width:250;height:250"/>';
 	                        echo '<h3>' . $ligne_competence['competence'] . '</h3>';
-	                        echo '<p>' . $ligne_competence['niveau'] . '</p>';
+                          echo '<div class="progress-outer">';
+                            echo '<div class="progress">';
+                              echo '<div class="progress-bar progress-bar-info progress-bar-striped active" style="width:' . $ligne_competence['niveau'] . ' %; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>';
+                              echo '<div class="progress-value">' . $ligne_competence['niveau'] . ' %</div>';
+                            echo '</div>';
+                          echo '</div>';
 	                    echo '</div>';
 	
 	                    echo '<div class="team-back">';
@@ -141,7 +156,12 @@
 	                    echo '<div class="team-front">';
                             echo '<img src="http://placehold.it/110x110/9c27b0/fff?text=' . $ligne_competence['competence'] . ' " class="img-fluid" style="width:250;height:250"/>';
                             echo '<h3>' . $ligne_competence['competence'] . '</h3>';
-                            echo '<p>' . $ligne_competence['niveau'] . '</p>';
+                            echo '<div class="progress-outer">';
+                                    echo '<div class="progress">';
+                                        echo '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width:' . $ligne_competence['niveau'] . ' %; box-shadow:-1px 10px 10px rgba(116, 195, 116,0.7);"></div>';
+                                        echo '<div class="progress-value">' . $ligne_competence['niveau'] . ' %</div>';
+                                    echo '</div>';
+                                echo '</div>';
 	                    echo '</div><!-- fin div .team-front -->';
 	
 	                    echo '<div class="team-back">';
@@ -164,7 +184,164 @@
 	    </div><!-- fin div .container -->
     
     </section>
-    <!-- fin section #skills --> <!-- Project Two Row -->
+    <!-- fin section #skills --> 
+    <!-- Project Two Row -->
+    <section>
+              
+        <div class="container-fluid">
+	<div class="row">
+	    <div id="timeline">
+			<div class="row timeline-movement timeline-movement-top">
+				<div class="timeline-badge timeline-future-movement">
+						<p>2018</p>
+				</div>
+			</div>
+			<div class="row timeline-movement">
+				<div class="timeline-badge center-left">
+					
+				</div>
+				<div class="col-sm-6  timeline-item">
+					<div class="row">
+						<div class="col-sm-11">
+							<div class="timeline-panel credits  anim animate fadeInLeft">
+								<ul class="timeline-panel-ul">
+									<div class="lefting-wrap">
+										<li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
+									</div>
+									<div class="righting-wrap">
+										<li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
+										<li><span class="causale" style="color:#000; font-weight: 600;">Developer </span> </li>
+										<li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+										<li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 13/01/2018, 13:05"</small></p> </li>
+									</div>
+									<div class="clear"></div>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row timeline-movement">
+				<div class="timeline-badge center-right">
+				
+				</div>
+				<div class="offset-sm-6 col-sm-6  timeline-item">
+					<div class="row">
+						<div class="offset-sm-1 col-sm-11">
+							<div class="timeline-panel debits  anim animate  fadeInRight">
+								<ul class="timeline-panel-ul">
+									<div class="lefting-wrap">
+										<li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
+									</div>
+									<div class="righting-wrap">
+										<li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
+										<li><span class="causale" style="color:#000; font-weight: 600;">Web Designer </span> </li>
+										<li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+										<li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 12/01/2018, 13:05"</small></p> </li>
+									</div>
+									<div class="clear"></div>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row timeline-movement">
+				<div class="timeline-badge center-left">
+					
+				</div>
+				<div class="col-sm-6  timeline-item">
+					<div class="row">
+						<div class="col-sm-11">
+							<div class="timeline-panel credits  anim animate  fadeInLeft">
+								<ul class="timeline-panel-ul">
+									<div class="lefting-wrap">
+										<li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
+									</div>
+									<div class="righting-wrap">
+										<li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
+										<li><span class="causale" style="color:#000; font-weight: 600;">Engineer </span> </li>
+										<li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+										<li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11/01/2018, 13:05"</small></p> </li>
+									</div>
+									<div class="clear"></div>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row timeline-movement timeline-movement-top">
+				<div class="timeline-badge timeline-future-movement">
+						<p>2017</p>
+				</div>
+			</div>
+			
+			
+			<div class="row timeline-movement">
+				<div class="timeline-badge center-right">
+				
+				</div>
+				<div class="offset-sm-6 col-sm-6  timeline-item">
+					<div class="row">
+						<div class="offset-sm-1 col-sm-11">
+							<div class="timeline-panel debits  anim animate  fadeInRight">
+								<ul class="timeline-panel-ul">
+									<div class="lefting-wrap">
+										<li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
+									</div>
+									<div class="righting-wrap">
+										<li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
+										<li><span class="causale" style="color:#000; font-weight: 600;">Web Designer </span> </li>
+										<li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+										<li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 12/01/2018, 13:05"</small></p> </li>
+									</div>
+									<div class="clear"></div>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="row timeline-movement">
+				<div class="timeline-badge center-left">
+					
+				</div>
+				<div class="col-sm-6  timeline-item">
+					<div class="row">
+						<div class="col-sm-11">
+							<div class="timeline-panel credits  anim animate  fadeInLeft">
+								<ul class="timeline-panel-ul">
+									<div class="lefting-wrap">
+										<li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
+									</div>
+									<div class="righting-wrap">
+										<li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
+										<li><span class="causale" style="color:#000; font-weight: 600;">Engineer </span> </li>
+										<li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+										<li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11/01/2018, 13:05"</small></p> </li>
+									</div>
+									<div class="clear"></div>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+    </section>
 
     <!-- Signup Section -->
     <section id="signup" class="signup-section">
@@ -355,14 +532,15 @@
       </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="back/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="back/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/grayscale.min.js"></script>
+    <script src="back/js/grayscale.min.js"></script>
+    <script src="back/js/script.js"></script>
+    
 
 
          
