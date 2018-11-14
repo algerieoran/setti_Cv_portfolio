@@ -41,13 +41,11 @@ if (!empty($_POST)) {
 
     // }
 
-    // Insertion de la competence en BDD :
-    executeRequete(
-        " REPLACE INTO t_loisirs VALUES (:id_loisir, :loisir, :id_utilisateur)",
+    // Insertion d'un loisir en BDD :
+    executeRequete(" REPLACE INTO t_loisirs VALUES (:id_loisir, :loisir, $id_utilisateur)",
         array(
             ':id_loisir' => $_POST['id_loisir'],
             ':loisir' => $_POST['loisir'],
-            ':id_utilisateur' => $_POST['id_utilisateur']
         )
     );
     //REPLACE INTO se comporte comme un INSERT INTO quand l'id_experience n'existe pas en BDD : c'est le cas lors de la création d'une experience pour laquelle nous avons mis un id_experience à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_experience existe en BDD : c'est le cas lors de la modification d'une experience existante.
@@ -85,14 +83,14 @@ require_once 'inc/haut.inc.php';
         <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
-            $sql = $pdo->prepare(" SELECT * FROM t_loisirs " . $ordre);
+            $sql = $pdo->prepare(" SELECT * FROM t_loisirs WHERE id_utilisateur = 1 $ordre");
             $sql->execute();
             $nbr_loisirs = $sql->rowCount();
             ?>
 
             <div class="table-responsive">
                 <div class="card-header">
-                    La liste des compétences : <?php echo $nbr_loisirs; ?>
+                    La liste des loisirs : <?php echo $nbr_loisirs; ?>
                 </div>
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">

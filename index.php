@@ -3,7 +3,10 @@
   $sql = $pdo->prepare(" SELECT * FROM t_competences WHERE id_utilisateur = 1 ");
   $sql->execute();
 
-
+   //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
+   $sql = $pdo->prepare(" SELECT * FROM t_experiences WHERE id_utilisateur =1 ");
+   $sql->execute();
+   $nbr_experiences = $sql->rowCount();
             
 ?>
 <!DOCTYPE html>
@@ -92,7 +95,7 @@
           <div class="col-lg-8 mx-auto">
             <div class="box">
               <div class="heart">
-                <span class="text"><h4>Developpeur web integrateur  </h4> par passion !</span>
+                <span class="text"><h4>Developpeuse </h4> par passion !</span>
               </div>
             </div>
             <!-- <h2 class="text-white mb-4"></h2> -->
@@ -114,7 +117,7 @@
             <?php
              while ($ligne_competence = $sql->fetch()) 
              { 
-                 if ($ligne_competence['id_competence'] == 1) 
+                 if ($ligne_competence['id_competence'] % 2 == 1) 
                 {
             ?>
                 <!--team-1-->
@@ -127,8 +130,8 @@
 	                        echo '<h3>' . $ligne_competence['competence'] . '</h3>';
                           echo '<div class="progress-outer">';
                             echo '<div class="progress">';
-                              echo '<div class="progress-bar progress-bar-info progress-bar-striped active" style="width:' . $ligne_competence['niveau'] . ' %; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>';
-                              echo '<div class="progress-value">' . $ligne_competence['niveau'] . ' %</div>';
+                              echo '<div class="progress-bar progress-bar-info progress-bar-striped active" style="width:' . $ligne_competence['niveau'] . '; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);"></div>';
+                              echo '<div class="progress-value">' . $ligne_competence['niveau'] . '%</div>';
                             echo '</div>';
                           echo '</div>';
 	                    echo '</div>';
@@ -158,8 +161,8 @@
                             echo '<h3>' . $ligne_competence['competence'] . '</h3>';
                             echo '<div class="progress-outer">';
                                     echo '<div class="progress">';
-                                        echo '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width:' . $ligne_competence['niveau'] . ' %; box-shadow:-1px 10px 10px rgba(116, 195, 116,0.7);"></div>';
-                                        echo '<div class="progress-value">' . $ligne_competence['niveau'] . ' %</div>';
+                                        echo '<div class="progress-bar progress-bar-success progress-bar-striped active" style="width:' . $ligne_competence['niveau'] . '; box-shadow:-1px 10px 10px rgba(116, 195, 116,0.7);"></div>';
+                                        echo '<div class="progress-value">' . $ligne_competence['niveau'] . '</div>';
                                     echo '</div>';
                                 echo '</div>';
 	                    echo '</div><!-- fin div .team-front -->';
@@ -183,72 +186,74 @@
 	        </div><!-- fin div .row -->
 	    </div><!-- fin div .container -->
     
-    </section>
-    <!-- fin section #skills --> 
-    <!-- Project Two Row -->
-    <section>
+    </section><!-- fin section #skills --> 
+    
+
+    
+    <section><!-- Experiences -->
               
-        <div class="container-fluid">
-	<div class="row">
-	    <div id="timeline">
-			<div class="row timeline-movement timeline-movement-top">
-				<div class="timeline-badge timeline-future-movement">
-						<p>2018</p>
-				</div>
-			</div>
-			<div class="row timeline-movement">
-				<div class="timeline-badge center-left">
-					
-				</div>
-				<div class="col-sm-6  timeline-item">
-					<div class="row">
-						<div class="col-sm-11">
-							<div class="timeline-panel credits  anim animate fadeInLeft">
-								<ul class="timeline-panel-ul">
-									<div class="lefting-wrap">
-										<li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
-									</div>
-									<div class="righting-wrap">
-										<li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
-										<li><span class="causale" style="color:#000; font-weight: 600;">Developer </span> </li>
-										<li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-										<li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 13/01/2018, 13:05"</small></p> </li>
-									</div>
-									<div class="clear"></div>
-								</ul>
-							</div>
+      <div class="container-fluid">
+	      <div class="row">
+	        <div id="timeline">
+          <?php while ($ligne_experience = $sql->fetch()) { }
+                    ?>
+            <div class="row timeline-movement timeline-movement-top">
+              <div class="timeline-badge timeline-future-movement">
+                  <p>2018</p>
+              </div>
+            </div>
+			      <div class="row timeline-movement">
+				      <div class="timeline-badge center-left">
+				      </div>
 
-						</div>
-					</div>
-				</div>
-			</div>
+				      <div class="col-sm-6  timeline-item">
+					      <div class="row">
+						      <div class="col-sm-11">
+							      <div class="timeline-panel credits  anim animate fadeInLeft">
+								      <ul class="timeline-panel-ul">
+                        <div class="lefting-wrap">
+                          <li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
+                        </div>
+                        <div class="righting-wrap">
+                          <li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
+                          <li><span class="causale" style="color:#000; font-weight: 600;">Developer </span> </li>
+                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 13/01/2018, 13:05"</small></p> </li>
+                        </div>
+									      <div class="clear"></div>
+								      </ul>
+							      </div>
+						      </div>
+					      </div>
+				      </div>
+			      </div>
 
-			<div class="row timeline-movement">
-				<div class="timeline-badge center-right">
-				
-				</div>
-				<div class="offset-sm-6 col-sm-6  timeline-item">
-					<div class="row">
-						<div class="offset-sm-1 col-sm-11">
-							<div class="timeline-panel debits  anim animate  fadeInRight">
-								<ul class="timeline-panel-ul">
-									<div class="lefting-wrap">
-										<li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
-									</div>
-									<div class="righting-wrap">
-										<li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
-										<li><span class="causale" style="color:#000; font-weight: 600;">Web Designer </span> </li>
-										<li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
-										<li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 12/01/2018, 13:05"</small></p> </li>
-									</div>
-									<div class="clear"></div>
-								</ul>
-							</div>
+			      <div class="row timeline-movement">
+				      <div class="timeline-badge center-right">
+				      </div>
 
-						</div>
-					</div>
-				</div>
-			</div>
+				      <div class="offset-sm-6 col-sm-6  timeline-item">
+                <div class="row">
+                  <div class="offset-sm-1 col-sm-11">
+                    <div class="timeline-panel debits  anim animate  fadeInRight">
+                      <ul class="timeline-panel-ul">
+                        <div class="lefting-wrap">
+                          <li class="img-wraping"><a href="#"><img src="http://via.placeholder.com/250/000000" class="img-responsive" alt="user-image" /></a></li>
+                        </div>
+                        <div class="righting-wrap">
+                          <li><a href="#" class="importo">Mussum ipsum cacilds</a></li>
+                          <li><span class="causale" style="color:#000; font-weight: 600;">Web Designer </span> </li>
+                          <li><span class="causale">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span> </li>
+                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 12/01/2018, 13:05"</small></p> </li>
+                        </div>
+									      <div class="clear"></div>
+								      </ul>
+							      </div>
+
+						      </div>
+					      </div>
+				      </div>
+			      </div>
 
 			<div class="row timeline-movement">
 				<div class="timeline-badge center-left">

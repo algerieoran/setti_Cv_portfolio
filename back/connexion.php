@@ -8,7 +8,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') {  // si l'inter
 }
 
 
-
 // 3 -  On vérifie si l'internaute est déjà connecté :
 
 if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son index :
@@ -56,10 +55,12 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
-        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        
 
         <!-- My CSS style -->
         <link rel="stylesheet" href="css/styleAdmin.css">
@@ -81,12 +82,9 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
                             <div class="form-group">
                                 <label for="mdp" class="text-uppercase"><i class="fa fa-key icon"></i></label>
                                 <input type="password" class="form-control" placeholder="Mot de passe"  name="mdp" required>
+                                <span id="voirMdp" style="cursor: pointer"><i class="far fa-eye"></i></span>
                             </div>
                             <div class="form-check">
-                                <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input">
-                                <small>Remember Me</small>
-                                </label>
                                 <button type="submit" class="btn btn-login float-right">Connexion</button>
                             </div>
         
@@ -133,6 +131,18 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
                 </div><!-- fin div .row -->
             </div><!-- fin div .container -->
         </section>
+        
+        <script>
+            $(function(){
+                $('#voirMdp').mousedown(function(){
+                        $('#mdp').attr('type', 'text');
+                    });
+
+                    $('#voirMdp').mouseup(function(){
+                        $('#mdp').attr('type', 'password');
+                    });
+            });
+        </script>
 
 
         

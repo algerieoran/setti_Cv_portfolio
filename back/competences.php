@@ -33,31 +33,30 @@ extract($_SESSION['t_utilisateurs']);
 if(!empty($_POST)) {
     // ICI il faudrait mettre les contrôles sur les champs du formulaire.
 
-    // ICI le code de la photo à venir
-    $photo_bdd ='';  // par défaut la photo est vide en BDD
+    // ICI le code de la icon à venir
+    $icon_bdd ='';  // par défaut la icon est vide en BDD
 
-    debug($_FILES);
+    // debug($_FILES);
 
-    if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
-        $nom_photo = $_POST['reference'] . '_' . $_FILES['photo']['name'];   // pour créer un nom de fichier unique, on concatène la référence du produit avec le nom du fichier en cour d'upload.
+    if (!empty($_FILES['icon']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c'est que je suis en tyrain d'uploader un fichier. L'indice "icon" correspond au name du champ dans le formulaire.
+        $nom_icon =  $_FILES['icon']['name'];   
 
-        $photo_bdd = 'photo/' . $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
+        $icon_bdd = $nom_icon;  // chemin relatif de la icon enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/img/ du site
 
-        copy($_FILES['photo']['tmp_name'], '../' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "../photo/nom_photo.jpg"
+        copy($_FILES['icon']['tmp_name'], 'img/' . $icon_bdd);  // on enregistre le fichier icon qui est tomporairement dans $_FILES['icon']['tmp_name'] dans le répertoire "../img/nom_icon.jpg"
 
     }
 
     // Insertion de la competence en BDD :
-    executeRequete(" REPLACE INTO t_competences VALUES (NULL, :photo, :competence, :niveau, :categorie, $id_utilisateur)", 
+    executeRequete(" REPLACE INTO t_competences VALUES (NULL, :icon, :competence, :niveau, :categorie, $id_utilisateur)", 
       array(
-            ':photo'    => $_POST['photo'],
+            ':icon'    => $icon_bdd,
             ':competence'    => $_POST['competence'],
             ':niveau'    => $_POST['niveau'],
-            ':categorie'        => $_POST['categorie']
+            ':categorie'  => $_POST['categorie']
         )
     );
-    //REPLACE INTO se comporte comme un INSERT INTO quand l'id_competence n'existe pas en BDD : c'est le cas lors de la création d'une competence pour laquelle nous avons mis un id_competence à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_competence existe en BDD : c'est le cas lors de la modification d'une competence existante.
-
+    
     $contenu .= '<div class="bg-success">La compétence a bien été enregistrée ! </div>';
 
 }// fin du if (!empty($_POST))
@@ -76,15 +75,8 @@ if (isset($_GET['id_competence'])) {// on récupère ce que je supprime dans l'u
 
 }//ferme le if isset pour la suppression
 
-
-
 //-----------------------------------------AFFICHAGE--------------------------------------------
 require_once 'inc/haut.inc.php';
-?>
-
-<?php
-echo $contenu;
-
 ?>
 
 <div class="container margin">
@@ -92,7 +84,7 @@ echo $contenu;
         <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
-                $sql = $pdo->prepare(" SELECT * FROM t_competences WHERE id_utilisateur = $id_utilisateur $ordre ");
+                $sql = $pdo->prepare(" SELECT * FROM t_competences $ordre ");
                 $sql->execute();
                 $nbr_competences = $sql->rowCount();
             ?>
@@ -107,6 +99,7 @@ echo $contenu;
                             <th>Compétences  <a href="competences.php?colonne=competences&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="competences.php?colonne=competences&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                             <th>Niveau</th>
                             <th>Catégorie</th>
+                            <th>Icon</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -115,10 +108,10 @@ echo $contenu;
                     <?php while ($ligne_competence = $sql->fetch()) {
 
                         echo '<tr>';
-                            echo '<td>' . $ligne_competence['icon'] . '</td>';
-                            echo '<td>' . $ligne_competence['competence'] . '</td>';
-                            echo '<td>' . $ligne_competence['niveau'] . '</td>';
-                            echo '<td>' . $ligne_competence['categorie'] . '</td>';
+                        echo '<td>' . $ligne_competence['competence'] . '</td>';
+                        echo '<td>' . $ligne_competence['niveau'] . '</td>';
+                        echo '<td>' . $ligne_competence['categorie'] . '</td>';
+                        echo '<td>' . $ligne_competence['icon'] . '</td>';
                             echo '<td> <a href="modif_competence.php?id_competence=' . $ligne_competence['id_competence'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier cette competence?\'))"><i class="fas fa-edit"></i></a></td>';
 
                             echo '<td> <a href="?id_competence=' . $ligne_competence['id_competence'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer cette competence?\'))" ><i class="far fa-trash-alt"></i></a></td>';
@@ -137,13 +130,14 @@ echo $contenu;
                 </div>
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id_competence" valeur="0">
                         <div class="form-group">
                             <label for="competence">Compétence</label>
                             <input type="text" name="competence" class="form-control" placeholder="nouvelle compétence" required>
                         </div>
-                        <div class="form-group">
-                            <label for="photo">photo</label>
-                            <input type="file" name="photo" class="form-control" required>
+                        <div class="form-group files color">
+                            <label for="icon">Télécharger votre icon</label>
+                            <input type="file" name="icon" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="niveau">Niveau</label>

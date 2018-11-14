@@ -89,7 +89,9 @@ body, html {
 		   
 		}
 		
-		.text h4{font-size:16px; color:#ff0;}
+    .text h4{font-size:16px; 
+      color:#ff0;
+    }
 		.heart{
 			position: relative;
 			width: 100px;
