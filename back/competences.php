@@ -43,7 +43,7 @@ if(!empty($_POST)) {
 
         $icon_bdd = $nom_icon;  // chemin relatif de la icon enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/img/ du site
 
-        copy($_FILES['icon']['tmp_name'], 'img/' . $icon_bdd);  // on enregistre le fichier icon qui est tomporairement dans $_FILES['icon']['tmp_name'] dans le répertoire "../img/nom_icon.jpg"
+        copy($_FILES['icon']['tmp_name'], 'img/' . $icon_bdd);  // on enregistre le fichier icon qui est tomporairement dans $_FILES['icon']['tmp_name'] dans le répertoire "img/nom_icon.jpg"
 
     }
 
@@ -56,7 +56,8 @@ if(!empty($_POST)) {
             ':categorie'  => $_POST['categorie']
         )
     );
-    
+     //REPLACE INTO se comporte comme un INSERT INTO quand l'id_formation n'existe pas en BDD : c'est le cas lors de la création d'une competence pour laquelle nous avons mis un id_competence à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_competence existe en BDD : c'est le cas lors de la modification d'une competence existante.
+
     $contenu .= '<div class="bg-success">La compétence a bien été enregistrée ! </div>';
 
 }// fin du if (!empty($_POST))
@@ -67,15 +68,15 @@ if (isset($_GET['id_competence'])) {// on récupère ce que je supprime dans l'u
 
     $resultat = $pdo->query(" DELETE FROM t_competences WHERE id_competence = '$efface' ");
 
-     header("location: ../back/competences.php");
+     header("location:../back/competences.php");
 
-    $contenu .= '<div class="alert alert-success" role="alert">La competence à bien été supprimé</div>';
+    $contenu .= '<div class="alert alert-success" role="alert">La competence à bien été supprimée !</div>';
 } else {
-    $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression</div>';
+    $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression !</div>';
 
 }//ferme le if isset pour la suppression
 
-//-----------------------------------------AFFICHAGE--------------------------------------------
+//-----------------------------------------AFFICHAGE-------------------------------------------
 require_once 'inc/haut.inc.php';
 ?>
 
@@ -84,7 +85,7 @@ require_once 'inc/haut.inc.php';
         <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
-                $sql = $pdo->prepare(" SELECT * FROM t_competences $ordre ");
+                $sql = $pdo->prepare(" SELECT * FROM t_competences WHERE id_utilisateur = 1 $ordre ");
                 $sql->execute();
                 $nbr_competences = $sql->rowCount();
             ?>
@@ -96,10 +97,10 @@ require_once 'inc/haut.inc.php';
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                         <tr>
+                            <th>Icon</th>
                             <th>Compétences  <a href="competences.php?colonne=competences&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="competences.php?colonne=competences&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                             <th>Niveau</th>
                             <th>Catégorie</th>
-                            <th>Icon</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -108,10 +109,10 @@ require_once 'inc/haut.inc.php';
                     <?php while ($ligne_competence = $sql->fetch()) {
 
                         echo '<tr>';
+                        echo '<td>' . $ligne_competence['icon'] . '</td>';
                         echo '<td>' . $ligne_competence['competence'] . '</td>';
                         echo '<td>' . $ligne_competence['niveau'] . '</td>';
                         echo '<td>' . $ligne_competence['categorie'] . '</td>';
-                        echo '<td>' . $ligne_competence['icon'] . '</td>';
                             echo '<td> <a href="modif_competence.php?id_competence=' . $ligne_competence['id_competence'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier cette competence?\'))"><i class="fas fa-edit"></i></a></td>';
 
                             echo '<td> <a href="?id_competence=' . $ligne_competence['id_competence'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer cette competence?\'))" ><i class="far fa-trash-alt"></i></a></td>';
@@ -131,13 +132,13 @@ require_once 'inc/haut.inc.php';
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id_competence" valeur="0">
-                        <div class="form-group">
-                            <label for="competence">Compétence</label>
-                            <input type="text" name="competence" class="form-control" placeholder="nouvelle compétence" required>
-                        </div>
                         <div class="form-group files color">
                             <label for="icon">Télécharger votre icon</label>
                             <input type="file" name="icon" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="competence">Compétence</label>
+                            <input type="text" name="competence" class="form-control" placeholder="nouvelle compétence" required>
                         </div>
                         <div class="form-group">
                             <label for="niveau">Niveau</label>

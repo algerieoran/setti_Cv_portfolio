@@ -92,13 +92,15 @@
     <section id="about" class="about-section text-center">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <div class="box">
+        <div class="col-lg-2 mx-auto">
+        <div class="box">
               <div class="heart">
-                <span class="text"><h4>Developpeuse </h4> par passion !</span>
+                
               </div>
             </div>
-            <!-- <h2 class="text-white mb-4"></h2> -->
+        </div>
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-white mb-4">Developpeuse, <span>par passion !</span></h2>
             <p class="text-white-50">Je me présente, Setti BELKACEM. Développeur Web Intégrateur Junior. <br>
               Actuellement, en formation de 10 mois labellisée Grande École du Numérique Techniques de développement web et mobile avec WebForce3. 
             Sociable, impliquée, à l'écoute des contraintes professionnelles et aux besoins du client, je suis à la recherche d'un stage non rémunéré d'une durée de 2 mois (Janv -Fév.).

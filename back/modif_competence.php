@@ -38,36 +38,28 @@ while($ligne_comp = $resultat->fetch(PDO::FETCH_ASSOC)) {
     
         // debug($ligne);
     
-    $contenu .= '<form method="post" action="competences.php" enctype="multipart/form-data">';
+    $contenu .= '<form method="post" action="" enctype="multipart/form-data">';
         
         foreach($ligne_comp as $indice => $valeur){ 
             $contenu .= '<div class="form-group">';
 
                 if ($indice == 'id_competence' || $indice =='id_utilisateur'){    
-                    $contenu .= '<input type="hidden" class="form-control" name="'. $indice .'" id="'. $indice .'" value="' . $valeur . '">';
-                
-
-                    
-                }elseif($indice == 'icon') {
-                   
+                    $contenu .= '<input type="hidden" class="form-control" name="'. $indice .'" id="'. $indice .'" value="' . $valeur . '">'; 
+                }
+                elseif($indice == 'icon') {
                     $contenu .= '<div class="files color"><input type="file" class="form-control" name="' . $indice . '" id="'. $indice . '" value="'. $valeur . '"> <img src="img/' . $valeur . '" width="90" alt=""></div>';
-                } elseif($indice == 'categorie')  {
-
+                } 
+                elseif($indice == 'categorie')  {
                     $contenu .= '<label for="'.$indice.'">Categories :</label>';
                     $contenu .= '<select type="text" class="form-control" name="'.$indice.'"  value ="'.$indice.'">';
-                
-              
-                    $contenu .= '<option value="">Choisisez...</option>';
-                    $contenu .= '<option value="Back">Back</option>';
-                    $contenu .= '<option value="CMS">CMS</option>';
-                    $contenu .= '<option value="Frameworks">Frameworks</option>';
-                    $contenu .= '<option value="Front">Front</option>';
-                  
-             
+                        $contenu .= '<option value="">Choisisez...</option>';
+                        $contenu .= '<option value="Back">Back</option>';
+                        $contenu .= '<option value="CMS">CMS</option>';
+                        $contenu .= '<option value="Frameworks">Frameworks</option>';
+                        $contenu .= '<option value="Front">Front</option>';
                     $contenu .= '</select>';
-               
-        
-                }else{
+                }
+                else{
                     $contenu .='<label for="'.$indice.'">&nbsp;&nbsp;'.$indice.'</label>';
                     $contenu .= '<input class="form-control"  id="'. $indice .'" value="' . $valeur . '" name="'. $indice .'">';
                 }
@@ -77,8 +69,8 @@ while($ligne_comp = $resultat->fetch(PDO::FETCH_ASSOC)) {
         
         $contenu .='<div><input type ="submit" id="'.$ligne_comp['id_competence'] .'" value="Modifier" class="form-control btn-success"></div>';
        
-        $contenu .='</form>';
-        $contenu .= '<div><strong ><a href="competences.php" class="form-control btn-success">Annuler</a></div class="danger"></strong></div>';    
+    $contenu .='</form>';
+    $contenu .= '<div class="mt-2"><strong ><a href="competences.php" class="form-control btn-success"><i class="fas fa-code"></i>&nbsp;Competences</a></div class="danger"></strong></div>';    
         
 }// fin while($ligne_comp = $resultat->fetch(PDO::FETCH_ASSOC))
 //--------------------------AFFICHAGE------------

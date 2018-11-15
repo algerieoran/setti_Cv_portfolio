@@ -91,7 +91,7 @@ require_once 'inc/haut.inc.php';
         <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
-            $sql = $pdo->prepare(" SELECT * FROM t_experiences $ordre ");
+            $sql = $pdo->prepare(" SELECT * FROM t_experiences WHERE id_utilisateur = 1 $ordre ");
             $sql->execute();
             $nbr_experiences = $sql->rowCount();
             ?>

@@ -6,19 +6,14 @@ $ordre = ''; // on declare la variable
 
 if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
 
-    if ($_GET['colonne'] == 'titre_form') {
-      $ordre = ' ORDER BY titre_form'; 
-  
-    } elseif ($_GET['colonne'] == 'stitre_form') {
-      $ordre = ' ORDER BY stitre_form';
+    if ($_GET['colonne'] == 'formations') {
+      $ordre = ' ORDER BY formation'; 
   
     } elseif ($_GET['colonne'] == 'dates_form') {
       $ordre = ' ORDER BY dates_form';
   
-    } elseif ($_GET['colonne'] == 'description_form') {
-      $ordre = ' ORDER BY descrition_form';
-    }
-  
+    } 
+    
     if ($_GET['ordre'] == 'asc') {
       $ordre .= ' ASC';
     } elseif ($_GET['ordre'] == 'desc') {
@@ -36,31 +31,14 @@ extract($_SESSION['t_utilisateurs']);
 if(!empty($_POST)) {
     // ICI il faudrait mettre les contrôles sur les champs du formulaire.
 
-    // ICI le code de la photo à venir
-    // $photo_bdd ='';  // par défaut la photo est vide en BDD
-
-    // debug($_FILES);
-
-    // if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
-    //     $nom_photo = $_POST['reference'] . '_' . $_FILES['photo']['name'];   // pour créer un nom de fichier unique, on concatène la référence du produit avec le nom du fichier en cour d'upload.
-
-    //     $photo_bdd = 'photo/' . $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
-
-    //     copy($_FILES['photo']['tmp_name'], '../' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "../photo/nom_photo.jpg"
-
-    // }
-
     // Insertion d'une formation en BDD :
-        executeRequete(
-            "REPLACE INTO t_formations VALUES (:id_formation, :icon, :dates_form, :titre_form, :stitre_form, description_form, :id_utilisateur)",
+        executeRequete(" REPLACE INTO t_formations VALUES (NULL, :formation, :stitre_form, :dates_form, :description_form, $id_utilisateur)",
             array(
-                ':id_formation' => $_POST['id_formation'],
-                ':icon' => $_POST['icon'],
-                ':dates_form' => $_POST['dates_form'],
-                ':titre_form' => $_POST['titre_form'],
+                // ':icon' => $_POST['icon'],
+                ':formation' => $_POST['formation'],
                 ':stitre_form' => $_POST['stitre_form'],
-                ':description_form' => $_POST['description_form'],
-                ':id_utilisateur' => $_POST['id_utilisateur']
+                ':dates_form' => $_POST['dates_form'],
+                ':description_form' => $_POST['description_form']
             )
         );
         //REPLACE INTO se comporte comme un INSERT INTO quand l'id_formation n'existe pas en BDD : c'est le cas lors de la création d'une formation pour laquelle nous avons mis un id_formation à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_formation existe en BDD : c'est le cas lors de la modification d'une formation existante.
@@ -73,18 +51,21 @@ if(!empty($_POST)) {
 if (isset($_GET['id_formation'])) {// on récupère ce que je supprime dans l'url par son id
     $efface = $_GET['id_formation'];// je passe l'id dans une variable $efface
 
-    $resultat = $pdo->query("DELETE FROM t_formations WHERE id_formation = '$efface' ");
+    $resultat = $pdo->query(" DELETE FROM t_formations WHERE id_formation = '$efface' ");
 
-    // header("location: ../back/formations.php");
+     header("location: ../back/formations.php");
+
+     $contenu .= '<div class="alert alert-success" role="alert">La formation à bien été supprimée !</div>';
+    } else {
+        $contenu .= '<div class="alert alert-danger" role="alert">Erreur lors de la suppression !</div>';
+
 }//ferme le if isset pour la suppression
 
 
 
-//-----------------------------------------AFFICHAGE--------------------------------------------
+//-----------------------------------------AFFICHAGE-------------------------------------------
 require_once 'inc/haut.inc.php';
 ?>
-
-
 
 <div class="container margin">
     <div class="row">  
@@ -92,22 +73,21 @@ require_once 'inc/haut.inc.php';
             <?php 
             //requête pour compter et chercher plusieurs enregistrements, on ne peut compter que si on a un prepare
 
-            $sql = $pdo->prepare("SELECT * FROM t_formations" . $ordre);
+            $sql = $pdo->prepare("SELECT * FROM t_formations WHERE id_utilisateur = 1 $ordre ");
             $sql->execute();
             $nbr_formations = $sql->rowCount();
             ?>
 
             <div class="table-responsive">
                 <div class="card-header">
-                    La liste des compétences : <?php echo $nbr_formations;?>
+                    La liste des formations : <?php echo $nbr_formations;?>
                 </div>
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                         <tr>
-                        <th>icon</th>
-                        <th>Dates  <a href="formations.php?colonne=dates_form&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="formations.php?colonne=dates_form&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
-                        <th>Titre formation</th>
+                        <th> Formation <a href="formations.php?colonne=dates_form&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="formations.php?colonne=dates_form&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Sous-titres</th>
+                        <th>Dates</th>
                         <th>Description</th>
                         <th>Modifier </th>
                         <th>Supprimer </th>
@@ -117,11 +97,9 @@ require_once 'inc/haut.inc.php';
                     <?php while ($ligne_formation=$sql ->fetch()) {
 
                         echo '<tr>';
-                            echo '<td>' . $ligne_formation['id_formation'] . '</td>';
-                            echo '<td>' . $ligne_formation['icon'] . '</td>';
-                            echo '<td>' . $ligne_formation['dates_form'] . '</td>';
-                            echo '<td>' . $ligne_formation['titre_form'] . '</td>';
+                            echo '<td>' . $ligne_formation['formation'] . '</td>';
                             echo '<td>' . $ligne_formation['stitre_form'] . '</td>';
+                            echo '<td>' . $ligne_formation['dates_form'] . '</td>';
                             echo '<td> <a href="modif_formation.php?id_formation=' . $ligne_formation['id_formation'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier cette formation?\'))"><i class="fas fa-edit"></i></a></td>';
 
                             echo '<td> <a href="?id_formation=' . $ligne_formation['id_formation'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer cette formation?\'))" ><i class="far fa-trash-alt"></i></a></td>';
@@ -140,17 +118,15 @@ require_once 'inc/haut.inc.php';
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
-                        <div class="form-group">
-                            <label for="icon">icon</label>
-                            <input class="icon" type="text" name="icon" id="icon" placeholder="" required>
-                        </div>
+                        <input type="hidden" name="id_formation" valeur="0">   
+                        
                         <div class="form-group">
                             <label for="dates_form">Dates</label>
                             <input class="form-control" type="text" name="dates_form" id="dates_form" placeholder="" required>
                         </div>
                         <div class="form-group">
-                            <label for="titre_form">Titre</label>
-                            <input class="form-control" type="text" name="titre_form" id="titre_form" placeholder="" required>
+                            <label for="formation">Titre</label>
+                            <input class="form-control" type="text" name="formation" id="formation" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="stitre_form">Sous-titres</label>

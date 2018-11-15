@@ -1,19 +1,25 @@
 <?php
-
-
-
 require_once 'inc/init.inc.php';
 
-// 1- On vérifie si l'utilisateur est admin :
+//pour le tri des colonnes par ordre croissant et decroissant
+$ordre = ''; // on declare la variable  
 
-    if(!internauteEstConnecteEtAdmin()){
-        header('location:connexion.php'); // si pas admin, on le redirige vers la page de connexion
-        exit();
+if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
+
+    if ($_GET['colonne'] == 'urls') {
+        $ordre = ' ORDER BY url';
     }
 
-    extract($_SESSION['t_utilisateurs']);
+    if ($_GET['ordre'] == 'asc') {
+        $ordre .= ' ASC';
+    } elseif ($_GET['ordre'] == 'desc') {
+        $ordre .= ' DESC';
+    }
+}
 
+extract($_SESSION['t_utilisateurs']);
 
+/**************************************************************** */
  // Supprimer une langue
  if (isset($_GET['id_reseau'])) {
     $resultat = executeRequete("DELETE FROM t_reseaux WHERE id_reseau = :id_reseau", array(':id_reseau' => $_GET['id_reseau']));
@@ -26,7 +32,7 @@ require_once 'inc/init.inc.php';
 }
 
 
-
+//--------------------------------------
 
     // Update de reseau pour chaque utilisateur
 if (!empty($_POST)){ // Si le formulaire est soumis
@@ -70,17 +76,19 @@ $contenu .= '<div class="alert alert-success" role="alert">Le reseau a bien ét�
 
  // Affichage les reseaux pour chaque utilisateur
 
- $resultat = $pdo -> query("SELECT id_reseau, url, ut.prenom, ut.nom
-                            FROM t_reseaux r, t_utilisateurs ut 
-                            WHERE r.id_utilisateur = $id_utilisateur  AND ut.id_utilisateur = $id_utilisateur");
+ $resultat = $pdo -> query("SELECT * FROM t_reseaux WHERE id_utilisateur = 1 $ordre ");
+
+// $resultat = $pdo -> query("SELECT id_reseau, url, ut.prenom, ut.nom
+// FROM t_reseaux r, t_utilisateurs ut 
+// WHERE r.id_utilisateur = $id_utilisateur  AND ut.id_utilisateur = $id_utilisateur");
 
 $contenu .='<table class="table" border = "1">';
     $contenu .= '<thead class="thead-dark">';
         $contenu .='<tr>';
        
         $contenu .= '<th>URL du reseau</th>' ;
-            $contenu .= '<th>Prénom</th>' ;
-            $contenu .= '<th>Nom</th>' ;
+            // $contenu .= '<th>Prénom</th>' ;
+            // $contenu .= '<th>Nom</th>' ;
            
             $contenu .='<th colspan="2">Actions</th>';
         $contenu .='</tr>';

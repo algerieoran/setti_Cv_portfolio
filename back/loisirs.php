@@ -28,27 +28,27 @@ if (!empty($_POST)) {
     // ICI il faudrait mettre les contrôles sur les champs du formulaire.
 
     // ICI le code de la photo à venir
-    // $photo_bdd ='';  // par défaut la photo est vide en BDD
+     $photo_bdd ='';  // par défaut la photo est vide en BDD
 
     // debug($_FILES);
 
-    // if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
-    //     $nom_photo = $_POST['reference'] . '_' . $_FILES['photo']['name'];   // pour créer un nom de fichier unique, on concatène la référence du produit avec le nom du fichier en cour d'upload.
+     if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
+        $nom_photo = $_FILES['photo']['name'];  
 
-    //     $photo_bdd = 'photo/' . $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
+       $photo_bdd = $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
 
-    //     copy($_FILES['photo']['tmp_name'], '../' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "../photo/nom_photo.jpg"
+       copy($_FILES['photo']['tmp_name'], 'img/' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "img/nom_photo.jpg"
 
-    // }
+    }
 
     // Insertion d'un loisir en BDD :
-    executeRequete(" REPLACE INTO t_loisirs VALUES (:id_loisir, :loisir, $id_utilisateur)",
+    executeRequete(" REPLACE INTO t_loisirs VALUES (NULL, :loisir, :photo, $id_utilisateur)",
         array(
-            ':id_loisir' => $_POST['id_loisir'],
             ':loisir' => $_POST['loisir'],
+            ':photo' => $photo_bdd
         )
     );
-    //REPLACE INTO se comporte comme un INSERT INTO quand l'id_experience n'existe pas en BDD : c'est le cas lors de la création d'une experience pour laquelle nous avons mis un id_experience à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_experience existe en BDD : c'est le cas lors de la modification d'une experience existante.
+    //REPLACE INTO se comporte comme un INSERT INTO quand l'id_loisir n'existe pas en BDD : c'est le cas lors de la création d'un loisir pour laquelle nous avons mis un id_loisir à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_loisir existe en BDD : c'est le cas lors de la modification d'une loisir existante.
 
     $contenu .= '<div class="bg-success">Le loisir a bien été enregistrée ! </div>';
 
@@ -62,7 +62,7 @@ if (isset($_GET['id_loisir'])) {// on récupère ce que je supprime dans l'url p
 
     $resultat = $pdo->query(" DELETE FROM t_loisirs WHERE id_loisir = '$efface' ");
 
-    header("location: ../back/loisirs.php");
+    header("location:../back/loisirs.php");
 
     $contenu .= '<div class="alert alert-success" role="alert">Le loisir à bien été supprimé</div>';
 } else {
@@ -83,7 +83,7 @@ require_once 'inc/haut.inc.php';
         <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
-            $sql = $pdo->prepare(" SELECT * FROM t_loisirs WHERE id_utilisateur = 1 $ordre");
+            $sql = $pdo->prepare(" SELECT * FROM t_loisirs WHERE id_utilisateur = 1 $ordre ");
             $sql->execute();
             $nbr_loisirs = $sql->rowCount();
             ?>
@@ -96,6 +96,7 @@ require_once 'inc/haut.inc.php';
                     <thead class="thead-dark">
                         <tr>
                             <th>Loisir  <a href="loisirs.php?colonne=loisirs&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="loisirs.php?colonne=loisirs&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
+                            <th>Photo</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -105,12 +106,14 @@ require_once 'inc/haut.inc.php';
 
                         echo '<tr>';
                         echo '<td>' . $ligne_loisir['loisir'] . '</td>';
+                        echo '<td><img src="img/' . $ligne_loisir['photo'] . '" alt="" style="width:100px;height:100px;"></td>';
                         echo '<td> <a href="modif_loisir.php?id_loisir=' . $ligne_loisir['id_loisir'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier ce loisir ?\'))"><i class="fas fa-edit"></i></a></td>';
 
                         echo '<td> <a href="?id_loisir=' . $ligne_loisir['id_loisir'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer ce loisir ?\'))" ><i class="far fa-trash-alt"></i></a></td>';
                         echo '</tr>';
                     }
                     ?>
+                    
                     </tbody>
                 </table>
             </div><!-- fin resposive -->
@@ -122,10 +125,15 @@ require_once 'inc/haut.inc.php';
                     Insertion d'un nouveau loisir :
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id_competence" valeur="0">
                         <div class="form-group">
                             <label for="loisir">Loisir</label>
                             <input type="text" name="loisir" class="form-control" placeholder="nouveau loisir" required>
+                        </div>
+                        <div class="form-group files color">
+                            <label for="photo">Télécharger votre photo</label>
+                            <input type="file" name="photo" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
