@@ -9,7 +9,8 @@ if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
     if ($_GET['colonne'] == 'formations') {
       $ordre = ' ORDER BY formation'; 
   
-    } elseif ($_GET['colonne'] == 'dates_form') {
+    } 
+    elseif ($_GET['colonne'] == 'dates_form') {
       $ordre = ' ORDER BY dates_form';
   
     } 
@@ -34,7 +35,6 @@ if(!empty($_POST)) {
     // Insertion d'une formation en BDD :
         executeRequete(" REPLACE INTO t_formations VALUES (NULL, :formation, :stitre_form, :dates_form, :description_form, $id_utilisateur)",
             array(
-                // ':icon' => $_POST['icon'],
                 ':formation' => $_POST['formation'],
                 ':stitre_form' => $_POST['stitre_form'],
                 ':dates_form' => $_POST['dates_form'],
@@ -85,7 +85,8 @@ require_once 'inc/haut.inc.php';
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                         <tr>
-                        <th> Formation <a href="formations.php?colonne=dates_form&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="formations.php?colonne=dates_form&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
+                        
+                        <th>Formation</th><a href="formations.php?colonne=formations&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="formations.php?colonne=formations&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Sous-titres</th>
                         <th>Dates</th>
                         <th>Description</th>

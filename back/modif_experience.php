@@ -1,13 +1,6 @@
 <?php
 require_once 'inc/init.inc.php';
 
-// 1- On vérifie si membre est admin :
-
-if (!internauteEstConnecteEtAdmin()) {
-    header('location:../connexion.php'); // si pas admin, on le redirige vers la page de connexion
-    exit();
-}
-
 extract($_SESSION['t_utilisateurs']);
 
 //-----------------mise à jour d'une experience ---------------
@@ -38,6 +31,7 @@ $id_experience = $_GET['id_experience'];
 $resultat = $pdo->query(" SELECT * FROM t_experiences WHERE id_experience = '$id_experience' ");
 
 while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC)) {
+    
     $contenu .= '<form method="post" action="">';
         // debug($ligne);
 
@@ -63,7 +57,7 @@ while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC)) {
         $contenu .= '<input type ="submit" id="' . $ligne_exp['id_experience'] . '" value="Modifier" class="form-control btn-success">';
 
     $contenu .= '<form>';
-    $contenu .= '<div class="mt-2"><strong ><a href="competences.php" class="form-control btn-success"><i class="fas fa-building"></i>&nbsp;Competences</a></div class="danger"></strong></div>';
+    $contenu .= '<div class="mt-2"><strong ><a href="experiences.php" class="form-control btn-success"><i class="fas fa-building"></i>&nbsp;experiences</a></div class="danger"></strong></div>';
 } //fin while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC))
 //--------------------------AFFICHAGE------------
 require_once 'inc/haut.inc.php';

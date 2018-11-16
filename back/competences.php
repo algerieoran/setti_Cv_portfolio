@@ -8,13 +8,7 @@ if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
 
     if ($_GET['colonne'] == 'competences') {
         $ordre = ' ORDER BY competence';
-
-    } elseif ($_GET['colonne'] == 'niveau') {
-        $ordre = ' ORDER BY niveau';
-
-    } elseif ($_GET['colonne'] == 'categorie') {
-        $ordre = ' ORDER BY categorie';
-    }
+    } 
 
     if ($_GET['ordre'] == 'asc') {
         $ordre .= ' ASC';
@@ -30,37 +24,38 @@ extract($_SESSION['t_utilisateurs']);
 // 4- Traitement de $_POST : enregistrement de la competence en BDD 
 //debug($_POST);
 
-if(!empty($_POST)) {
+if (!empty($_POST)) {
     // ICI il faudrait mettre les contrôles sur les champs du formulaire.
 
     // ICI le code de la icon à venir
-    $icon_bdd ='';  // par défaut la icon est vide en BDD
+     $icon_bdd ='';  // par défaut la icon est vide en BDD
 
     // debug($_FILES);
 
-    if (!empty($_FILES['icon']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c'est que je suis en tyrain d'uploader un fichier. L'indice "icon" correspond au name du champ dans le formulaire.
-        $nom_icon =  $_FILES['icon']['name'];   
+     if (!empty($_FILES['icon']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "icon" correspond au name du champ dans le formulaire.
+        $nom_icon = $_FILES['icon']['name'];  
 
-        $icon_bdd = $nom_icon;  // chemin relatif de la icon enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/img/ du site
+       $icon_bdd = $nom_icon;  // chemin relatif de la icon enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/icon/ du site
 
-        copy($_FILES['icon']['tmp_name'], 'img/' . $icon_bdd);  // on enregistre le fichier icon qui est tomporairement dans $_FILES['icon']['tmp_name'] dans le répertoire "img/nom_icon.jpg"
+       copy($_FILES['icon']['tmp_name'], 'img/' . $icon_bdd);  // on enregistre le fichier icon qui est tomporairement dans $_FILES['icon']['tmp_name'] dans le répertoire "img/nom_icon.jpg"
 
     }
 
-    // Insertion de la competence en BDD :
-    executeRequete(" REPLACE INTO t_competences VALUES (NULL, :icon, :competence, :niveau, :categorie, $id_utilisateur)", 
-      array(
-            ':icon'    => $icon_bdd,
-            ':competence'    => $_POST['competence'],
-            ':niveau'    => $_POST['niveau'],
-            ':categorie'  => $_POST['categorie']
+    // Insertion d'un loisir en BDD :
+    executeRequete(" REPLACE INTO t_competences VALUES (NULL, :icon, :competence, :niveau, :categorie, $id_utilisateur)",
+    array(
+        ':icon' => $icon_bdd,
+        ':competence' => $_POST['competence'],
+        ':niveau' => $_POST['niveau'],
+        ':categorie' => $_POST['categorie']
         )
     );
-     //REPLACE INTO se comporte comme un INSERT INTO quand l'id_formation n'existe pas en BDD : c'est le cas lors de la création d'une competence pour laquelle nous avons mis un id_competence à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_competence existe en BDD : c'est le cas lors de la modification d'une competence existante.
-
+    //REPLACE INTO se comporte comme un INSERT INTO quand l'id_formation n'existe pas en BDD : c'est le cas lors de la création d'une competence pour laquelle nous avons mis un id_competence à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_competence existe en BDD : c'est le cas lors de la modification d'une competence existante.
     $contenu .= '<div class="bg-success">La compétence a bien été enregistrée ! </div>';
 
 }// fin du if (!empty($_POST))
+
+
 
 //suppression d'un élément de la BDD
 if (isset($_GET['id_competence'])) {// on récupère ce que je supprime dans l'url par son id
@@ -76,8 +71,12 @@ if (isset($_GET['id_competence'])) {// on récupère ce que je supprime dans l'u
 
 }//ferme le if isset pour la suppression
 
-//-----------------------------------------AFFICHAGE-------------------------------------------
+
+
+//-----------------------------------------AFFICHAGE--------------------------------------------
 require_once 'inc/haut.inc.php';
+
+//echo $contenu;
 ?>
 
 <div class="container margin">
@@ -85,20 +84,20 @@ require_once 'inc/haut.inc.php';
         <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
-                $sql = $pdo->prepare(" SELECT * FROM t_competences WHERE id_utilisateur = 1 $ordre ");
-                $sql->execute();
-                $nbr_competences = $sql->rowCount();
+            $sql = $pdo->prepare(" SELECT * FROM t_competences WHERE id_utilisateur = 1 $ordre ");
+            $sql->execute();
+            $nbr_competences = $sql->rowCount();
             ?>
 
             <div class="table-responsive">
                 <div class="card-header">
-                    La liste des compétences : <?php echo $nbr_competences; ?>
+                    La liste des competences : <?php echo $nbr_competences; ?>
                 </div>
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Icon</th>
-                            <th>Compétences  <a href="competences.php?colonne=competences&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="competences.php?colonne=competences&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
+                            <th>icon</th>
+                            <th>Competences  <a href="competences.php?colonne=competences&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="competences.php?colonne=competences&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                             <th>Niveau</th>
                             <th>Catégorie</th>
                             <th>Modifier</th>
@@ -106,19 +105,22 @@ require_once 'inc/haut.inc.php';
                         </tr>
                     </thead>
                     <tbody class="thead-light">
-                    <?php while ($ligne_competence = $sql->fetch()) {
+                    <?php while ($ligne_competences = $sql->fetch()) {
 
                         echo '<tr>';
-                        echo '<td>' . $ligne_competence['icon'] . '</td>';
-                        echo '<td>' . $ligne_competence['competence'] . '</td>';
-                        echo '<td>' . $ligne_competence['niveau'] . '</td>';
-                        echo '<td>' . $ligne_competence['categorie'] . '</td>';
-                            echo '<td> <a href="modif_competence.php?id_competence=' . $ligne_competence['id_competence'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier cette competence?\'))"><i class="fas fa-edit"></i></a></td>';
 
-                            echo '<td> <a href="?id_competence=' . $ligne_competence['id_competence'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer cette competence?\'))" ><i class="far fa-trash-alt"></i></a></td>';
+                        echo '<td><img src="img/' . $ligne_competences['icon'] . '" alt="" style="width:100px;height:100px;"></td>';
+
+                        echo '<td>' . $ligne_competences['competence'] . '</td>';
+                        echo '<td>' . $ligne_competences['niveau'] . '</td>';
+                        echo '<td>' . $ligne_competences['categorie'] . '</td>';
+                        echo '<td> <a href="modif_competence.php?id_competence=' . $ligne_competences['id_competence'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier cette competence ?\'))"><i class="fas fa-edit"></i></a></td>';
+
+                        echo '<td> <a href="?id_competence=' . $ligne_competences['id_competence'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer cette competence?\'))" ><i class="far fa-trash-alt"></i></a></td>';
                         echo '</tr>';
-                        }
+                    }
                     ?>
+                    
                     </tbody>
                 </table>
             </div><!-- fin resposive -->
@@ -127,11 +129,11 @@ require_once 'inc/haut.inc.php';
         <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="card text-white bg-secondary mb-3">
                 <div class="card-header">
-                    Insertion d'une nouvelle compétences :
+                Insertion d'une nouvelle compétences :
                 </div>
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id_competence" valeur="0">
+                    <input type="hidden" name="id_competence" valeur="0">
                         <div class="form-group files color">
                             <label for="icon">Télécharger votre icon</label>
                             <input type="file" name="icon" class="form-control" required>

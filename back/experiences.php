@@ -34,20 +34,6 @@ extract($_SESSION['t_utilisateurs']);
 if (!empty($_POST)) {
     // ICI il faudrait mettre les contrôles sur les champs du formulaire.
 
-    // ICI le code de la photo à venir
-    // $photo_bdd ='';  // par défaut la photo est vide en BDD
-
-    // debug($_FILES);
-
-    // if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
-    //     $nom_photo = $_POST['reference'] . '_' . $_FILES['photo']['name'];   // pour créer un nom de fichier unique, on concatène la référence du produit avec le nom du fichier en cour d'upload.
-
-    //     $photo_bdd = 'photo/' . $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
-
-    //     copy($_FILES['photo']['tmp_name'], '../' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "../photo/nom_photo.jpg"
-
-    // }
-
     // Insertion de la competence en BDD :
     executeRequete(
         " REPLACE INTO t_experiences VALUES (NULL, :titre_exp, :stitre_exp, :dates_exp, :description_exp, $id_utilisateur)",

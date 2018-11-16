@@ -81,8 +81,8 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
                             </div>
                             <div class="form-group">
                                 <label for="mdp" class="text-uppercase"><i class="fa fa-key icon"></i></label>
-                                <input type="password" class="form-control" placeholder="Mot de passe"  name="mdp" required>
-                                <span id="voirMdp" style="cursor: pointer"><i class="far fa-eye"></i></span>
+                                <input type="password" class="form-control" placeholder="Mot de passe"  name="mdp" id="mdp" required>
+                                <div id="voirMdp" style="cursor: pointer" class="text-right"><i class="far fa-eye text-dark"></i></div>
                             </div>
                             <div class="form-check">
                                 <button type="submit" class="btn btn-login float-right">Connexion</button>
@@ -134,11 +134,11 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
         
         <script>
             $(function(){
-                $('#voirMdp').mousedown(function(){
+                $('#voirMdp').mousedown(function(){  // au click sur la souris, #voirmdp la fonction #mdp va redevenir de type text
                         $('#mdp').attr('type', 'text');
                     });
 
-                    $('#voirMdp').mouseup(function(){
+                    $('#voirMdp').mouseup(function(){  // en levant le doigt de #voirmdp la fonction #mdp va redevenir de type password "hidden"
                         $('#mdp').attr('type', 'password');
                     });
             });

@@ -5,23 +5,23 @@ extract($_SESSION['t_utilisateurs']);
 debug($_POST);
 //-----------------mise à jour d'une experience ---------------
 if (!empty($_POST)) {
-    $photo_bdd ='';  // par défaut la photo est vide en BDD
+    $icon_bdd ='';  // par défaut la icon est vide en BDD
 
     // debug($_FILES);
 
-     if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
-        $nom_photo = $_FILES['photo']['name'];  
+     if (!empty($_FILES['icon']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "icon" correspond au name du champ dans le formulaire.
+        $nom_icon = $_FILES['icon']['name'];  
 
-       $photo_bdd = $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
+       $icon_bdd = $nom_icon;  // chemin relatif de la icon enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/icon/ du site
 
-       copy($_FILES['photo']['tmp_name'], 'img/' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "img/nom_photo.jpg"
+       copy($_FILES['icon']['tmp_name'], 'img/' . $icon_bdd);  // on enregistre le fichier icon qui est tomporairement dans $_FILES['icon']['tmp_name'] dans le répertoire "img/nom_icon.jpg"
      }
     $result = executeRequete(
-        " UPDATE t_loisirs SET loisir = :loisir, photo = :photo, id_utilisateur = $id_utilisateur WHERE id_loisir = :id_loisir",
+        " UPDATE t_loisirs SET loisir = :loisir, icon = :icon, id_utilisateur = $id_utilisateur WHERE id_loisir = :id_loisir",
         array(
             ':id_loisir' => $_POST['id_loisir'],
             ':loisir' => $_POST['loisir'],
-            ':photo' => $photo_bdd
+            ':icon' => $icon_bdd
         )
     );
 
@@ -47,7 +47,7 @@ while ($ligne_loisirs = $result->fetch(PDO::FETCH_ASSOC)) {
             if ($indice == 'id_loisir' || $indice == 'id_utilisateur') {
                 $contenu .= '<input type="hidden" name="' . $indice . '" id="' . $indice . '" value="' . $valeur . '">';
             }
-            elseif($indice == 'photo') {
+            elseif($indice == 'icon') {
                 $contenu .= '<div class="files color"><input type="file" class="form-control" name="' . $indice . '" id="'. $indice . '" value="'. $valeur . '"> <img src="img/' . $valeur . '" width="90" alt=""></div>';
             } 
             else {
