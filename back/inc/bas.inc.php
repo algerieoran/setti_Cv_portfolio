@@ -1,7 +1,7 @@
-      <hr>
+      
       <footer>
-        <div class="row">
-          <div class="col-lg-12">
+        <div class="row mt-5">
+          <div class="col-lg-12 text-center text-dark">
             <p>Copyright &copy; Setti CV portfolio - 2018</p>
           </div>
         </div>

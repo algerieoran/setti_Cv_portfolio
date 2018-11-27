@@ -32,7 +32,7 @@ $resultat = $pdo->query(" SELECT * FROM t_experiences WHERE id_experience = '$id
 
 while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC)) {
     
-    $contenu .= '<form method="post" action="">';
+    $contenu .= '<form method="post" action="experiences.php">';
         // debug($ligne);
 
         foreach ($ligne_exp as $indice => $valeur) {
@@ -63,17 +63,11 @@ while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC)) {
 require_once 'inc/haut.inc.php';
 ?>
     
-    <div class="container mt-4" style="min-width: 180vh">
-        <div class="jumbotron mt-4">
-                <h1 class="text-center mt-4 mb-4">Gestion de votre  CV</h1>
-                <?php echo '<h4 class="text-center mt-4 mb-4">' . $prenom . ' - ' . $nom . '</h4>'; ?>
-                <h2 class="text-center"> Vous êtes un administrateur !</h2>
-        </div>
-    
+    <div class="container text-center mt-4 mb-5 pt-5" style="min-width: 180vh">
+       
+        <h2 class="text-center text-dark margin pb-3">La mise à jour d'une experience</h2>
         <div class="row d-flex justify-content-center">
-            <h2 class="text-center m-5">La mise à jour d'une experience</h2>
-            <div class="col-lg-6 m-3">
-            
+            <div class="col-lg-6 m-auto pb-4 bg-info">
                 <?php echo $contenu; ?>
             </div>
         </div>
@@ -81,5 +75,5 @@ require_once 'inc/haut.inc.php';
     </div>
     
     <?php
-    //le bas de page
-    require_once 'inc/bas.inc.php';
+    
+    require_once 'inc/bas.inc.php';//le bas de page

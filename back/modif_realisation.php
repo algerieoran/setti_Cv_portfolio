@@ -42,7 +42,7 @@ $resultat = $pdo->query(" SELECT * FROM t_realisations
 
 
 while ($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
-    $contenu .= '<form method="post" action="modif_realisation.php">';
+    $contenu .= '<form method="post" action="realisations.php">';
         // debug($ligne);
 
     foreach ($ligne as $indice => $valeur) {

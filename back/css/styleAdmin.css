@@ -1,13 +1,6 @@
 /* les styles de ma page */
 @charset "utf-8";
 
-body {
-  /* height: 100%; */
-  background-image: url('../img/cool-galaxy-wallpapers-17.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #ffffff;
-}
 .margin {
   margin-top: 5rem;
 }
@@ -15,14 +8,53 @@ body {
 .margine{
     margin-left: 13%;
 }
+.color {
+    background: rgb(240, 230, 140);
+}
+/* .color1 {
+    background: rgb(188, 143, 143);
+} */
+
+/* -----------------------style buttons--------------- */
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+.btn {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 18px 80px 20px;
+  transition: all 0.7s ease-out;
+  background-image: linear-gradient(to right, #2b5876 0%, #4e4376 51%, #2b5876 100%);
+
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0.625rem;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+}
+
+.btn:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: #fff;
+  background-position: right center;
+}
+
+/* ----------------------- fin style buttons--------------- */
 
 /* -----------------------page connexion -------------------------*/
 
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 .login-block{
-    background: #DE6262;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #D8BFD8;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #E6E6FA, #9370DB);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #E6E6FA, #9370DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 float:left;
 width:100%;
 padding : 50px 0;
@@ -33,11 +65,11 @@ padding : 50px 0;
 .carousel-caption{text-align:left; left:5%;}
 .login-sec{padding: 50px 30px; position:relative;}
 .login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
-.login-sec .copy-text i{color:#FEB58A;}
-.login-sec .copy-text a{color:#E36262;}
-.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #DE6262;}
-.login-sec h2:after{content:" "; width:100px; height:5px; background:#FEB58A; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
-.btn-login{background: #DE6262; color:#fff; font-weight:600;}
+.login-sec .copy-text i{color:#E6E6FA;}
+.login-sec .copy-text a{color:#483D8B;}
+.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #483D8B;}
+.login-sec h2:after{content:" "; width:100px; height:5px; background:#E6E6FA; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
+.btn-login{background: #483D8B; color:#fff; font-weight:600;}
 .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
 .banner-text h2{color:#fff; font-weight:600;}
 .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
@@ -47,50 +79,60 @@ padding : 50px 0;
 
 
 /* -----------------------style page Profil ----------------------------*/
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 500px;
-    margin: auto;
-    text-align: center;
-}
-
-.title {
-    color: grey;
-    font-size: 18px;
-}
-
-button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: dodgerblue;
-    background-color: transparent;
-    text-align: center;
-    cursor: pointer;
+.header-img{
+    height: 500px;
+    position: relative;
     width: 100%;
-    font-size: 18px;
+    margin-top: 75px;
 }
-
-a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
+.header-img img{
+    width: 100%;
+    
 }
-
-button:hover, a:hover {
-    opacity: 0.7;
-}
-h1, h2{
+.header-content{
+    background: rgb(255, 192, 203);
+    color: #FF1493;
+    height: 300px;
+    padding-top: 98px;
+    position: relative;
     text-align: center;
+    width: 100%;
+    /* margin-top: 350px; */
 }
-
+.header-content h2{
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+.header-content p{
+    padding: 0px 150px;
+}
+.header-content:before{
+    position: absolute;
+    content: "Mes filles adorées : Ines et Sarah";
+    width: 60%;
+    height: 125px;
+    top: -50px;
+    left: 0;
+    background:rgb(255, 192, 203);
+    transform: skewY(10deg);
+}
+.header-content:after{
+    position: absolute;
+    content: "Maman";
+    width: 60%;
+    height: 125px;
+    top: -50px;
+    right: 0;
+    background:rgb(255, 192, 203);
+    transform: skewY(-10deg);
+}
 
 
 /* ------------competences---------- */
 
-/* -----------------file input-------------- */
-.files input {
+/* -----------------file input "téléchargement d'une photo" -------------- */
+/* .files input {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
     -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
@@ -128,15 +170,15 @@ h1, h2{
     right: 0;
     height: 57px;
     /* content: " or drag it here. "; */
-    display: block;
+    /* display: block;
     margin: 0 auto;
-    color: #2ea591;
-    font-weight: 600;
+    color: #2ea591; */
+    /* font-weight: 600;
     text-transform: capitalize;
-    text-align: center;
-}
+    text-align: center; */
+/* } */
 
-
+ 
 
 
 

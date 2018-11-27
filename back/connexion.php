@@ -67,8 +67,6 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
     </head>
 
     <body class="secondary">
-         <!-- La marque -->
-         <a class="navbar-brand" href="<?php echo RACINE_SITE . 'index.php' ?>"><i class="fas fa-home"></i></a>
         <section class="login-block">
             <div class="container">
                 <div class="row">
@@ -82,14 +80,18 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
                             <div class="form-group">
                                 <label for="mdp" class="text-uppercase"><i class="fa fa-key icon"></i></label>
                                 <input type="password" class="form-control" placeholder="Mot de passe"  name="mdp" id="mdp" required>
-                                <div id="voirMdp" style="cursor: pointer" class="text-right"><i class="far fa-eye text-dark"></i></div>
+                                <div id="voirMdp" style="cursor: pointer" class="text-right"><i class="far fa-eye text-primary"></i></div>
                             </div>
                             <div class="form-check">
                                 <button type="submit" class="btn btn-login float-right">Connexion</button>
-                            </div>
+                            </div> 
         
                         </form>
-                        <div class="copy-text">Created with <i class="fa fa-heart"></i> by <a href="http://settibelkacem.com">settibelkacem.com</a></div>
+                        <div class="copy-text">
+                        <p><a href="http://settibelkacem.com">settibelkacem.com</a></p>
+                        <!-- La marque -->
+                        <a class="navbar-brand" href="<?php echo RACINE_SITE . 'index.php' ?>"><i class="fas fa-home text-dark"></i></a>
+                    </div>
                     </div>
                     <div class="col-md-8 banner-sec">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -104,7 +106,7 @@ if (internauteEstConnecte()) {  // s'il est connecté, on le renvoie vers son in
                                     <div class="carousel-caption d-none d-md-block">
                                         <div class="banner-text">
                                             <h2>Bonjour Setti !</h2>
-                                            <p><i class="fas fa-briefcase"></i>Bien venue dans votre Admin !</p>
+                                            <p><i class="fas fa-briefcase"></i>&nbsp;&nbsp; Bien venue dans votre Admin !</p>
                                         </div>	
                                     </div>
                                 </div>

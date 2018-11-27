@@ -80,8 +80,13 @@ require_once 'inc/haut.inc.php';
 ?>
 
 <div class="container margin">
+    <div class="row">
+        <div class="col-xm-6 col-md-8 col-lg-12 mb-3">
+            <h2 class="text-center text-dark">Mise à jour d'une compétence</h2>
+        </div>
+    </div>
     <div class="row">  
-        <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
+        <div class="col-sm-12 col-md-8 col-lg-8 color">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
             $sql = $pdo->prepare(" SELECT * FROM t_competences WHERE id_utilisateur = 1 $ordre ");
@@ -126,15 +131,15 @@ require_once 'inc/haut.inc.php';
             </div><!-- fin resposive -->
         </div><!-- fin .col-lg-8 -->
 
-        <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="card text-white bg-secondary mb-3">
+        <div class="col-sm-12 col-md-4 col-lg-4 margin">
+            <div class="card text-dark color mb-3">
                 <div class="card-header">
                 Insertion d'une nouvelle compétences :
                 </div>
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id_competence" valeur="0">
-                        <div class="form-group files color">
+                        <div class="form-group">
                             <label for="icon">Télécharger votre icon</label>
                             <input type="file" name="icon" class="form-control" required>
                         </div>
@@ -156,7 +161,7 @@ require_once 'inc/haut.inc.php';
                             </select>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Insérer une compétence</button>
+                            <button class="btn" type="submit"><i class="fas fa-plus"></i> compétence</button>
                         </div>
                     </form>
                 </div><!-- fin div .card-body -->

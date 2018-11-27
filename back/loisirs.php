@@ -42,10 +42,10 @@ if (!empty($_POST)) {
     }
 
     // Insertion d'un loisir en BDD :
-    executeRequete(" REPLACE INTO t_loisirs VALUES (NULL, :loisir, :photo, $id_utilisateur)",
+    executeRequete(" REPLACE INTO t_loisirs VALUES (NULL, :photo, :loisir,  $id_utilisateur)",
         array(
-            ':loisir' => $_POST['loisir'],
-            ':photo' => $photo_bdd
+            ':photo' => $photo_bdd,
+            ':loisir' => $_POST['loisir']
         )
     );
     //REPLACE INTO se comporte comme un INSERT INTO quand l'id_loisir n'existe pas en BDD : c'est le cas lors de la création d'un loisir pour laquelle nous avons mis un id_loisir à 0 par défaut dans le formulaire. REPLACE INTO se comporte comme un UPDATE quand l'id_loisir existe en BDD : c'est le cas lors de la modification d'une loisir existante.
@@ -79,8 +79,13 @@ require_once 'inc/haut.inc.php';
 ?>
 
 <div class="container margin">
+<div class="row">
+            <div class="col-xm-6 col-md-8 col-lg-12 mb-3">
+                <h2 class="text-center text-dark">Mise à jour d'un loisir</h2>
+            </div>
+        </div>
     <div class="row">  
-        <div class="col-sm-12 col-md-8 col-lg-8 bg-secondary">
+        <div class="col-sm-12 col-md-8 col-lg-8 color">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
             $sql = $pdo->prepare(" SELECT * FROM t_loisirs WHERE id_utilisateur = 1 $ordre ");
@@ -95,8 +100,8 @@ require_once 'inc/haut.inc.php';
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Loisir  <a href="loisirs.php?colonne=loisirs&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="loisirs.php?colonne=loisirs&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                             <th>Photo</th>
+                            <th>Loisir  <a href="loisirs.php?colonne=loisirs&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="loisirs.php?colonne=loisirs&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -120,24 +125,24 @@ require_once 'inc/haut.inc.php';
         </div><!-- fin .col-lg-8 -->
 
         <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="card text-white bg-secondary mb-3">
+            <div class="card text-white color mb-3">
                 <div class="card-header">
                     Insertion d'un nouveau loisir :
                 </div>
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id_competence" valeur="0">
-                        <div class="form-group">
-                            <label for="loisir">Loisir</label>
-                            <input type="text" name="loisir" class="form-control" placeholder="nouveau loisir" required>
-                        </div>
                         <div class="form-group files color">
                             <label for="photo">Télécharger votre photo</label>
                             <input type="file" name="photo" class="form-control" required>
                         </div>
+                        <div class="form-group">
+                            <label for="loisir">Loisir</label>
+                            <input type="text" name="loisir" class="form-control" placeholder="nouveau loisir" required>
+                        </div>
                         
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Insérer un loisir</button>
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> loisir</button>
                         </div>
                     </form>
                 </div><!-- fin div .card-body -->

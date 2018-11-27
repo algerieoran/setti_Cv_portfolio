@@ -15,31 +15,22 @@ extract($_SESSION['t_utilisateurs']);   // extrait tous les indices de l'array s
 //-----------------------------------------------------------AFFICHAGE---------------------------------------------
 require_once 'inc/haut.inc.php';
 ?>
-    
 
-
-
-<div class="container margin" >
-    
-    <h1 class="mt-5">Profil</h1>
-    <?php 
-    if(internauteEstConnecteEtAdmin()) echo '<h1>Vous êtes un administrateur</h1>';
-     ?>
-    <hr>
-    
-    <div class="card" style="background:transparent" width="200">
-
-      <img src="img/<?php echo $photo; ?>" alt="Setti" class="rounded-circle" style="width:100%">
-      <h1><?php echo $prenom.'&nbsp;&nbsp;' .$nom; ?></h1>
-      <p><i class="fas fa-map-marker-alt"></i> <?php echo $adresse; ?></p>
-      <p><i class="fas fa-city"></i> <?php echo $ville.'&nbsp;-&nbsp;' .$code_postal; ?></p>
-    
-      <p><i class="fas fa-envelope"></i> <?php echo $email; ?></p>
-      <a href="#"><i class="fa fa-dribbble"></i></a>
-      <a href="#"><i class="fa fa-twitter"></i></a>
-      <a href="#"><i class="fa fa-linkedin"></i></a>
-      <a href="#"><i class="fa fa-facebook"></i></a>
-      
+<div class="container">
+<!-- <div class="jumbotron mt-4">
+                <h1 class="text-center mt-4 mb-4">Gestion de votre  CV</h1>
+                <?php echo '<h4 class="text-center mt-4 mb-4">' . $prenom . ' - ' . $nom . '</h4>'; ?>
+                <h2 class="text-center"> Vous êtes un administrateur !</h2>
+        </div> -->
+    <div class="header-img">
+        <img src="img/lesfilles.jpg" alt="">
+    </div>
+    <div class="header-content">
+        <h2><?php 
+        if(internauteEstConnecteEtAdmin()) echo '<h1 class="text-info">Bonjour '.$prenom . ' '. $nom . ', vous êtes un administrateur !</h1>';
+         ?></h2>
+        <p><i class="fas fa-map-marker-alt text-info"></i> <?php echo $adresse; ?>&nbsp;&nbsp;<i class="fas fa-city text-info"></i>&nbsp;&nbsp;<?php echo $ville.'&nbsp;-&nbsp;' .$code_postal; ?></p>
+        <p><i class="fas fa-envelope text-info"></i>&nbsp;&nbsp;<?php echo $email; ?></p>
     </div>
 </div>
 

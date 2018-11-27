@@ -35,7 +35,7 @@ $id_reseau = $_GET['id_reseau'];
 $result = $pdo->query(" SELECT * FROM t_reseaux WHERE id_reseau = '$id_reseau' ");
 
 while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-    $contenu .= '<form method="post" action="">';
+    $contenu .= '<form method="post" action="reseaux.php">';
         // debug($ligne);
 
     foreach ($ligne as $indice => $valeur) {
@@ -44,7 +44,8 @@ while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
         if ($indice == 'id_reseau' || $indice == 'id_utilisateur') {
             $contenu .= '<input type="hidden" name="' . $indice . '" id="' . $indice . '" value="' . $valeur . '">';
 
-        } else {
+        } 
+        else {
             $contenu .= '<label for="' . $indice . '">&nbsp;&nbsp;' . $indice . '</label>';
             $contenu .= '<input class="form-control"  id="' . $indice . '" value="' . $valeur . '" name="' . $indice . '">';
         }
@@ -59,18 +60,11 @@ while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
 require_once 'inc/haut.inc.php';
 ?>
     
-    <div class="container mt-4" style="min-width: 180vh">
-        <div class="jumbotron mt-4">
-                <h1 class="text-center mt-4 mb-4">Gestion de votre  CV</h1>
-                <?php echo '<h4 class="text-center mt-4 mb-4">' . $prenom . ' - ' . $nom . '</h4>'; ?>
-                <h2 class="text-center"> Vous êtes un administrateur !</h2>
-        </div>
-    
+    <div class="container text-center mt-4 mb-5 pt-5" style="min-width: 180vh">
+        <h2 class="text-dark margin pb-3">La mise à jour d'un loisir</h2>
         <div class="row d-flex justify-content-center">
-            <h2 class="text-center m-5">La mise à jour d'un loisir</h2>
-            <div class="col-lg-8 m-3">
-            
-                <?php echo $contenu; ?>
+            <div class="col-lg-6 m-auto bg-info pb-4">
+                <?php echo  $contenu ;?>
             </div>
         </div>
     

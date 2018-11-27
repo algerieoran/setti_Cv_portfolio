@@ -120,40 +120,32 @@ if (!empty($_POST)){ // Si le formulaire est soumis
 require_once 'inc/haut.inc.php';
 
 ?>
-<div class="container mt-5" style="min-width: 180vh">
-    <div class="jumbotron mt-5">
-            <h1 class="text-center mt-4 mb-4">Gestion de votre CV</h1>
-            <?php    echo '<h4 class="text-center mt-4 mb-4">' . $prenom . ' - ' . $nom .  '</h4>';  ?>
-            <h2 class="text-center lead"> Vous êtes un  admin.</h2>
-            
-        </div>
-
+<div class="container mt-5 mb-5" style="min-width: 180vh">
+    
         
 
 
-        <div class="row mb-3">
-            <div class="col-lg-12 text-center">
-                <h2>Mise à jour d'un reseau</h2>
+        <div class="row">
+            <div class="col-xm-6 col-md-8 col-lg-12">
+                <h2 class="text-center margin text-dark">Mise à jour d'un reseau</h2>
             </div>
         </div>
-
-        
-
-        <div class="row mb-4 bg-secondary">
-            <div class="col-lg-6 text-center">
+        <div class="row d-flex justify-content-center mb-5">
+            <div class="col-lg-6 m-auto pb-4 color">
                 <?php  echo $contenu;?>
             </div>
+        </div>
             
-            <div class="col-lg-4">
+            <div class="col-lg-8 color m-auto">
                 
-                <form method ="post" action=""> 
+                <form class="form-inline" method ="post" action=""> 
                     <input type="hidden" id="id_reseau" name="id_reseau" value="0"><!-- Ce champ caché est utile pour la modification d'un produit afin de l'identifier dans la requête SQL. La valeur 0 par défaut signifie que le produit n'existe pas en BDD, et qu'on est en train de le créer -->
                     
-                    <div class="form-group">
+                    <div class="form-group pl-5">
                         <label for="url">Url de réseau</label>
                         <input type="text" class="form-control" name="url" id="url" placeholder="Url reseau">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group pl-5">
                         <label for="icon">Choix de l'icon</label>                                
                         <select name="icon" id="" class="form-control">
                             <option value="Facebook">Facebook</option>
@@ -164,12 +156,13 @@ require_once 'inc/haut.inc.php';
                         </select>
                     </div>
                     
-                    <div class="form-group">
-                        <input type="submit" class="form-control btn-success"  value="valider">
+                    <div class="form-group pl-5">
+                    <button class="btn" type="submit"><i class="fas fa-plus"></i> reseau</button>
                     </div>
                 </form>
             </div> 
-        </div>
+
+            
 </div>
 
 
