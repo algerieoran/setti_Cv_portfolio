@@ -32,32 +32,42 @@ $resultat = $pdo->query(" SELECT * FROM t_experiences WHERE id_experience = '$id
 
 while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC)) {
     
-    $contenu .= '<form method="post" action="experiences.php">';
+    $contenu .= '<form method="post" action="">';
         // debug($ligne);
 
         foreach ($ligne_exp as $indice => $valeur) {
             $contenu .= '<div class="form-group">';
 
-            if ($indice == 'id_experience' || $indice == 'id_utilisateur') {
-                $contenu .= '<input type="hidden" name="' . $indice . '" id="' . $indice . '" value="' . $valeur . '">';
+                if ($indice == 'id_experience' || $indice == 'id_utilisateur') {
+                    $contenu .= '<input type="hidden" name="' . $indice . '" id="' . $indice . '" value="' . $valeur . '">';
 
-            } 
-            elseif ($indice == 'description') {
-                $contenu .= '<label for="' . $indice . '">&nbsp;' . $indice . '</label>';
-                $contenu .= '<textarea name="' . $indice . '" id="' . $indice . '" class="form-control" cols="30" rows="10"></textarea>';   
-            }
-            else {
-                $contenu .= '<label for="' . $indice . '">&nbsp;' . $indice . '</label>';
-                $contenu .= '<input class="form-control"  id="' . $indice . '" value="' . $valeur . '" name="' . $indice . '">';
-            }
-            $contenu .= '</div>';
+                } 
+                elseif ($indice == 'description') {
+                    $contenu .= '<label for="' . $indice . '">&nbsp;' . $indice . '</label>';
+                    $contenu .= '<textarea name="' . $indice . '" id="' . $indice . '" class="form-control" cols="30" rows="10"></textarea>';   
+                }
+                else {
+                    $contenu .= '<label for="' . $indice . '">&nbsp;' . $indice . '</label>';
+                    $contenu .= '<input class="form-control"  id="' . $indice . '" value="' . $valeur . '" name="' . $indice . '">';
+                }
+            $contenu .= '</div>';/* fin div .form-group */
 
         } // fin foreach ($ligne_exp as $indice => $valeur) {
 
-        $contenu .= '<input type ="submit" id="' . $ligne_exp['id_experience'] . '" value="Modifier" class="form-control btn-success">';
+        // $contenu .= '<input type ="submit" id="' . $ligne_exp['id_experience'] . '" value="Modifier" class="form-control btn-success">';
+            $contenu .= '<div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="submit" id="' . $ligne_exp['id_experience'] . '" value="Modifier" class="btn btn-block btn-outline-info">
+                    </div>
+                    <div class="col-6">
+                        <a href="experiences.php" class="btn btn-block btn-outline-success"><i class="fas fa-ban"></i>&nbsp;Revenir aux experiences</a>
+                    </div>
+                </div>   
+            </div>';
 
     $contenu .= '<form>';
-    $contenu .= '<div class="mt-2"><strong ><a href="experiences.php" class="form-control btn-success"><i class="fas fa-building"></i>&nbsp;experiences</a></div class="danger"></strong></div>';
+   
 } //fin while ($ligne_exp = $resultat->fetch(PDO::FETCH_ASSOC))
 //--------------------------AFFICHAGE------------
 require_once 'inc/haut.inc.php';

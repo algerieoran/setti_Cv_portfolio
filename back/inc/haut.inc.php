@@ -35,16 +35,7 @@
 
 <!-- Mes styles -->
     <link href="css/styleAdmin.css" rel="stylesheet" type="text/css">
-<!-- Ck editor 4 -->
-    <script src="ckeditor/ckeditor.js"></script>
-  <!-- <style>
-      @media print{
-  
-        #imprim{
-            display: none;
-        }
-  }
-   </style> -->
+
   </head>
   <body>
     
@@ -74,7 +65,7 @@
                 echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/experiences.php">Expériences</a></li>';
                 echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/loisirs.php">Loisirs</a></li>';
                 echo '<li><a class="nav-link" href="'. RACINE_SITE .'back/reseaux.php">Réseaux</a></li>';
-                echo '<li><a class="nav-link" href="'. RACINE_SITE .'contact.php">Messages</a></li>';
+                // echo '<li><a class="nav-link" href="'. RACINE_SITE .'contact.php">Messages</a></li>';
               } 
 
               // // menu si internaute connecté :

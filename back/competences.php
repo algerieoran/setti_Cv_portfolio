@@ -86,7 +86,7 @@ require_once 'inc/haut.inc.php';
         </div>
     </div>
     <div class="row">  
-        <div class="col-sm-12 col-md-8 col-lg-8 color">
+        <div class="col-sm-12 col-md-8 col-lg-8 mb-5">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
             $sql = $pdo->prepare(" SELECT * FROM t_competences WHERE id_utilisateur = 1 $ordre ");
@@ -94,7 +94,7 @@ require_once 'inc/haut.inc.php';
             $nbr_competences = $sql->rowCount();
             ?>
 
-            <div class="table-responsive">
+            <div class="table-responsive color">
                 <div class="card-header">
                     La liste des competences : <?php echo $nbr_competences; ?>
                 </div>
@@ -128,10 +128,10 @@ require_once 'inc/haut.inc.php';
                     
                     </tbody>
                 </table>
-            </div><!-- fin resposive -->
+            </div><!-- fin .table-resposive -->
         </div><!-- fin .col-lg-8 -->
 
-        <div class="col-sm-12 col-md-4 col-lg-4 margin">
+        <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="card text-dark color mb-3">
                 <div class="card-header">
                 Insertion d'une nouvelle compétences :
@@ -161,7 +161,8 @@ require_once 'inc/haut.inc.php';
                             </select>
                         </div>
                         <div class="form-group">
-                            <button class="btn" type="submit"><i class="fas fa-plus"></i> compétence</button>
+                            <!-- <button class="btn" type="submit"><i class="fas fa-plus"></i> compétence</button> -->
+                            <input class="btn" type="submit" value=" Compétence">
                         </div>
                     </form>
                 </div><!-- fin div .card-body -->

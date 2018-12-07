@@ -74,7 +74,7 @@ require_once 'inc/haut.inc.php';
             </div>
         </div>
     <div class="row">  
-        <div class="col-sm-12 col-md-8 col-lg-8 color">
+        <div class="col-sm-12 col-md-8 col-lg-8 mb-5">
             <?php 
             //requête pour compter et chercher plusieurs enregistrements, on ne peut compter que si on a un prepare
 
@@ -83,7 +83,7 @@ require_once 'inc/haut.inc.php';
             $nbr_formations = $sql->rowCount();
             ?>
 
-            <div class="table-responsive">
+            <div class="table-responsive color">
                 <div class="card-header">
                     La liste des formations : <?php echo $nbr_formations;?>
                 </div>
@@ -100,21 +100,22 @@ require_once 'inc/haut.inc.php';
                         </tr>
                     </thead>
                     <tbody class="thead-light">
-                    <?php while ($ligne_formation=$sql ->fetch()) {
-
+                    <?php while ($ligne_formation=$sql ->fetch()) 
+                    {
                         echo '<tr>';
                             echo '<td>' . $ligne_formation['formation'] . '</td>';
                             echo '<td>' . $ligne_formation['stitre_form'] . '</td>';
                             echo '<td>' . $ligne_formation['dates_form'] . '</td>';
+                            echo '<td>' . $ligne_formation['description_form'] . '</td>';
                             echo '<td> <a href="modif_formation.php?id_formation=' . $ligne_formation['id_formation'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir modifier cette formation?\'))"><i class="fas fa-edit"></i></a></td>';
 
                             echo '<td> <a href="?id_formation=' . $ligne_formation['id_formation'] . '" onclick="return(confirm(\'Etes-vous certain de vouloir supprimer cette formation?\'))" ><i class="far fa-trash-alt"></i></a></td>';
                         echo '</tr>';
-                        }
+                    }
                     ?>
                     </tbody>
                 </table>
-            </div><!-- fin resposive -->
+            </div><!-- fin .table-resposive -->
         </div><!-- fin .col-lg-8 -->
 
         <div class="col-sm-12 col-md-4 col-lg-4">

@@ -1,4 +1,7 @@
-/* les styles de ma page */
+/* Setti BELKACEM, développeur web intégrateur junior.
+Au PoleS de Pantin, 11/2018
+les styles des pages de mon back */
+
 @charset "utf-8";
 
 .margin {
@@ -11,64 +14,68 @@
 .color {
     background: rgb(240, 230, 140);
 }
-/* .color1 {
-    background: rgb(188, 143, 143);
-} */
-
-/* -----------------------style buttons--------------- */
-@import url('https://fonts.googleapis.com/css?family=PT+Sans');
-.btn {
-  display: inline-block;
-  background: transparent;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 0.625rem;
-  letter-spacing: 0.3em;
-  color: rgba(223,190,106,0.7);
-  border-radius: 0;
-  padding: 18px 80px 20px;
-  transition: all 0.7s ease-out;
-  background-image: linear-gradient(to right, #2b5876 0%, #4e4376 51%, #2b5876 100%);
-
-  background-position: 1% 50%;
-  background-size: 300% 300%;
-  text-decoration: none;
-  margin: 0.625rem;
-  border: none;
-  border: 1px solid rgba(223,190,106,0.3);
-}
-
-.btn:hover {
-  color: #fff;
-  border: 1px solid rgba(223,190,106,0);
-  color: #fff;
-  background-position: right center;
-}
-
-/* ----------------------- fin style buttons--------------- */
 
 /* -----------------------page connexion -------------------------*/
 
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 .login-block{
-    background: #D8BFD8;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #E6E6FA, #9370DB);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #E6E6FA, #9370DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: #D8BFD8; 
+ /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #E6E6FA, #9370DB);
+  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #E6E6FA, #9370DB);
+ /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 float:left;
 width:100%;
 padding : 50px 0;
 }
-.banner-sec{background:url(https://static.pexels.com/photos/33972/pexels-photo.jpg)  no-repeat left bottom; background-size:cover; min-height:500px; border-radius: 0 10px 10px 0; padding:0;}
-.container{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
-.carousel-inner{border-radius:0 10px 10px 0;}
-.carousel-caption{text-align:left; left:5%;}
-.login-sec{padding: 50px 30px; position:relative;}
-.login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
-.login-sec .copy-text i{color:#E6E6FA;}
-.login-sec .copy-text a{color:#483D8B;}
-.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #483D8B;}
-.login-sec h2:after{content:" "; width:100px; height:5px; background:#E6E6FA; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
+
+.banner-sec{
+    /* background:url(https://static.pexels.com/photos/33972/pexels-photo.jpg)  no-repeat left bottom; */
+    background:url('../img/fond_connex.jpg')  no-repeat left bottom;
+    background-size:cover;
+    min-height:500px;
+    border-radius: 0 10px 10px 0; 
+    padding:0;
+}
+
+.connex{
+    background:#fff;
+    border-radius: 10px;
+    box-shadow:15px 20px 0px rgba(0,0,0,0.1);
+}
+.carousel-inner{
+    border-radius:0 10px 10px 0;
+}
+.carousel-caption{
+    text-align:left; left:5%;
+}
+.login-sec{
+    padding: 50px 30px;
+    position:relative;
+}
+.login-sec .copy-text{
+    position:absolute; 
+    width:80%; 
+    bottom:20px; 
+    font-size:13px; 
+    text-align:center;
+}
+.login-sec .copy-text i{
+    color:#E6E6FA;
+}
+.login-sec .copy-text a{
+    color:#483D8B;
+}
+.login-sec h2{
+    margin-bottom:30px; 
+    font-weight:800; 
+    font-size:30px; 
+    color: #483D8B;
+}
+.login-sec h2:after{
+    content:" "; 
+    width:100px; height:5px; background:#E6E6FA; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
 .btn-login{background: #483D8B; color:#fff; font-weight:600;}
 .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
 .banner-text h2{color:#fff; font-weight:600;}
@@ -78,7 +85,13 @@ padding : 50px 0;
 /* ------------fin connexion---------- */
 
 
-/* -----------------------style page Profil ----------------------------*/
+/* -----------------------style page Profil ------------------------*/
+.profil{
+    background:#FF1493;
+    border-radius: 10px;
+    box-shadow:15px 20px 0px rgba(0,0,0,0.1);
+}
+
 .header-img{
     height: 500px;
     position: relative;
@@ -131,52 +144,7 @@ padding : 50px 0;
 
 /* ------------competences---------- */
 
-/* -----------------file input "téléchargement d'une photo" -------------- */
-/* .files input {
-    outline: 2px dashed #92b0b3;
-    outline-offset: -10px;
-    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    padding: 120px 0px 85px 35%;
-    text-align: center !important;
-    margin: 0;
-    width: 100% !important;
-}
-.files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
-    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
- }
-.files{ position:relative}
-.files:after {  pointer-events: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 50px;
-    right: 0;
-    height: 56px;
-    content: "";
-    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
-    display: block;
-    margin: 0 auto;
-    background-size: 100%;
-    background-repeat: no-repeat;
-}
-.color input{ background-color:#f1f1f1;}
-.files:before {
-    position: absolute;
-    bottom: 10px;
-    left: 0;  pointer-events: none;
-    width: 100%;
-    right: 0;
-    height: 57px;
-    /* content: " or drag it here. "; */
-    /* display: block;
-    margin: 0 auto;
-    color: #2ea591; */
-    /* font-weight: 600;
-    text-transform: capitalize;
-    text-align: center; */
-/* } */
+
 
  
 

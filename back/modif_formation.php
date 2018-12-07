@@ -30,7 +30,7 @@ $resultat = $pdo->query(" SELECT * FROM t_formations WHERE id_formation = '$id_f
 
 
 while($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
-    $contenu .= '<form method="post" action="formations.php">';
+    $contenu .= '<form method="post" action="">';
         // debug($ligne);
         
         foreach($ligne as $indice => $valeur){ 
@@ -44,12 +44,22 @@ while($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
                     $contenu .= '<input class="form-control"  id="'. $indice .'" value="' . $valeur . '" name="'. $indice .'">';
                 }
                 
-            $contenu .='</div>';
+            $contenu .='</div>';/* fin div .from-group */
             
         }
-        $contenu .='<input type ="submit" id="'.$ligne['id_formation'] .'" value="Modifier" class="form-control btn-success">';
-        $contenu .='<form>';
-        $contenu .= '<div class="mt-2"><strong ><a href="formations.php" class="form-control btn-success"><i class="fas fa-graduation-cap"></i>&nbsp;Formations</a></div class="danger"></strong></div>';    
+        
+            $contenu .= '<div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="submit" id="' . $ligne['id_formation'] . '" value="Modifier" class="btn btn-block btn-outline-info">
+                    </div>
+                    <div class="col-6">
+                        <a href="formations.php" class="btn btn-block btn-outline-success"><i class="fas fa-ban"></i>&nbsp;Revenir aux formations</a>
+                    </div>
+                </div>   
+            </div>';
+    $contenu .='<form>';
+           
     }// fin while($ligne = $resultat->fetch(PDO::FETCH_ASSOC))
 //--------------------------AFFICHAGE--------------------------
     require_once 'inc/haut.inc.php';
@@ -57,8 +67,8 @@ while($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
     
     <div class="container mt-5" style="min-width: 180vh">
        
-        <div class="row d-flex justify-content-center bg-info mt-5">
-            <div class="col-lg-6 m-3">
+        <div class="row margin">
+            <div class="col-lg-6 mx-auto bg-info">
             <h2 class="text-center m-5">La mise à jour d'une formation</h2>
                 <?php echo  $contenu ;?>
             </div>

@@ -2,20 +2,21 @@
 require_once 'inc/init.inc.php';
 
 //pour le tri des colonnes par ordre croissant et decroissant
-$ordre = ''; // on declare la variable  
+// $ordre = ''; 
+// on declare la variable  
 
-if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
+// if (isset($_GET['ordre']) && isset($_GET['colonne'])) {
 
-    if ($_GET['colonne'] == 'urls') {
-        $ordre = ' ORDER BY url';
-    }
+//     if ($_GET['colonne'] == 'urls') {
+//         $ordre = ' ORDER BY url';
+//     }
 
-    if ($_GET['ordre'] == 'asc') {
-        $ordre .= ' ASC';
-    } elseif ($_GET['ordre'] == 'desc') {
-        $ordre .= ' DESC';
-    }
-}
+//     if ($_GET['ordre'] == 'asc') {
+//         $ordre .= ' ASC';
+//     } elseif ($_GET['ordre'] == 'desc') {
+//         $ordre .= ' DESC';
+//     }
+// }
 
 extract($_SESSION['t_utilisateurs']);
 
@@ -72,7 +73,7 @@ if (!empty($_POST)){ // Si le formulaire est soumis
 
     //-------------------------------
   
-    // Insertion de nouvelles reseau en BDD :
+    // Insertion de nouveaux reseaux en BDD :
     $pdo -> exec("INSERT INTO t_reseaux VALUES (NULL, '$url', '$id_utilisateur')");
 
     $contenu .= '<div class="alert alert-success" role="alert">Le reseau a bien été enregitré !</div>';
@@ -81,11 +82,11 @@ if (!empty($_POST)){ // Si le formulaire est soumis
     
 
  // Affichage les reseaux pour chaque utilisateur
- $resultat = $pdo -> query("SELECT * FROM t_reseaux WHERE id_utilisateur = 1 $ordre ");
+ $resultat = $pdo -> query("SELECT * FROM t_reseaux WHERE id_utilisateur = 1 ");
     $resultat->execute();
     $nbr_reseaux = $resultat->rowCount();
 
-    $contenu .='<div class="table-responsive">';
+    $contenu .='<div class="table-responsive color">';
         $contenu .='<div class="card-header">La liste des reseaux : '.$nbr_reseaux.'</div>';
     
         $contenu .='<table class="table table-striped table-sm">';
@@ -94,16 +95,20 @@ if (!empty($_POST)){ // Si le formulaire est soumis
             
                 $contenu .= '<th>URL du reseau</th>' ;
                 
-                    $contenu .='<th colspan="2">Actions</th>';
+                    $contenu .='<th>modifier</th>';
+                    $contenu .='<th>suprimer</th>';
                 $contenu .='</tr>';
             $contenu .= '</thead>';
             $contenu .= '<tbody class="thead-light">';
-                while ($ligne = $resultat->fetch(PDO::FETCH_ASSOC)){
+            while ($ligne = $resultat->fetch(PDO::FETCH_ASSOC))
+            {
                 $contenu .= '<tr>';
-                    foreach ($ligne as $indice => $valeur) {
+                    foreach ($ligne as $indice => $valeur) 
+                    {
                         // Affichage de chaque ligne à chaque tour de boucle sauf "mdp"
-                        if($indice != 'id_reseau' && $indice != 'id_utilisateur'){
-                        $contenu .= '<td>'. $valeur . '</td>'; 
+                        if($indice != 'id_reseau' && $indice != 'id_utilisateur')
+                        {
+                            $contenu .= '<td>'. $valeur . '</td>'; 
                         }
                     }
                     $contenu .='<td><a href="?id_reseau='. $ligne['id_reseau'] .'"  onclick="return(confirm(\'Etes-vous certain de vouloir supprimer ce reseau ? \' ))" ><i class="far fa-trash-alt"></i></a></td>';
@@ -120,50 +125,52 @@ if (!empty($_POST)){ // Si le formulaire est soumis
 require_once 'inc/haut.inc.php';
 
 ?>
-<div class="container mt-5 mb-5" style="min-width: 180vh">
+<div class="container margin text-center">
     
+    <div class="row">
+        <div class="col-xm-6 col-md-8 col-lg-12 mx-auto">
+            <h2 class="text-dark mb-4">Mise à jour d'un reseau</h2>
+        </div>
+ 
+    
+        <div class="col-sm-12 col-md-6 col-lg-6 mx-auto ">
+            <?php  echo $contenu;?>
+        </div>
+
         
-
-
-        <div class="row">
-            <div class="col-xm-6 col-md-8 col-lg-12">
-                <h2 class="text-center margin text-dark">Mise à jour d'un reseau</h2>
+        <div class="col-sm-12 col-md-8 col-lg-12 margin">
+            <div class="card text-dark color mb-3">
+                <div class="card-header">
+                    Insertion d'un nouveau réseau :
+                </div>
+                <div class="card-body">
+                    <form class="form-inline" method ="post" action=""> 
+                        <input type="hidden" id="id_reseau" name="id_reseau" value="0"><!-- Ce champ caché est utile pour la modification d'un produit afin de l'identifier dans la requête SQL. La valeur 0 par défaut signifie que le produit n'existe pas en BDD, et qu'on est en train de le créer -->
+                        
+                        <div class="form-group pl-3">
+                            <label for="url"> Url de réseau :</label>
+                            <input type="text" class="form-control" name="url" id="url" placeholder="Url reseau">
+                        </div>
+                        <div class="form-group pl-5">
+                            <label for="icon"> Choix de l'icon :</label>                                
+                            <select name="icon" id="" class="form-control">
+                                <option value="Facebook">Facebook</option>
+                                <option value="Twitter">Twitter</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="Linkedin">Linkedin</option>
+                                <option value="Github">Github</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group pl-5">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> reseau</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="row d-flex justify-content-center mb-5">
-            <div class="col-lg-6 m-auto pb-4 color">
-                <?php  echo $contenu;?>
-            </div>
-        </div>
-            
-            <div class="col-lg-8 color m-auto">
-                
-                <form class="form-inline" method ="post" action=""> 
-                    <input type="hidden" id="id_reseau" name="id_reseau" value="0"><!-- Ce champ caché est utile pour la modification d'un produit afin de l'identifier dans la requête SQL. La valeur 0 par défaut signifie que le produit n'existe pas en BDD, et qu'on est en train de le créer -->
-                    
-                    <div class="form-group pl-5">
-                        <label for="url">Url de réseau</label>
-                        <input type="text" class="form-control" name="url" id="url" placeholder="Url reseau">
-                    </div>
-                    <div class="form-group pl-5">
-                        <label for="icon">Choix de l'icon</label>                                
-                        <select name="icon" id="" class="form-control">
-                            <option value="Facebook">Facebook</option>
-                            <option value="Twitter">Twitter</option>
-                            <option value="Instagram">Instagram</option>
-                            <option value="Linkedin">Linkedin</option>
-                            <option value="Github">Github</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group pl-5">
-                    <button class="btn" type="submit"><i class="fas fa-plus"></i> reseau</button>
-                    </div>
-                </form>
-            </div> 
-
-            
-</div>
+        </div> <!-- fin div .col-lg-8 color m-auto --> 
+    </div>      
+</div><!-- fin div .container margin -->
 
 
 

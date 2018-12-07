@@ -16,12 +16,7 @@ extract($_SESSION['t_utilisateurs']);   // extrait tous les indices de l'array s
 require_once 'inc/haut.inc.php';
 ?>
 
-<div class="container">
-<!-- <div class="jumbotron mt-4">
-                <h1 class="text-center mt-4 mb-4">Gestion de votre  CV</h1>
-                <?php echo '<h4 class="text-center mt-4 mb-4">' . $prenom . ' - ' . $nom . '</h4>'; ?>
-                <h2 class="text-center"> Vous êtes un administrateur !</h2>
-        </div> -->
+<div class="container profil">
     <div class="header-img">
         <img src="img/lesfilles.jpg" alt="">
     </div>

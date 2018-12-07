@@ -73,13 +73,13 @@ require_once 'inc/haut.inc.php';
 ?>
 
 <div class="container margin">
-<div class="row">
-            <div class="col-xm-6 col-md-8 col-lg-12 mb-3">
-                <h2 class="text-center text-dark">Mise à jour d'une experience</h2>
-            </div>
+    <div class="row">
+        <div class="col-xm-6 col-md-8 col-lg-12 mb-3">
+            <h2 class="text-center text-dark">Mise à jour d'une experience</h2>
         </div>
+    </div>
     <div class="row">  
-        <div class="col-sm-12 col-md-8 col-lg-8 color">
+        <div class="col-sm-12 col-md-8 col-lg-8 mb-5">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
             $sql = $pdo->prepare(" SELECT * FROM t_experiences WHERE id_utilisateur = 1 $ordre ");
@@ -87,14 +87,14 @@ require_once 'inc/haut.inc.php';
             $nbr_experiences = $sql->rowCount();
             ?>
 
-            <div class="table-responsive">
+            <div class="table-responsive color">
                 <div class="card-header">
                     La liste des experiences  : <?php echo $nbr_experiences; ?>
                 </div>
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Titre de l'experience  <a href="experiences.php?colonne=titre_exp&ordre=asc"><i class="fas fa-sort-alpha-down"></i></a> | <a href="experiences.php?colonne=titre_exp&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
+                            <th><a href="experiences.php?colonne=titre_exp&ordre=asc"> Titre de l'experience <i class="fas fa-sort-alpha-down"></i></a> | <a href="experiences.php?colonne=titre_exp&ordre=desc"><i class="fas fa-sort-alpha-up"></i></a></th>
                             <th>Sous titre</th>
                             <th>Date d'experience</th>
                             <th>Description</th>
@@ -103,7 +103,8 @@ require_once 'inc/haut.inc.php';
                         </tr>
                     </thead>
                     <tbody class="thead-light">
-                    <?php while ($ligne_experience = $sql->fetch()) {
+                    <?php while ($ligne_experience = $sql->fetch()) 
+                    {
 
                         echo '<tr>';
                         echo '<td>' . $ligne_experience['titre_exp'] . '</td>';
@@ -118,11 +119,11 @@ require_once 'inc/haut.inc.php';
                     ?>
                     </tbody>
                 </table>
-            </div><!-- fin resposive -->
+            </div><!-- fin .table-resposive -->
         </div><!-- fin .col-lg-8 -->
 
         <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="card text-white color mb-3">
+            <div class="card text-dark color mb-3">
                 <div class="card-header">
                     Insertion d'une nouvelle experience :
                 </div>

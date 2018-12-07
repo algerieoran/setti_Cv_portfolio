@@ -34,43 +34,56 @@ $id_reseau = $_GET['id_reseau'];
 
 $result = $pdo->query(" SELECT * FROM t_reseaux WHERE id_reseau = '$id_reseau' ");
 
+$contenu .= '<form method="post" action="">';
 while ($ligne = $result->fetch(PDO::FETCH_ASSOC)) {
-    $contenu .= '<form method="post" action="reseaux.php">';
         // debug($ligne);
 
     foreach ($ligne as $indice => $valeur) {
-        $contenu .= '<div class="form-group">';
-
+        
         if ($indice == 'id_reseau' || $indice == 'id_utilisateur') {
             $contenu .= '<input type="hidden" name="' . $indice . '" id="' . $indice . '" value="' . $valeur . '">';
-
-        } 
-        else {
-            $contenu .= '<label for="' . $indice . '">&nbsp;&nbsp;' . $indice . '</label>';
-            $contenu .= '<input class="form-control"  id="' . $indice . '" value="' . $valeur . '" name="' . $indice . '">';
+            
+        }else{
+            $contenu .= '<div class="form-group">';
+                $contenu .= '<label for="' . $indice . '">&nbsp;&nbsp;' . $indice . '</label>';
+                $contenu .= '<input class="form-control" value="' . $valeur . '" name="' . $indice . '">';
+            $contenu .= '</div>';
         }
 
-        $contenu .= '</div>';
 
     }
-    $contenu .= '<input type ="submit" id="' . $ligne['id_reseau'] . '" value="Modifier" class="form-control btn-success">';
+   
+        $contenu .= '<div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <input type="submit" id="' . $ligne['id_reseau'] . '" value="Modifier" class="btn btn-block btn-outline-info">
+                </div>
+                <div class="col-6">
+                    <a href="reseaux.php" class="btn btn-block btn-outline-success"><i class="fas fa-ban"></i>&nbsp;Revenir aux reseaux</a>
+                </div>
+            </div>   
+        </div>';
+    }
     $contenu .= '<form>';
-}
+
 //--------------------------AFFICHAGE------------
 require_once 'inc/haut.inc.php';
 ?>
     
     <div class="container text-center mt-4 mb-5 pt-5" style="min-width: 180vh">
-        <h2 class="text-dark margin pb-3">La mise à jour d'un loisir</h2>
+        <h2 class="text-dark margin pb-3">La mise à jour d'un réseau</h2>
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 m-auto bg-info pb-4">
                 <?php echo  $contenu ;?>
             </div>
         </div>
-    
-    
     </div>
     
+
+
+
+
+
     <?php
     //le bas de page
     require_once 'inc/bas.inc.php';

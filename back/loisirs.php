@@ -85,7 +85,7 @@ require_once 'inc/haut.inc.php';
             </div>
         </div>
     <div class="row">  
-        <div class="col-sm-12 col-md-8 col-lg-8 color">
+        <div class="col-sm-12 col-md-8 col-lg-8 mb-5">
             <?php 
                 //requête pour compter et chercher plusieurs enregistrements on ne peut compter que si on a un prépare
             $sql = $pdo->prepare(" SELECT * FROM t_loisirs WHERE id_utilisateur = 1 $ordre ");
@@ -93,7 +93,7 @@ require_once 'inc/haut.inc.php';
             $nbr_loisirs = $sql->rowCount();
             ?>
 
-            <div class="table-responsive">
+            <div class="table-responsive color">
                 <div class="card-header">
                     La liste des loisirs : <?php echo $nbr_loisirs; ?>
                 </div>
@@ -107,7 +107,8 @@ require_once 'inc/haut.inc.php';
                         </tr>
                     </thead>
                     <tbody class="thead-light">
-                    <?php while ($ligne_loisir = $sql->fetch()) {
+                    <?php while ($ligne_loisir = $sql->fetch()) 
+                    {
 
                         echo '<tr>';
                         echo '<td>' . $ligne_loisir['loisir'] . '</td>';
@@ -125,7 +126,7 @@ require_once 'inc/haut.inc.php';
         </div><!-- fin .col-lg-8 -->
 
         <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="card text-white color mb-3">
+            <div class="card text-dark color mb-3">
                 <div class="card-header">
                     Insertion d'un nouveau loisir :
                 </div>

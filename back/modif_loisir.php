@@ -5,17 +5,9 @@ extract($_SESSION['t_utilisateurs']);
 //debug($_POST);
 //-----------------mise à jour d'une experience ---------------
 if (!empty($_POST)) {
-    // $photo_bdd ='';  // par défaut la photo est vide en BDD
-
+   
     // // debug($_FILES);
 
-    //  if (!empty($_FILES['photo']['name'])) {  // s'il y a un nom de fichier dans la superglobale $_FILES, c"est que je suis en tyrain d'uploader un fichier. L'indice "photo" correspond au name du champ dans le formulaire.
-    //     $nom_photo = $_FILES['photo']['name'];  
-
-    //    $photo_bdd = $nom_photo;  // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier/photo/ du site
-
-    //    copy($_FILES['photo']['tmp_name'], 'img/' . $photo_bdd);  // on enregistre le fichier photo qui est tomporairement dans $_FILES['photo']['tmp_name'] dans le répertoire "img/nom_photo.jpg"
-    //  }
     $result = executeRequete(
         " UPDATE t_loisirs SET loisir = :loisir, id_utilisateur = $id_utilisateur WHERE id_loisir = :id_loisir",
         array(
@@ -38,7 +30,7 @@ $result = $pdo->query(" SELECT * FROM t_loisirs WHERE id_loisir = '$id_loisir' "
 
 while ($ligne_loisirs = $result->fetch(PDO::FETCH_ASSOC)) {
     // debug($ligne_loisirs);
-    $contenu .= '<form method="post" action="loisirs.php" enctype="multipart/form-data">';
+    $contenu .= '<form method="post" action="" enctype="multipart/form-data">';
 
         foreach ($ligne_loisirs as $indice => $valeur) {
             $contenu .= '<div class="form-group">';
@@ -59,15 +51,19 @@ while ($ligne_loisirs = $result->fetch(PDO::FETCH_ASSOC)) {
 
         }//fin foreach($ligne_loisirs as $indice => $valeur)
 
-    //     $contenu .= '<div><input type ="submit" id="' . $ligne_loisirs['id_loisir'] . '" value="Modifier" class="btn-success"></div>';
-    // $contenu .= '<form>';
-    // $contenu .= '<div class="mt-2"><strong ><a href="loisirs.php" class="btn-success"><i class="fas fa-table-tennis"></i>&nbsp;Loisirs</a></div class="danger"></strong></div>';   
-    $contenu .= '<div class="container">
-	<div class="row">
-		<input type ="submit" id="' . $ligne_loisirs['id_loisir'] . '" value="Modifier" class="btn">
-		<a href="loisirs.php" class="btn"><i class="fas fa-ban"></i>&nbsp;Annuler</a></div>
-	</div>
-</div>';
+
+        $contenu .= '<div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <input type="submit" id="' . $ligne_loisirs['id_loisir'] . '" value="Modifier" class="btn btn-block btn-outline-info">
+                </div>
+                <div class="col-6">
+                    <a href="loisirs.php" class="btn btn-block btn-outline-success"><i class="fas fa-ban"></i>&nbsp;Revenir aux loisirs</a></div>
+                </div>
+            </div>   
+        </div>';
+    $contenu .= '<form>';
+
 
 }// fin while($ligne_loisirs = $resultat->fetch(PDO::FETCH_ASSOC))
 
@@ -87,6 +83,7 @@ require_once 'inc/haut.inc.php';
                 </div><!-- fin div .col-lg-8 m-3 -->
             </div><!-- fin div .row d-flex justify-content-center -->
         </div><!-- fin div .container text-center mb-5 -->
+
     
     </div>
     
